@@ -27,12 +27,12 @@ class DescribedTextField: UIView {
 
         heightAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
 
-        [label.leadingAnchor.constraint(equalTo: leadingAnchor),
+        [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.padding),
          label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: Values.Label.widthMultiplier),
          label.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
 
-        [textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: Values.TextField.leftPadding),
-        textField.trailingAnchor.constraint(equalTo: trailingAnchor),
+        [textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: ViewConstants.padding),
+        textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: ViewConstants.padding),
         textField.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
     }
 }
@@ -41,10 +41,6 @@ extension DescribedTextField {
     struct Values {
         struct Label {
             static let widthMultiplier: CGFloat = 0.25
-            static let verticalPadding: CGFloat = 10
-        }
-        struct TextField {
-            static let leftPadding: CGFloat = 10
         }
     }
 }

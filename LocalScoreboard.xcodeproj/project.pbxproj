@@ -17,6 +17,7 @@
 		1BB1254430D36E29E0C8B159 /* DescribedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB125C14E734F96E8A46E39 /* DescribedTextField.swift */; };
 		1BB125E6EB73980C64B63C60 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12BC7A88A36DF705771C6 /* ViewControllerFactory.swift */; };
 		1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12310E5C3581595166933 /* UIView+Fill.swift */; };
+		1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12E8704FF864EB553BD36 /* ViewConstans.swift */; };
 		1BB127C99D765FE285D0489A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB12475DA95427D0FD3F47A /* LaunchScreen.storyboard */; };
 		1BB1294457B0CEE9DF5F4B5B /* UIStackView+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12AD484306657A9B8BC0F /* UIStackView+Init.swift */; };
 		1BB129B8A31B2F701AA58952 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12B61C930E09EE48BCB55 /* String+Localized.swift */; };
@@ -63,6 +64,7 @@
 		1BB12D3AC9374DBC54E0E572 /* LocalScoreboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalScoreboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB12D5517AEE05B8531C394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		1BB12DB20EFAE21FABBE0931 /* LocalScoreboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalScoreboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BB12E8704FF864EB553BD36 /* ViewConstans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstans.swift; sourceTree = "<group>"; };
 		1BB12F1EE07EC37FCB0DFDC3 /* LocalScoreboardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalScoreboardUITests.swift; sourceTree = "<group>"; };
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +108,7 @@
 			children = (
 				1BB125C14E734F96E8A46E39 /* DescribedTextField.swift */,
 				1BB1223C25BE299382FDEFA2 /* GameHeaderView.swift */,
+				1BB12E8704FF864EB553BD36 /* ViewConstans.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				1BB120D51F2B33F4BFB83D34 /* GameHeaderView.swift in Sources */,
 				1BB12108DA0B7B9EC4A94EFD /* AddPlayersView.swift in Sources */,
 				1BB1294457B0CEE9DF5F4B5B /* UIStackView+Init.swift in Sources */,
+				1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

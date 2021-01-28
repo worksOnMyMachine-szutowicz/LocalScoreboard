@@ -7,6 +7,7 @@ import UIKit
 
 class NewGameViewController: UIViewController {
     private let formView = UIStackView(type: .verticalWithDefaultSpacing)
+    private let playButton = UIButton(type: .system)
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -17,23 +18,26 @@ class NewGameViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        title = "newGame.title".localized
         view.backgroundColor = .systemGroupedBackground
+        title = "newGame.title".localized
+        playButton.titleLabel?.font = Values.playButtonFont
+        playButton.setTitle("newGame.play".localized, for: .normal)
 
         layout()
     }
 
     private func layout() {
-        view.addSubviewAndFillToSafeArea(formView, insets: Values.insets)
+        view.addSubviewAndFillToSafeArea(formView)
         formView.translatesAutoresizingMaskIntoConstraints = false
 
         formView.addArrangedSubview(GameHeaderView(title: "1000 Dices", description: "quite long text quite long text quite long text quite long text quite long text quite long text quite long text quite long text quite long text "))
         formView.addArrangedSubview(AddPlayersView())
+        formView.addArrangedSubview(playButton)
     }
 }
 
 extension NewGameViewController {
     struct Values {
-        static let insets: UIEdgeInsets = .init(top: 10, left: 10, bottom: 10, right: 10)
+        static let playButtonFont: UIFont = .systemFont(ofSize: 25)
     }
 }

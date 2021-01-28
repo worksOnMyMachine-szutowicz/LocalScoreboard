@@ -1,2 +1,4 @@
 "newGame.title" = "New game";
-"newGame.addPlayer.button" = "Add Player";
+"newGame.addPlayer.title" = "Players";
+"newGame.addPlayer.button" = "+";
+"newGame.play" = "Let's Play!";

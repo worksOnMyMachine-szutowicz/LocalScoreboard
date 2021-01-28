@@ -6,10 +6,15 @@
 import UIKit
 
 class AddPlayersView: UIScrollView {
+    private let headerContainer = UIView()
+    private let headerTitle = UILabel()
     private let addButton = UIButton(type: .system)
 
     init() {
+        headerContainer.backgroundColor = .systemGray4
+        headerTitle.text = "newGame.addPlayer.title".localized
         addButton.setTitle("newGame.addPlayer.button".localized, for: .normal)
+        addButton.titleLabel?.font = Values.headerTitleFont
         super.init(frame: .zero)
         layout()
     }
@@ -19,19 +24,29 @@ class AddPlayersView: UIScrollView {
     }
 
     private func layout() {
+        headerContainer.addSubviews([headerTitle, addButton])
+
         let stackView = UIStackView(type: .verticalWithDefaultSpacing)
 
-        addSubviews([addButton, stackView])
-        [addButton, stackView].disableAutoresizingMask()
+        addSubviews([headerContainer, stackView])
+        [headerContainer, headerTitle, addButton, stackView].disableAutoresizingMask()
 
-        [addButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-        addButton.topAnchor.constraint(equalTo: topAnchor)].activate()
+        [headerContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
+        headerContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+        headerContainer.topAnchor.constraint(equalTo: topAnchor),
+        headerContainer.heightAnchor.constraint(equalTo: addButton.heightAnchor)].activate()
 
-        [stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-        stackView.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: Values.stackViewTopPadding),
-        stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-        stackView.widthAnchor.constraint(equalTo: widthAnchor)].activate()
+        [headerTitle.leadingAnchor.constraint(equalTo: headerContainer.leadingAnchor, constant: ViewConstants.padding),
+         headerTitle.centerYAnchor.constraint(equalTo: headerContainer.centerYAnchor)].activate()
+
+        [addButton.trailingAnchor.constraint(equalTo: headerContainer.trailingAnchor, constant: -ViewConstants.padding),
+        addButton.centerYAnchor.constraint(equalTo: headerContainer.centerYAnchor)].activate()
+
+        [stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.padding),
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2 * ViewConstants.padding),
+        stackView.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: ViewConstants.padding),
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: ViewConstants.padding),
+        stackView.widthAnchor.constraint(equalTo: widthAnchor, constant: -3 * ViewConstants.padding)].activate()
 
         stackView.addArrangedSubview(DescribedTextField(labelText: "gracz1"))
         stackView.addArrangedSubview(DescribedTextField(labelText: "gracz2"))
@@ -40,6 +55,6 @@ class AddPlayersView: UIScrollView {
 
 extension AddPlayersView {
     struct Values {
-        static let stackViewTopPadding: CGFloat = 10
+        static let headerTitleFont: UIFont = .systemFont(ofSize: 25)
     }
 }

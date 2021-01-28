@@ -40,6 +40,6 @@ extension GameHeaderView {
     struct Values {
         static let titleFont: UIFont = .boldSystemFont(ofSize: 40)
         static let description: UIFont = .systemFont(ofSize: 15)
-        static let stackViewInsets: UIEdgeInsets = .init(top: 50, left: 0, bottom: 0, right: 0)
+        static let stackViewInsets: UIEdgeInsets = .init(top: 50, left: ViewConstants.padding, bottom: ViewConstants.padding, right: ViewConstants.padding)
     }
 }
