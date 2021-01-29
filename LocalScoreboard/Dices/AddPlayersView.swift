@@ -4,19 +4,32 @@
 //
 
 import UIKit
+import RxSwift
 
-class AddPlayersView: UIScrollView {
+class AddPlayersView: UIView {
+    typealias VMInput = AddPlayersViewModelInput
+    private let disposeBag = DisposeBag()
+    private let viewModel: AddPlayersViewModelInterface
+    private let viewFactory: NewGameViewFactoryInterface
+    private let stackView = UIStackView(type: .verticalWithDefaultSpacing)
     private let headerContainer = UIView()
     private let headerTitle = UILabel()
     private let addButton = UIButton(type: .system)
 
-    init() {
+    init(viewModel: AddPlayersViewModelInterface, viewFactory: NewGameViewFactoryInterface) {
+        self.viewModel = viewModel
+        self.viewFactory = viewFactory
         headerContainer.backgroundColor = .systemGray4
         headerTitle.text = "newGame.addPlayer.title".localized
         addButton.setTitle("newGame.addPlayer.button".localized, for: .normal)
-        addButton.titleLabel?.font = Values.headerTitleFont
+        addButton.titleLabel?.font = Values.addButtonFont
+        
         super.init(frame: .zero)
+        
         layout()
+        setupBindigs()
+        
+        viewModel.input.accept(.addRequiredPlayers(.init()))
     }
 
     required init?(coder: NSCoder) {
@@ -26,10 +39,11 @@ class AddPlayersView: UIScrollView {
     private func layout() {
         headerContainer.addSubviews([headerTitle, addButton])
 
-        let stackView = UIStackView(type: .verticalWithDefaultSpacing)
-
-        addSubviews([headerContainer, stackView])
-        [headerContainer, headerTitle, addButton, stackView].disableAutoresizingMask()
+        let scrollView = UIScrollView(frame: .zero)
+        scrollView.addSubviewAndFill(stackView, insets: Values.stackViewInsets)
+        
+        addSubviews([headerContainer, scrollView])
+        [headerContainer, headerTitle, addButton, scrollView, stackView].disableAutoresizingMask()
 
         [headerContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
         headerContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -41,20 +55,55 @@ class AddPlayersView: UIScrollView {
 
         [addButton.trailingAnchor.constraint(equalTo: headerContainer.trailingAnchor, constant: -ViewConstants.padding),
         addButton.centerYAnchor.constraint(equalTo: headerContainer.centerYAnchor)].activate()
+        
+        [scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+         scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+         scrollView.topAnchor.constraint(equalTo: addButton.bottomAnchor),
+         scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
+        
+        stackView.widthAnchor.constraint(equalTo: widthAnchor, constant: -ViewConstants.padding).isActive = true
+    }
+    
+    private func setupBindigs() {
+        addButton.rx.tap
+            .map { _ in VMInput.addPlayerTapped(.init())}
+            .bind(to: viewModel.input)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.asObservable()
+            .append(weak: self)
+            .subscribe(onNext: { view, output in
+                switch output {
+                case .error(let output):
+                    print(output)
+                case .addPlayer(let output):
+                    let playerView = view.viewFactory.createNewPlayerView(viewModel: output.newPlayerViewModel, viewFactory: view.viewFactory)
+                    playerView.alpha = 0
+                    playerView.isHidden = true
+                    view.stackView.addArrangedSubview(playerView)
 
-        [stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.padding),
-        stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2 * ViewConstants.padding),
-        stackView.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: ViewConstants.padding),
-        stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: ViewConstants.padding),
-        stackView.widthAnchor.constraint(equalTo: widthAnchor, constant: -3 * ViewConstants.padding)].activate()
+                    UIView.animate(withDuration: ViewConstants.animationTime, animations: { () -> Void in
+                        playerView.alpha = 1
+                        playerView.isHidden = false
+                    })
+                case .deletePlayer(let output):
+                    let playerView = view.stackView.subviews[output.index]
+                    playerView.alpha = 1
+                    playerView.isHidden = false
 
-        stackView.addArrangedSubview(DescribedTextField(labelText: "gracz1"))
-        stackView.addArrangedSubview(DescribedTextField(labelText: "gracz2"))
+                    UIView.animate(withDuration: ViewConstants.animationTime, animations: { () -> Void in
+                        playerView.alpha = 0
+                        playerView.isHidden = true
+                    })
+                    playerView.removeFromSuperview()
+                }
+            }).disposed(by: disposeBag)
     }
 }
 
 extension AddPlayersView {
     struct Values {
-        static let headerTitleFont: UIFont = .systemFont(ofSize: 25)
+        static let addButtonFont: UIFont = .systemFont(ofSize: 25)
+        static let stackViewInsets: UIEdgeInsets = .init(top: ViewConstants.padding, left: ViewConstants.padding, bottom: ViewConstants.padding, right: -ViewConstants.padding)
     }
 }

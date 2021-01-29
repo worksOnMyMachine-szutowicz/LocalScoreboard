@@ -4,17 +4,24 @@
 //
 
 import UIKit
+import RxSwift
 
-class DescribedTextField: UIView {
+class DescribedTextFieldView: UIView {
+    typealias VMOutput = DescribedTextFieldViewModelOutput
+    private let disposeBag = DisposeBag()
+    private let viewModel: DescribedTextFieldViewModelInterface
     private let label = UILabel()
     private let textField = UITextField()
 
-    init(labelText: String) {
-        label.text = labelText
+    init(viewModel: DescribedTextFieldViewModelInterface) {
+        self.viewModel = viewModel
+        label.text = viewModel.viewData.labelText
         textField.borderStyle = .roundedRect
+        
         super.init(frame: .zero)
 
         layout()
+        setupBindigs()
     }
 
     required init?(coder: NSCoder) {
@@ -28,19 +35,29 @@ class DescribedTextField: UIView {
         heightAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
 
         [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.padding),
-         label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: Values.Label.widthMultiplier),
+         label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: Values.labelWidthMultiplier),
          label.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
 
         [textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: ViewConstants.padding),
         textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: ViewConstants.padding),
         textField.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
     }
+    
+    private func setupBindigs() {
+        textField.rx.text.orEmpty
+            .bind(to: viewModel.viewOutput)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.UpdateViewModel.self)
+            .append(weak: self)
+            .subscribe(onNext: { view, output in
+                view.label.text = output.labelText
+            }).disposed(by: disposeBag)
+    }
 }
 
-extension DescribedTextField {
+extension DescribedTextFieldView {
     struct Values {
-        struct Label {
-            static let widthMultiplier: CGFloat = 0.25
-        }
+        static let labelWidthMultiplier: CGFloat = 0.25
     }
 }

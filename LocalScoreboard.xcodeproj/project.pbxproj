@@ -14,7 +14,7 @@
 		1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12469EFB87711AE5E8AE8 /* AppCoordinator.swift */; };
 		1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB1272C0418F6892326E5D3 /* NewGameViewController.swift */; };
 		1BB124D83DC3089F4B834297 /* LocalScoreboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12915288E385531054EC3 /* LocalScoreboardTests.swift */; };
-		1BB1254430D36E29E0C8B159 /* DescribedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB125C14E734F96E8A46E39 /* DescribedTextField.swift */; };
+		1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB125C14E734F96E8A46E39 /* DescribedTextFieldView.swift */; };
 		1BB125E6EB73980C64B63C60 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12BC7A88A36DF705771C6 /* ViewControllerFactory.swift */; };
 		1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12310E5C3581595166933 /* UIView+Fill.swift */; };
 		1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12E8704FF864EB553BD36 /* ViewConstans.swift */; };
@@ -24,7 +24,18 @@
 		1BB12C16C2BB1B6A11C81E2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB128DF5DC3AD07F5BFBB1F /* AppDelegate.swift */; };
 		1BB12DD331F76DBF39B58330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB12AFA59C4A060148680B1 /* Assets.xcassets */; };
 		2B904EDD945640CD943D601C /* Pods_LocalScoreboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F24665F181AB7B147F8352 /* Pods_LocalScoreboard.framework */; };
+		F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211718125C425F400880DA4 /* Observable+Weak.swift */; };
+		F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211718625C4279A00880DA4 /* NewGameViewFactory.swift */; };
+		F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211718B25C429B000880DA4 /* AddPlayersViewModel.swift */; };
+		F211719125C429E000880DA4 /* AddPlayersViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211719025C429E000880DA4 /* AddPlayersViewModelInterface.swift */; };
+		F21171A125C45FFC00880DA4 /* DescribedTextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21171A025C45FFC00880DA4 /* DescribedTextFieldViewModel.swift */; };
+		F21171A625C4618200880DA4 /* DescribedTextFileViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21171A525C4618200880DA4 /* DescribedTextFileViewModelInterface.swift */; };
 		F248282825C40B43002239E3 /* NewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248282725C40B43002239E3 /* NewPlayerView.swift */; };
+		F248282D25C417C8002239E3 /* NewPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */; };
+		F248283225C4181A002239E3 /* NewPlayerViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */; };
+		F248283725C4193A002239E3 /* EnumWithAssociatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283625C4193A002239E3 /* EnumWithAssociatedValue.swift */; };
+		F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283B25C41A75002239E3 /* RxInputOutput.swift */; };
+		F248284125C42166002239E3 /* Observable+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248284025C42166002239E3 /* Observable+Filter.swift */; };
 		F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25A91B925C157B6002B9C51 /* Localizable.strings */; };
 		FAC02B691239E58FFC23751D /* Pods_LocalScoreboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C5C8F88D893ADF3F6B9953 /* Pods_LocalScoreboardTests.framework */; };
 /* End PBXBuildFile section */
@@ -53,7 +64,7 @@
 		1BB12310E5C3581595166933 /* UIView+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Fill.swift"; sourceTree = "<group>"; };
 		1BB12469EFB87711AE5E8AE8 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		1BB12475DA95427D0FD3F47A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		1BB125C14E734F96E8A46E39 /* DescribedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescribedTextField.swift; sourceTree = "<group>"; };
+		1BB125C14E734F96E8A46E39 /* DescribedTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescribedTextFieldView.swift; sourceTree = "<group>"; };
 		1BB1272C0418F6892326E5D3 /* NewGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
 		1BB128225FAF746836DE6706 /* Array+Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Constraints.swift"; sourceTree = "<group>"; };
 		1BB128DF5DC3AD07F5BFBB1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +86,18 @@
 		A3C995F0EBEDD478F2BB2B66 /* Pods-LocalScoreboardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboardTests.debug.xcconfig"; path = "Target Support Files/Pods-LocalScoreboardTests/Pods-LocalScoreboardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AFC5FE019A2E8032E5A1B81B /* Pods-LocalScoreboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboard.debug.xcconfig"; path = "Target Support Files/Pods-LocalScoreboard/Pods-LocalScoreboard.debug.xcconfig"; sourceTree = "<group>"; };
 		BF8D5336A17A12548104D269 /* Pods-LocalScoreboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboard.release.xcconfig"; path = "Target Support Files/Pods-LocalScoreboard/Pods-LocalScoreboard.release.xcconfig"; sourceTree = "<group>"; };
+		F211718125C425F400880DA4 /* Observable+Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Weak.swift"; sourceTree = "<group>"; };
+		F211718625C4279A00880DA4 /* NewGameViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewFactory.swift; sourceTree = "<group>"; };
+		F211718B25C429B000880DA4 /* AddPlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayersViewModel.swift; sourceTree = "<group>"; };
+		F211719025C429E000880DA4 /* AddPlayersViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayersViewModelInterface.swift; sourceTree = "<group>"; };
+		F21171A025C45FFC00880DA4 /* DescribedTextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribedTextFieldViewModel.swift; sourceTree = "<group>"; };
+		F21171A525C4618200880DA4 /* DescribedTextFileViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribedTextFileViewModelInterface.swift; sourceTree = "<group>"; };
 		F248282725C40B43002239E3 /* NewPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerView.swift; sourceTree = "<group>"; };
+		F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerViewModel.swift; sourceTree = "<group>"; };
+		F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerViewModelInterface.swift; sourceTree = "<group>"; };
+		F248283625C4193A002239E3 /* EnumWithAssociatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumWithAssociatedValue.swift; sourceTree = "<group>"; };
+		F248283B25C41A75002239E3 /* RxInputOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxInputOutput.swift; sourceTree = "<group>"; };
+		F248284025C42166002239E3 /* Observable+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Filter.swift"; sourceTree = "<group>"; };
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,9 +140,11 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				1BB125C14E734F96E8A46E39 /* DescribedTextField.swift */,
+				1BB125C14E734F96E8A46E39 /* DescribedTextFieldView.swift */,
 				1BB1223C25BE299382FDEFA2 /* GameHeaderView.swift */,
 				1BB12E8704FF864EB553BD36 /* ViewConstans.swift */,
+				F21171A025C45FFC00880DA4 /* DescribedTextFieldViewModel.swift */,
+				F21171A525C4618200880DA4 /* DescribedTextFileViewModelInterface.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -128,6 +152,7 @@
 		1BB120A698AE500863E45998 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F248284825C42176002239E3 /* Rx */,
 				1BB12B61C930E09EE48BCB55 /* String+Localized.swift */,
 				1BB128225FAF746836DE6706 /* Array+Constraints.swift */,
 				1BB12310E5C3581595166933 /* UIView+Fill.swift */,
@@ -163,7 +188,12 @@
 			children = (
 				1BB1272C0418F6892326E5D3 /* NewGameViewController.swift */,
 				1BB12A21B0030D5BF0AB71A3 /* AddPlayersView.swift */,
+				F211718B25C429B000880DA4 /* AddPlayersViewModel.swift */,
 				F248282725C40B43002239E3 /* NewPlayerView.swift */,
+				F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */,
+				F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */,
+				F211718625C4279A00880DA4 /* NewGameViewFactory.swift */,
+				F211719025C429E000880DA4 /* AddPlayersViewModelInterface.swift */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -220,6 +250,17 @@
 				17AC5EDEC769CBD52A014A7B /* Pods-LocalScoreboardTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F248284825C42176002239E3 /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				F248284025C42166002239E3 /* Observable+Filter.swift */,
+				F248283625C4193A002239E3 /* EnumWithAssociatedValue.swift */,
+				F248283B25C41A75002239E3 /* RxInputOutput.swift */,
+				F211718125C425F400880DA4 /* Observable+Weak.swift */,
+			);
+			path = Rx;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,16 +329,22 @@
 		1BB128E4F790DB425EF177BB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "works on my machine ~Szutowicz Krystian";
+				TargetAttributes = {
+					1BB12F569B60006AF008A592 = {
+						DevelopmentTeam = A3P9PF353G;
+					};
+				};
 			};
 			buildConfigurationList = 1BB124FF4A136E3C841AB259 /* Build configuration list for PBXProject "LocalScoreboard" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				pl,
+				Base,
 			);
 			mainGroup = 1BB121833C2A01F384BF385B;
 			productRefGroup = 1BB125829E0C297C3D441D47 /* Products */;
@@ -442,17 +489,28 @@
 			files = (
 				1BB12C16C2BB1B6A11C81E2A /* AppDelegate.swift in Sources */,
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
+				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
+				F248282D25C417C8002239E3 /* NewPlayerViewModel.swift in Sources */,
 				F248282825C40B43002239E3 /* NewPlayerView.swift in Sources */,
 				1BB125E6EB73980C64B63C60 /* ViewControllerFactory.swift in Sources */,
 				1BB129B8A31B2F701AA58952 /* String+Localized.swift in Sources */,
+				F211719125C429E000880DA4 /* AddPlayersViewModelInterface.swift in Sources */,
+				F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */,
+				F248284125C42166002239E3 /* Observable+Filter.swift in Sources */,
+				F248283725C4193A002239E3 /* EnumWithAssociatedValue.swift in Sources */,
+				F21171A125C45FFC00880DA4 /* DescribedTextFieldViewModel.swift in Sources */,
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
-				1BB1254430D36E29E0C8B159 /* DescribedTextField.swift in Sources */,
+				F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */,
+				1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */,
 				1BB120A37D60A82FE94CAC76 /* Array+Constraints.swift in Sources */,
 				1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */,
 				1BB120D51F2B33F4BFB83D34 /* GameHeaderView.swift in Sources */,
 				1BB12108DA0B7B9EC4A94EFD /* AddPlayersView.swift in Sources */,
+				F21171A625C4618200880DA4 /* DescribedTextFileViewModelInterface.swift in Sources */,
+				F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */,
 				1BB1294457B0CEE9DF5F4B5B /* UIStackView+Init.swift in Sources */,
 				1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */,
+				F248283225C4181A002239E3 /* NewPlayerViewModelInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -532,6 +591,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -572,6 +632,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = A3P9PF353G;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = LocalScoreboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -588,6 +649,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = A3P9PF353G;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = LocalScoreboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -615,6 +677,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -637,6 +700,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

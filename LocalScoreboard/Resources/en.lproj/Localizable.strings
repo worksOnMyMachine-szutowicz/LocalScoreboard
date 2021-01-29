@@ -1,4 +1,6 @@
 "newGame.title" = "New game";
 "newGame.addPlayer.title" = "Players";
 "newGame.addPlayer.button" = "+";
+"newGame.addPlayer.player" = "Player %@";
+"newGame.addPlayer.delete" = "-";
 "newGame.play" = "Let's Play!";

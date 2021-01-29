@@ -7,4 +7,5 @@ import UIKit
 
 struct ViewConstants {
     static let padding: CGFloat = 10
+    static let animationTime: TimeInterval = 0.25
 }
