@@ -140,11 +140,9 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				1BB125C14E734F96E8A46E39 /* DescribedTextFieldView.swift */,
+				F277525F25C596F10099E995 /* DescribedTextField */,
 				1BB1223C25BE299382FDEFA2 /* GameHeaderView.swift */,
 				1BB12E8704FF864EB553BD36 /* ViewConstans.swift */,
-				F21171A025C45FFC00880DA4 /* DescribedTextFieldViewModel.swift */,
-				F21171A525C4618200880DA4 /* DescribedTextFileViewModelInterface.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -186,14 +184,10 @@
 		1BB124F0C31E2F455C3F42E4 /* Dices */ = {
 			isa = PBXGroup;
 			children = (
+				F277525E25C596D80099E995 /* AddPlayers */,
+				F277525D25C596C20099E995 /* NewPlayer */,
 				1BB1272C0418F6892326E5D3 /* NewGameViewController.swift */,
-				1BB12A21B0030D5BF0AB71A3 /* AddPlayersView.swift */,
-				F211718B25C429B000880DA4 /* AddPlayersViewModel.swift */,
-				F248282725C40B43002239E3 /* NewPlayerView.swift */,
-				F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */,
-				F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */,
 				F211718625C4279A00880DA4 /* NewGameViewFactory.swift */,
-				F211719025C429E000880DA4 /* AddPlayersViewModelInterface.swift */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -261,6 +255,36 @@
 				F211718125C425F400880DA4 /* Observable+Weak.swift */,
 			);
 			path = Rx;
+			sourceTree = "<group>";
+		};
+		F277525D25C596C20099E995 /* NewPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				F248282725C40B43002239E3 /* NewPlayerView.swift */,
+				F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */,
+				F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */,
+			);
+			path = NewPlayer;
+			sourceTree = "<group>";
+		};
+		F277525E25C596D80099E995 /* AddPlayers */ = {
+			isa = PBXGroup;
+			children = (
+				1BB12A21B0030D5BF0AB71A3 /* AddPlayersView.swift */,
+				F211719025C429E000880DA4 /* AddPlayersViewModelInterface.swift */,
+				F211718B25C429B000880DA4 /* AddPlayersViewModel.swift */,
+			);
+			path = AddPlayers;
+			sourceTree = "<group>";
+		};
+		F277525F25C596F10099E995 /* DescribedTextField */ = {
+			isa = PBXGroup;
+			children = (
+				F21171A525C4618200880DA4 /* DescribedTextFileViewModelInterface.swift */,
+				F21171A025C45FFC00880DA4 /* DescribedTextFieldViewModel.swift */,
+				1BB125C14E734F96E8A46E39 /* DescribedTextFieldView.swift */,
+			);
+			path = DescribedTextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
