@@ -51,8 +51,18 @@ class DescribedTextFieldView: UIView {
         viewModel.output.asObservable().filterByAssociatedType(VMOutput.UpdateViewModel.self)
             .append(weak: self)
             .subscribe(onNext: { view, output in
-                view.label.text = output.labelText
+                view.animateUpdate(labelText: output.labelText)
             }).disposed(by: disposeBag)
+    }
+    
+    private func animateUpdate(labelText: String) {
+        UIView.animate(withDuration: ViewConstants.animationTime, animations: { [weak self] () -> Void in
+            self?.label.alpha = 0
+        })
+        label.text = labelText
+        UIView.animate(withDuration: ViewConstants.animationTime, animations: { [weak self] () -> Void in
+            self?.label.alpha = 1
+        })
     }
 }
 
