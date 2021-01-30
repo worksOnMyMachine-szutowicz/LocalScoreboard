@@ -12,7 +12,7 @@ protocol NewPlayerViewModelInterface {
     var input: PublishRelay<NewPlayerViewModelInput> { get }
     var output: Driver<NewPlayerViewModelOutput> { get }
     
-    var viewData: NewPlayerViewData { get }
+    var viewData: NewPlayerView.ViewData { get }
 }
 
 enum NewPlayerViewModelInput: EnumWithAssociatedValue {
@@ -47,10 +47,4 @@ enum NewPlayerViewModelOutput: EnumWithAssociatedValue {
             return associatedValue
         }
     }
-}
-
-struct NewPlayerViewData {
-    let descibedTextFieldViewModel: DescribedTextFieldViewModelInterface
-    let canBeDeleted: Bool
-    var index: Int
 }

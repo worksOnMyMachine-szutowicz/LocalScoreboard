@@ -16,7 +16,7 @@ class DescribedTextFieldViewModel: RxInputOutput<DescribedTextFieldViewModelInpu
     }
     
     var viewOutput: BehaviorRelay<String> = .init(value: "")
-    var viewData: DescribedTextFieldViewData
+    var viewData: DescribedTextFieldView.ViewData
     
     init(labelText: String) {
         self.viewData = .init(labelText: labelText)

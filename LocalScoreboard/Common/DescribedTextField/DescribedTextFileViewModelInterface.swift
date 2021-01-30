@@ -13,7 +13,7 @@ protocol DescribedTextFieldViewModelInterface {
     var output: Driver<DescribedTextFieldViewModelOutput> { get }
     
     var viewOutput: BehaviorRelay<String> { get }
-    var viewData: DescribedTextFieldViewData { get }
+    var viewData: DescribedTextFieldView.ViewData { get }
 }
 
 enum DescribedTextFieldViewModelInput: EnumWithAssociatedValue {
@@ -43,8 +43,4 @@ enum DescribedTextFieldViewModelOutput: EnumWithAssociatedValue {
             return associatedValue
         }
     }
-}
-
-struct DescribedTextFieldViewData {
-    let labelText: String
 }

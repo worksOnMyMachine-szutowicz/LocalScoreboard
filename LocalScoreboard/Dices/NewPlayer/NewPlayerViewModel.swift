@@ -13,7 +13,7 @@ class NewPlayerViewModel: RxInputOutput<NewPlayerViewModelInput, NewPlayerViewMo
     var output: Driver<Output> {
         outputRelay.asDriver(onErrorRecover: { Driver.just(Output.error($0)) })
     }
-    var viewData: NewPlayerViewData
+    var viewData: NewPlayerView.ViewData
     
     private let describedTextFieldViewModel: DescribedTextFieldViewModelInterface
     

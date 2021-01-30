@@ -62,4 +62,10 @@ extension NewPlayerView {
         static let deleteButtonFont: UIFont = .systemFont(ofSize: 25)
         static let deletebuttonWidth: CGFloat = 30
     }
+    
+    struct ViewData {
+        let descibedTextFieldViewModel: DescribedTextFieldViewModelInterface
+        let canBeDeleted: Bool
+        var index: Int
+    }
 }
