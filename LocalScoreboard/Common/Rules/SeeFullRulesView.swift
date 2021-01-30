@@ -10,18 +10,20 @@ import UIKit
 import RxSwift
 
 protocol SeeFullRulesViewDelegate: class {
-    func pushRulesView()
+    func pushRulesView(gameData: GameData)
 }
 
 class SeeFullRulesView: UIView {
     private let disposeBag = DisposeBag()
     private weak var delegate: SeeFullRulesViewDelegate?
+    private let gameData: GameData
     private let titleLabel = UILabel()
     private let chevronLabel = UILabel()
     private let gestureRecognizer = UITapGestureRecognizer()
     
-    init(delegate: SeeFullRulesViewDelegate?) {
+    init(delegate: SeeFullRulesViewDelegate?, gameData: GameData) {
         self.delegate = delegate
+        self.gameData = gameData
         
         super.init(frame: .zero)
         
@@ -56,13 +58,13 @@ class SeeFullRulesView: UIView {
             .filter { $0.state == .ended }
             .append(weak: self)
             .subscribe(onNext: { view, _ in
-                view.delegate?.pushRulesView()
+                view.delegate?.pushRulesView(gameData: view.gameData)
             }).disposed(by: disposeBag)
     }
 }
 
 extension SeeFullRulesView {
-    struct Values {
+    private struct Values {
         static let viewHeight: CGFloat = 20
     }
 }

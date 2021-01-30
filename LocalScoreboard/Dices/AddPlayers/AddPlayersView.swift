@@ -40,7 +40,7 @@ class AddPlayersView: UIView {
         headerContainer.addSubviews([headerTitle, addButton])
 
         let scrollView = UIScrollView(frame: .zero)
-        scrollView.addSubviewAndFill(stackView, insets: Values.stackViewInsets)
+        scrollView.addSubviewAndFill(stackView, insets: Values.scrollViewInsets)
         
         addSubviews([headerContainer, scrollView])
         [headerContainer, headerTitle, addButton, scrollView, stackView].disableAutoresizingMask()
@@ -102,8 +102,8 @@ class AddPlayersView: UIView {
 }
 
 extension AddPlayersView {
-    struct Values {
+    private struct Values {
         static let addButtonFont: UIFont = .systemFont(ofSize: 25)
-        static let stackViewInsets: UIEdgeInsets = .init(top: ViewConstants.padding, left: ViewConstants.padding, bottom: ViewConstants.padding, right: -ViewConstants.padding)
+        static let scrollViewInsets: UIEdgeInsets = .init(top: ViewConstants.padding, left: ViewConstants.padding, bottom: ViewConstants.padding, right: -ViewConstants.padding)
     }
 }

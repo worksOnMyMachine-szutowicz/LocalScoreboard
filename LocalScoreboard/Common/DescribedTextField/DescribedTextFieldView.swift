@@ -67,7 +67,7 @@ class DescribedTextFieldView: UIView {
 }
 
 extension DescribedTextFieldView {
-    struct Values {
+    private struct Values {
         static let labelWidthMultiplier: CGFloat = 0.25
     }
     

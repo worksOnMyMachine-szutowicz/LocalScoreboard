@@ -58,7 +58,7 @@ class NewPlayerView: UIView {
 }
 
 extension NewPlayerView {
-    struct Values {
+    private struct Values {
         static let deleteButtonFont: UIFont = .systemFont(ofSize: 25)
         static let deletebuttonWidth: CGFloat = 30
     }

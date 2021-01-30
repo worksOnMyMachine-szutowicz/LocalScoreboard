@@ -7,15 +7,15 @@ import UIKit
 
 protocol ViewControllerFactoryProtocol {
     func createNewGameViewController(delegate: NewGameViewControllerDelegate) -> UIViewController
-    func createRulesViewController() -> UIViewController
+    func createRulesViewController(gameData: GameData) -> UIViewController
 }
 
 class ViewControllerFactory: ViewControllerFactoryProtocol {
     func createNewGameViewController(delegate: NewGameViewControllerDelegate) -> UIViewController {
-        NewGameViewController(delegate: delegate)
+        NewGameViewController(delegate: delegate, gameData: .thousandDices)
     }
     
-    func createRulesViewController() -> UIViewController {
-        RulesViewController()
+    func createRulesViewController(gameData: GameData) -> UIViewController {
+        return RulesViewController(viewData: gameData.rulesViewData)
     }
 }

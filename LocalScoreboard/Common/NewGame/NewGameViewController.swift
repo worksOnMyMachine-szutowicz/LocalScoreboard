@@ -9,11 +9,13 @@ protocol NewGameViewControllerDelegate: SeeFullRulesViewDelegate { }
 
 class NewGameViewController: UIViewController {
     private weak var delegate: NewGameViewControllerDelegate?
+    private let gameData: GameData
     private let formView = UIStackView(type: .verticalWithDefaultSpacing)
     private let playButton = UIButton(type: .system)
 
-    init(delegate: NewGameViewControllerDelegate?) {
+    init(delegate: NewGameViewControllerDelegate, gameData: GameData) {
         self.delegate = delegate
+        self.gameData = gameData
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -35,15 +37,15 @@ class NewGameViewController: UIViewController {
         view.addSubviewAndFillToSafeArea(formView)
         formView.translatesAutoresizingMaskIntoConstraints = false
 
-        formView.addArrangedSubview(GameHeaderView(title: "1000 Dices", description: "quite long text quite long text quite long text quite long text quite long text quite long text quite long text quite long text quite long text "))
-        formView.addArrangedSubview(SeeFullRulesView(delegate: delegate))
-        formView.addArrangedSubview(AddPlayersView(viewModel: AddPlayersViewModel(requiredPlayers: 2), viewFactory: NewGameViewFactory()))
+        formView.addArrangedSubview(GameHeaderView(viewData: gameData.gameHeaderViewData))
+        formView.addArrangedSubview(SeeFullRulesView(delegate: delegate, gameData: gameData))
+        formView.addArrangedSubview(AddPlayersView(viewModel: AddPlayersViewModel(requiredPlayers: gameData.requiredPlayers), viewFactory: NewGameViewFactory()))
         formView.addArrangedSubview(playButton)
     }
 }
 
 extension NewGameViewController {
-    struct Values {
+    private struct Values {
         static let playButtonFont: UIFont = .systemFont(ofSize: 25)
     }
 }

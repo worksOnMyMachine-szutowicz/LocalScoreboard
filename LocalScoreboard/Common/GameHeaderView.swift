@@ -9,11 +9,11 @@ class GameHeaderView: UIView {
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
 
-    init(title: String, description: String) {
-        titleLabel.text = title
+    init(viewData: ViewData) {
+        titleLabel.text = viewData.titleLabelText
         titleLabel.font = Values.titleFont
         titleLabel.textAlignment = .center
-        descriptionLabel.text = description
+        descriptionLabel.text = viewData.descriptionLabelText
         descriptionLabel.font = Values.description
         descriptionLabel.numberOfLines = 0
 
@@ -37,9 +37,14 @@ class GameHeaderView: UIView {
 }
 
 extension GameHeaderView {
-    struct Values {
+    private struct Values {
         static let titleFont: UIFont = .boldSystemFont(ofSize: 40)
         static let description: UIFont = .systemFont(ofSize: 15)
         static let stackViewInsets: UIEdgeInsets = .init(top: 50, left: ViewConstants.padding, bottom: ViewConstants.padding, right: ViewConstants.padding)
+    }
+    
+    struct ViewData {
+        let titleLabelText: String
+        let descriptionLabelText: String
     }
 }

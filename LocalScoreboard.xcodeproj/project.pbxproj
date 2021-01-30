@@ -39,6 +39,8 @@
 		F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25A91B925C157B6002B9C51 /* Localizable.strings */; };
 		F277527625C598E70099E995 /* SeeFullRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527525C598E70099E995 /* SeeFullRulesView.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
+		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
+		F27D48D425C5B75800BF02D0 /* GamesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GamesData.swift */; };
 		FAC02B691239E58FFC23751D /* Pods_LocalScoreboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C5C8F88D893ADF3F6B9953 /* Pods_LocalScoreboardTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +105,8 @@
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F277527525C598E70099E995 /* SeeFullRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeFullRulesView.swift; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
+		F27D48D325C5B75800BF02D0 /* GamesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,10 +148,12 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F27D48D825C5BA0300BF02D0 /* NewGame */,
 				F277527425C598D40099E995 /* Rules */,
 				F277525F25C596F10099E995 /* DescribedTextField */,
 				1BB1223C25BE299382FDEFA2 /* GameHeaderView.swift */,
 				1BB12E8704FF864EB553BD36 /* ViewConstans.swift */,
+				F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -191,8 +197,6 @@
 			children = (
 				F277525E25C596D80099E995 /* AddPlayers */,
 				F277525D25C596C20099E995 /* NewPlayer */,
-				1BB1272C0418F6892326E5D3 /* NewGameViewController.swift */,
-				F211718625C4279A00880DA4 /* NewGameViewFactory.swift */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -227,6 +231,7 @@
 				1BB120A698AE500863E45998 /* Extensions */,
 				1BB124F0C31E2F455C3F42E4 /* Dices */,
 				1BB1205CAC59D159C678C3D1 /* Common */,
+				F27D48D325C5B75800BF02D0 /* GamesData.swift */,
 			);
 			path = LocalScoreboard;
 			sourceTree = "<group>";
@@ -299,6 +304,15 @@
 				F277527D25C5A16A0099E995 /* RulesViewController.swift */,
 			);
 			path = Rules;
+			sourceTree = "<group>";
+		};
+		F27D48D825C5BA0300BF02D0 /* NewGame */ = {
+			isa = PBXGroup;
+			children = (
+				1BB1272C0418F6892326E5D3 /* NewGameViewController.swift */,
+				F211718625C4279A00880DA4 /* NewGameViewFactory.swift */,
+			);
+			path = NewGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -529,6 +543,7 @@
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
 				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
 				F248282D25C417C8002239E3 /* NewPlayerViewModel.swift in Sources */,
+				F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */,
 				F248282825C40B43002239E3 /* NewPlayerView.swift in Sources */,
 				1BB125E6EB73980C64B63C60 /* ViewControllerFactory.swift in Sources */,
 				1BB129B8A31B2F701AA58952 /* String+Localized.swift in Sources */,
@@ -541,6 +556,7 @@
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
 				F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */,
 				1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */,
+				F27D48D425C5B75800BF02D0 /* GamesData.swift in Sources */,
 				1BB120A37D60A82FE94CAC76 /* Array+Constraints.swift in Sources */,
 				1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */,
 				1BB120D51F2B33F4BFB83D34 /* GameHeaderView.swift in Sources */,
