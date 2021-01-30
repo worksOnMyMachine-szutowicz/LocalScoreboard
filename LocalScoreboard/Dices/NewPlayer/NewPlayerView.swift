@@ -13,15 +13,13 @@ class NewPlayerView: UIView {
     typealias VMInput = NewPlayerViewModelInput
     private let disposeBag = DisposeBag()
     private let viewModel: NewPlayerViewModelInterface
-    private let viewFactory: NewGameViewFactoryInterface
     private let describedTextField: DescribedTextFieldView
     private let deleteButton = UIButton(type: .system)
     
-    init(viewModel: NewPlayerViewModelInterface, viewFactory: NewGameViewFactoryInterface) {
+    init(viewModel: NewPlayerViewModelInterface) {
         self.viewModel = viewModel
-        self.viewFactory = viewFactory
         
-        describedTextField = viewFactory.createDescribedTextFieldView(viewModel: viewModel.viewData.descibedTextFieldViewModel)
+        describedTextField = DescribedTextFieldView(viewModel: viewModel.viewData.descibedTextFieldViewModel)
         deleteButton.setTitle("newGame.addPlayer.delete".localized, for: .normal)
         deleteButton.titleLabel?.font = Values.deleteButtonFont
         deleteButton.isHidden = !viewModel.viewData.canBeDeleted

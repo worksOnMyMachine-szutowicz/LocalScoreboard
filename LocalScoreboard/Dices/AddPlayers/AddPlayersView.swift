@@ -77,7 +77,7 @@ class AddPlayersView: UIView {
                 case .error(let output):
                     print(output)
                 case .addPlayer(let output):
-                    let playerView = view.viewFactory.createNewPlayerView(viewModel: output.newPlayerViewModel, viewFactory: view.viewFactory)
+                    let playerView = view.viewFactory.createNewPlayerView(viewModel: output.newPlayerViewModel)
                     playerView.alpha = 0
                     playerView.isHidden = true
                     view.stackView.addArrangedSubview(playerView)

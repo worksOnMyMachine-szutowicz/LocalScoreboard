@@ -6,11 +6,16 @@
 import UIKit
 
 protocol ViewControllerFactoryProtocol {
-    func createNewGameViewController() -> UIViewController
+    func createNewGameViewController(delegate: NewGameViewControllerDelegate) -> UIViewController
+    func createRulesViewController() -> UIViewController
 }
 
 class ViewControllerFactory: ViewControllerFactoryProtocol {
-    func createNewGameViewController() -> UIViewController {
-        NewGameViewController()
+    func createNewGameViewController(delegate: NewGameViewControllerDelegate) -> UIViewController {
+        NewGameViewController(delegate: delegate)
+    }
+    
+    func createRulesViewController() -> UIViewController {
+        RulesViewController()
     }
 }

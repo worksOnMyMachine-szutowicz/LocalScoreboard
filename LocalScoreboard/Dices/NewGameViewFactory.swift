@@ -7,16 +7,11 @@
 //
 
 protocol NewGameViewFactoryInterface {
-    func createNewPlayerView(viewModel: NewPlayerViewModelInterface, viewFactory: NewGameViewFactoryInterface) -> NewPlayerView
-    func createDescribedTextFieldView(viewModel: DescribedTextFieldViewModelInterface) -> DescribedTextFieldView
+    func createNewPlayerView(viewModel: NewPlayerViewModelInterface) -> NewPlayerView
 }
 
 class NewGameViewFactory: NewGameViewFactoryInterface {
-    func createNewPlayerView(viewModel: NewPlayerViewModelInterface, viewFactory: NewGameViewFactoryInterface) -> NewPlayerView {
-        NewPlayerView(viewModel: viewModel, viewFactory: viewFactory)
-    }
-    
-    func createDescribedTextFieldView(viewModel: DescribedTextFieldViewModelInterface) -> DescribedTextFieldView {
-        DescribedTextFieldView(viewModel: viewModel)
+    func createNewPlayerView(viewModel: NewPlayerViewModelInterface) -> NewPlayerView {
+        NewPlayerView(viewModel: viewModel)
     }
 }

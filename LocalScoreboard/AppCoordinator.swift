@@ -9,7 +9,7 @@ protocol AppCoordinatorInterface {
     func start()
 }
 
-class AppCoordinator: AppCoordinatorInterface {
+class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate {
     private let window: UIWindow
     private let navigationController: UINavigationController
     private let viewControllerFactory: ViewControllerFactoryProtocol
@@ -21,10 +21,14 @@ class AppCoordinator: AppCoordinatorInterface {
     }
 
     func start() {
-        let homeVc = viewControllerFactory.createNewGameViewController()
+        let homeVc = viewControllerFactory.createNewGameViewController(delegate: self)
         navigationController.setViewControllers([homeVc], animated: true)
 
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
+    }
+    
+    func pushRulesView() {
+        navigationController.pushViewController(viewControllerFactory.createRulesViewController(), animated: true)
     }
 }

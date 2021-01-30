@@ -5,11 +5,16 @@
 
 import UIKit
 
+protocol NewGameViewControllerDelegate: SeeFullRulesViewDelegate { }
+
 class NewGameViewController: UIViewController {
+    private weak var delegate: NewGameViewControllerDelegate?
     private let formView = UIStackView(type: .verticalWithDefaultSpacing)
     private let playButton = UIButton(type: .system)
 
-    init() {
+    init(delegate: NewGameViewControllerDelegate?) {
+        self.delegate = delegate
+        
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -31,6 +36,7 @@ class NewGameViewController: UIViewController {
         formView.translatesAutoresizingMaskIntoConstraints = false
 
         formView.addArrangedSubview(GameHeaderView(title: "1000 Dices", description: "quite long text quite long text quite long text quite long text quite long text quite long text quite long text quite long text quite long text "))
+        formView.addArrangedSubview(SeeFullRulesView(delegate: delegate))
         formView.addArrangedSubview(AddPlayersView(viewModel: AddPlayersViewModel(requiredPlayers: 2), viewFactory: NewGameViewFactory()))
         formView.addArrangedSubview(playButton)
     }
