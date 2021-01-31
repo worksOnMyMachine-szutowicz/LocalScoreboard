@@ -12,18 +12,28 @@ protocol DescribedTextFieldViewModelInterface {
     var input: PublishRelay<DescribedTextFieldViewModelInput> { get }
     var output: Driver<DescribedTextFieldViewModelOutput> { get }
     
-    var viewOutput: BehaviorRelay<String> { get }
     var viewData: DescribedTextFieldView.ViewData { get }
 }
 
 enum DescribedTextFieldViewModelInput: EnumWithAssociatedValue {
-    case update(UpdateModel)
+    //internal
+    case userInput(UserInput)
     
+    //external
+    case update(UpdateModel)
+    case validate(ValidateModel)
+    
+    struct UserInput { let input: String }
     struct UpdateModel { let labelText: String }
+    struct ValidateModel { }
     
     func associatedValue() -> Any {
         switch self {
+        case .userInput(let associatedValue):
+            return associatedValue
         case .update(let associatedValue):
+            return associatedValue
+        case .validate(let associatedValue):
             return associatedValue
         }
     }
@@ -31,15 +41,26 @@ enum DescribedTextFieldViewModelInput: EnumWithAssociatedValue {
 
 enum DescribedTextFieldViewModelOutput: EnumWithAssociatedValue {
     case error(Error)
+    
+    //internal
     case updateView(UpdateViewModel)
     
+    //internal && external
+    case validationResult(ValidationResultModel)
+    
     struct UpdateViewModel { let labelText: String }
+    struct ValidationResultModel {
+        let result: Bool
+        let userInput: String
+    }
     
     func associatedValue() -> Any {
         switch self {
         case .error(let associatedValue):
             return associatedValue
         case .updateView(let associatedValue):
+            return associatedValue
+        case .validationResult(let associatedValue):
             return associatedValue
         }
     }

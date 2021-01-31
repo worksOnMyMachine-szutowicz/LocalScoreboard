@@ -96,6 +96,8 @@ class AddPlayersView: UIView {
                         playerView.isHidden = true
                     })
                     playerView.removeFromSuperview()
+                case .validationSuccess:
+                    break
                 }
             }).disposed(by: disposeBag)
     }

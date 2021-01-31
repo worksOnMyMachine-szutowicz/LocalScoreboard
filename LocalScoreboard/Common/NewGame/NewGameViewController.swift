@@ -4,20 +4,28 @@
 //
 
 import UIKit
+import RxSwift
 
-protocol NewGameViewControllerDelegate: SeeFullRulesViewDelegate { }
+protocol NewGameViewControllerDelegate: SeeFullRulesViewDelegate {
+    func startNewGame(game: GameData.Games, players: [String])
+}
 
 class NewGameViewController: UIViewController {
+    typealias VMInput = NewGameViewModel.Input
+    typealias VMOutput = NewGameViewModel.Output
+    private let disposeBag = DisposeBag()
     private weak var delegate: NewGameViewControllerDelegate?
-    private let gameData: GameData
-    private let formView = UIStackView(type: .verticalWithDefaultSpacing)
+    private let viewModel: NewGameViewModelInterface
+    private let stackView = UIStackView(type: .verticalWithDefaultSpacing)
     private let playButton = UIButton(type: .system)
 
-    init(delegate: NewGameViewControllerDelegate, gameData: GameData) {
+    init(delegate: NewGameViewControllerDelegate, viewModel: NewGameViewModelInterface) {
         self.delegate = delegate
-        self.gameData = gameData
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
+        setupBindigs()
     }
 
     required init?(coder: NSCoder) {
@@ -34,18 +42,42 @@ class NewGameViewController: UIViewController {
     }
 
     private func layout() {
-        view.addSubviewAndFillToSafeArea(formView)
-        formView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubviewAndFillToSafeArea(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
 
-        formView.addArrangedSubview(GameHeaderView(viewData: gameData.gameHeaderViewData))
-        formView.addArrangedSubview(SeeFullRulesView(delegate: delegate, gameData: gameData))
-        formView.addArrangedSubview(AddPlayersView(viewModel: AddPlayersViewModel(requiredPlayers: gameData.requiredPlayers), viewFactory: NewGameViewFactory()))
-        formView.addArrangedSubview(playButton)
+        stackView.addArrangedSubview(GameHeaderView(viewData: viewModel.viewData.gameHeaderViewData))
+        stackView.addArrangedSubview(SeeFullRulesView(delegate: delegate, rulesViewData: viewModel.viewData.rulesViewData))
+        stackView.addArrangedSubview(AddPlayersView(viewModel: viewModel.viewData.addPlayersViewModel, viewFactory: NewGameViewFactory()))
+        stackView.addArrangedSubview(playButton)
+    }
+    
+    private func setupBindigs() {
+        playButton.rx.tap
+            .map { _ in VMInput.playButtonTapped(.init()) }
+            .bind(to: viewModel.input)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.asObservable()
+            .append(weak: self)
+            .subscribe(onNext: { vc, output in
+                switch output {
+                case .error(let output):
+                    print(output)
+                case .startNewGame(let output):
+                    vc.delegate?.startNewGame(game: output.game, players: output.players)
+                }
+            }).disposed(by: disposeBag)
     }
 }
 
 extension NewGameViewController {
     private struct Values {
         static let playButtonFont: UIFont = .systemFont(ofSize: 25)
+    }
+    
+    struct ViewData {
+        let gameHeaderViewData: GameHeaderView.ViewData
+        let rulesViewData: RulesViewController.ViewData
+        let addPlayersViewModel: AddPlayersViewModelInterface
     }
 }

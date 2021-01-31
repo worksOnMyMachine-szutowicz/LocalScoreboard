@@ -28,7 +28,12 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate {
         window.makeKeyAndVisible()
     }
     
-    func pushRulesView(gameData: GameData) {
-        navigationController.pushViewController(viewControllerFactory.createRulesViewController(gameData: gameData), animated: true)
+    func pushRulesView(rulesViewData: RulesViewController.ViewData) {
+        navigationController.pushViewController(viewControllerFactory.createRulesViewController(rulesViewData: rulesViewData), animated: true)
     }
+    
+    func startNewGame(game: GameData.Games, players: [String]) {
+        
+    }
+    
 }

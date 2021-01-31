@@ -7,11 +7,16 @@
 //
 
 struct GameData {
+    enum Games {
+        case thousandDices
+    }
+    
+    let game: Games
     let requiredPlayers: Int
     let gameHeaderViewData: GameHeaderView.ViewData
     let rulesViewData: RulesViewController.ViewData
     
-    static let thousandDices = GameData(requiredPlayers: 2, gameHeaderViewData: .thousandDices, rulesViewData: .thousandDices)
+    static let thousandDices = GameData(game: .thousandDices, requiredPlayers: 2, gameHeaderViewData: .thousandDices, rulesViewData: .thousandDices)
 }
 
 extension GameHeaderView.ViewData {

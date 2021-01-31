@@ -17,8 +17,6 @@ class RulesViewController: UIViewController {
         sections = viewData.sections.map { TitledSectionView(viewData: $0) }
         
         super.init(nibName: nil, bundle: nil)
-        
-        layout()
     }
     
     required init?(coder: NSCoder) {
@@ -28,6 +26,8 @@ class RulesViewController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .systemGroupedBackground
         title = "rules.title".localized
+        
+        layout()
     }
     
     private func layout() {

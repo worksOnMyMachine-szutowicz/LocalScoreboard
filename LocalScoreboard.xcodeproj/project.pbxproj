@@ -40,7 +40,9 @@
 		F277527625C598E70099E995 /* SeeFullRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527525C598E70099E995 /* SeeFullRulesView.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
-		F27D48D425C5B75800BF02D0 /* GamesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GamesData.swift */; };
+		F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GameData.swift */; };
+		F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */; };
+		F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */; };
 		FAC02B691239E58FFC23751D /* Pods_LocalScoreboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C5C8F88D893ADF3F6B9953 /* Pods_LocalScoreboardTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,7 +108,9 @@
 		F277527525C598E70099E995 /* SeeFullRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeFullRulesView.swift; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
-		F27D48D325C5B75800BF02D0 /* GamesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesData.swift; sourceTree = "<group>"; };
+		F27D48D325C5B75800BF02D0 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
+		F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModelInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,8 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F277525E25C596D80099E995 /* AddPlayers */,
+				F277525D25C596C20099E995 /* NewPlayer */,
 				F27D48D825C5BA0300BF02D0 /* NewGame */,
 				F277527425C598D40099E995 /* Rules */,
 				F277525F25C596F10099E995 /* DescribedTextField */,
@@ -195,8 +201,6 @@
 		1BB124F0C31E2F455C3F42E4 /* Dices */ = {
 			isa = PBXGroup;
 			children = (
-				F277525E25C596D80099E995 /* AddPlayers */,
-				F277525D25C596C20099E995 /* NewPlayer */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -231,7 +235,7 @@
 				1BB120A698AE500863E45998 /* Extensions */,
 				1BB124F0C31E2F455C3F42E4 /* Dices */,
 				1BB1205CAC59D159C678C3D1 /* Common */,
-				F27D48D325C5B75800BF02D0 /* GamesData.swift */,
+				F27D48D325C5B75800BF02D0 /* GameData.swift */,
 			);
 			path = LocalScoreboard;
 			sourceTree = "<group>";
@@ -311,6 +315,8 @@
 			children = (
 				1BB1272C0418F6892326E5D3 /* NewGameViewController.swift */,
 				F211718625C4279A00880DA4 /* NewGameViewFactory.swift */,
+				F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */,
+				F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */,
 			);
 			path = NewGame;
 			sourceTree = "<group>";
@@ -556,13 +562,15 @@
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
 				F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */,
 				1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */,
-				F27D48D425C5B75800BF02D0 /* GamesData.swift in Sources */,
+				F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */,
 				1BB120A37D60A82FE94CAC76 /* Array+Constraints.swift in Sources */,
 				1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */,
+				F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */,
 				1BB120D51F2B33F4BFB83D34 /* GameHeaderView.swift in Sources */,
 				1BB12108DA0B7B9EC4A94EFD /* AddPlayersView.swift in Sources */,
 				F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */,
 				F21171A625C4618200880DA4 /* DescribedTextFileViewModelInterface.swift in Sources */,
+				F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */,
 				F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */,
 				1BB1294457B0CEE9DF5F4B5B /* UIStackView+Init.swift in Sources */,
 				1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */,

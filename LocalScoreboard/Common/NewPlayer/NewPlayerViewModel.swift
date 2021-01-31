@@ -34,6 +34,16 @@ class NewPlayerViewModel: RxInputOutput<NewPlayerViewModelInput, NewPlayerViewMo
             .bind(to: describedTextFieldViewModel.input)
             .disposed(by: disposeBag)
         
+        input.asObservable().filterByAssociatedType(Input.ValidateModel.self)
+            .map { _ in DescribedTextFieldViewModelInput.validate(.init()) }
+            .bind(to: describedTextFieldViewModel.input)
+            .disposed(by: disposeBag)
+        
+        describedTextFieldViewModel.output.asObservable().filterByAssociatedType(DescribedTextFieldViewModelOutput.ValidationResultModel.self)
+            .map { Output.validationResult(.init(result: $0.result, userInput: $0.userInput)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
         input.asObservable().filterByAssociatedType(Input.DeleteTappedModel.self)
             .append(weak: self)
             .map { vm, _ in Output.delete(.init(index: vm.viewData.index)) }

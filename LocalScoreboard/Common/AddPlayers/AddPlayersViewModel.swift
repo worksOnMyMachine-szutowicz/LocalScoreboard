@@ -10,12 +10,12 @@ import RxSwift
 import RxCocoa
 
 class AddPlayersViewModel: RxInputOutput<AddPlayersViewModelInput, AddPlayersViewModelOutput>, AddPlayersViewModelInterface {
-    var output: Driver<AddPlayersViewModelOutput> {
+    var output: Driver<Output> {
         outputRelay.asDriver(onErrorRecover: { Driver.just(Output.error($0)) })
     }
     
     private let requiredPlayers: Int
-    private var players: [NewPlayerViewModel] = []
+    private var players: [Observable<NewPlayerViewModelOutput.ValidationResultModel>] = []
     
     init(requiredPlayers: Int) {
         self.requiredPlayers = requiredPlayers
@@ -47,11 +47,23 @@ class AddPlayersViewModel: RxInputOutput<AddPlayersViewModelInput, AddPlayersVie
             .map { Output.addPlayer(.init(newPlayerViewModel: $0)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
+        
+        input.asObservable().filterByAssociatedType(Input.ValidateModel.self)
+            .append(weak: self)
+            .flatMapLatest { vm, _ in
+                Observable.zip(vm.players)
+            }
+            .filter { $0.allSatisfy { $0.result } }
+            .map { $0.map { $0.userInput } }
+            .map { Output.validationSuccess(.init(players: $0)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
     }
     
     private func createAndBindNewPlayerViewModel(canBeDeleted: Bool) -> NewPlayerViewModel {
         let newPlayerViewModel = NewPlayerViewModel(index: players.count, canBeDeleted: canBeDeleted)
-        players.append(newPlayerViewModel)
+        let newPlayerValidationResult = PublishSubject<NewPlayerViewModelOutput.ValidationResultModel>()
+        players.append(newPlayerValidationResult.asObservable())
         
         newPlayerViewModel.output.asObservable().filterByAssociatedType(NewPlayerViewModelOutput.DeleteModel.self)
             .append(weak: self)
@@ -65,6 +77,15 @@ class AddPlayersViewModel: RxInputOutput<AddPlayersViewModelInput, AddPlayersVie
             .filter { newPlayerViewModel, deleletePlayerModel in newPlayerViewModel.viewData.index > deleletePlayerModel.index }
             .map { _ in NewPlayerViewModelInput.updateIndex(.init()) }
             .bind(to: newPlayerViewModel.input)
+            .disposed(by: disposeBag)
+        
+        input.asObservable().filterByAssociatedType(Input.ValidateModel.self)
+            .map { _ in NewPlayerViewModelInput.validate(.init()) }
+            .bind(to: newPlayerViewModel.input)
+            .disposed(by: disposeBag)
+        
+        newPlayerViewModel.output.asObservable().filterByAssociatedType(NewPlayerViewModelOutput.ValidationResultModel.self)
+            .bind(to: newPlayerValidationResult)
             .disposed(by: disposeBag)
         
         return newPlayerViewModel

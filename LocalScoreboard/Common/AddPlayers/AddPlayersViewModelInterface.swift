@@ -14,11 +14,16 @@ protocol AddPlayersViewModelInterface {
 }
 
 enum AddPlayersViewModelInput: EnumWithAssociatedValue {
+    //internal
     case addRequiredPlayers(AddRequiredPlayersModel)
+    
+    //external
     case addPlayerTapped(AddPlayerTappedModel)
+    case validate(ValidateModel)
     
     struct AddRequiredPlayersModel { }
     struct AddPlayerTappedModel { }
+    struct ValidateModel { }
     
     func associatedValue() -> Any {
         switch self {
@@ -26,17 +31,25 @@ enum AddPlayersViewModelInput: EnumWithAssociatedValue {
             return associatedValue
         case .addPlayerTapped(let associatedValue):
             return associatedValue
+        case .validate(let associatedValue):
+            return associatedValue
         }
     }
 }
 
 enum AddPlayersViewModelOutput: EnumWithAssociatedValue {
     case error(Error)
+    
+    //internal
     case addPlayer(AddPlayerModel)
     case deletePlayer(DeletePlayerModel)
     
+    //external
+    case validationSuccess(ValidationSuccessModel)
+    
     struct AddPlayerModel { let newPlayerViewModel: NewPlayerViewModel }
     struct DeletePlayerModel { let index: Int }
+    struct ValidationSuccessModel { let players: [String] }
     
     func associatedValue() -> Any {
         switch self {
@@ -45,6 +58,8 @@ enum AddPlayersViewModelOutput: EnumWithAssociatedValue {
         case .addPlayer(let associatedValue):
             return associatedValue
         case .deletePlayer(let associatedValue):
+            return associatedValue
+        case .validationSuccess(let associatedValue):
             return associatedValue
         }
     }

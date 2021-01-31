@@ -11,12 +11,11 @@ import RxCocoa
 
 class DescribedTextFieldViewModel: RxInputOutput<DescribedTextFieldViewModelInput, DescribedTextFieldViewModelOutput>, DescribedTextFieldViewModelInterface {
     
-    var output: Driver<DescribedTextFieldViewModelOutput>{
+    var output: Driver<Output>{
         outputRelay.asDriver(onErrorRecover: { Driver.just(Output.error($0)) })
     }
-    
-    var viewOutput: BehaviorRelay<String> = .init(value: "")
     var viewData: DescribedTextFieldView.ViewData
+    private let userInput: BehaviorRelay<String> = .init(value: "")
     
     init(labelText: String) {
         self.viewData = .init(labelText: labelText)
@@ -27,8 +26,19 @@ class DescribedTextFieldViewModel: RxInputOutput<DescribedTextFieldViewModelInpu
     }
     
     private func setupBindings() {
+        input.asObservable().filterByAssociatedType(Input.UserInput.self)
+            .map { $0.input }
+            .bind(to: userInput)
+            .disposed(by: disposeBag)
+        
         input.asObservable().filterByAssociatedType(Input.UpdateModel.self)
             .map { Output.updateView(.init(labelText: $0.labelText)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        input.asObservable().filterByAssociatedType(Input.ValidateModel.self)
+            .withLatestFrom(userInput)
+            .map { Output.validationResult(.init(result: !$0.isEmpty, userInput: $0)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
     }

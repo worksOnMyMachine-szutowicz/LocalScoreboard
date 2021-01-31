@@ -7,6 +7,7 @@ import UIKit
 import RxSwift
 
 class DescribedTextFieldView: UIView {
+    typealias VMInput = DescribedTextFieldViewModelInput
     typealias VMOutput = DescribedTextFieldViewModelOutput
     private let disposeBag = DisposeBag()
     private let viewModel: DescribedTextFieldViewModelInterface
@@ -45,13 +46,20 @@ class DescribedTextFieldView: UIView {
     
     private func setupBindigs() {
         textField.rx.text.orEmpty
-            .bind(to: viewModel.viewOutput)
+            .map { VMInput.userInput(.init(input: $0)) }
+            .bind(to: viewModel.input)
             .disposed(by: disposeBag)
         
         viewModel.output.asObservable().filterByAssociatedType(VMOutput.UpdateViewModel.self)
             .append(weak: self)
             .subscribe(onNext: { view, output in
                 view.animateUpdate(labelText: output.labelText)
+            }).disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.ValidationResultModel.self)
+            .append(weak: self)
+            .subscribe(onNext: { view, validationResult in
+                view.indicateValidationResult(validationResult.result)
             }).disposed(by: disposeBag)
     }
     
@@ -63,6 +71,10 @@ class DescribedTextFieldView: UIView {
         UIView.animate(withDuration: ViewConstants.animationTime, animations: { [weak self] () -> Void in
             self?.label.alpha = 1
         })
+    }
+    
+    private func indicateValidationResult(_ result: Bool) {
+        label.textColor = result ? .label : .systemRed
     }
 }
 
