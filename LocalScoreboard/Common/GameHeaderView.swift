@@ -10,11 +10,9 @@ class GameHeaderView: UIView {
     private let descriptionLabel = UILabel()
 
     init(viewData: ViewData) {
-        titleLabel.text = viewData.titleLabelText
-        titleLabel.font = Values.titleFont
+        titleLabel.attributedText = .init(string: viewData.titleLabelText, attributes: Values.titleAttributes)
         titleLabel.textAlignment = .center
-        descriptionLabel.text = viewData.descriptionLabelText
-        descriptionLabel.font = Values.description
+        descriptionLabel.attributedText = .init(string: viewData.descriptionLabelText, attributes: ViewConstants.labelTextAttributes)
         descriptionLabel.numberOfLines = 0
 
         super.init(frame: .zero)
@@ -27,20 +25,24 @@ class GameHeaderView: UIView {
     }
 
     private func layout() {
-        let stackView = UIStackView(type: .verticalWithDefaultSpacing)
-        addSubviewAndFillToSafeArea(stackView, insets: Values.stackViewInsets)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(descriptionLabel)
+        addSubviews([titleLabel, descriptionLabel])
+        [titleLabel, descriptionLabel].disableAutoresizingMask()
+        
+        [titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Values.topPadding)].activate()
+        
+        [descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMarginPadding),
+         descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewConstants.padding),
+         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ViewConstants.padding),
+         descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
     }
 }
 
 extension GameHeaderView {
     private struct Values {
-        static let titleFont: UIFont = .boldSystemFont(ofSize: 50)
-        static let description: UIFont = .systemFont(ofSize: 15)
-        static let stackViewInsets: UIEdgeInsets = .init(top: 40, left: ViewConstants.padding, bottom: ViewConstants.padding, right: ViewConstants.padding)
+        static let titleAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Chalkduster", size: 48) as Any]
+        static let topPadding: CGFloat = 20
     }
     
     struct ViewData {

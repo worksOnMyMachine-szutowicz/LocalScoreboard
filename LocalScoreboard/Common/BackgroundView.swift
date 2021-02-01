@@ -55,7 +55,7 @@ class BackgroundView: UIView {
 extension BackgroundView {
     private struct Values {
         static let lineSize: CGFloat = 1
-        static let highlightedLineIndex = 4
+        static let highlightedLineIndex: Int = Int(ViewConstants.sheetMargin / ViewConstants.backgroundGridSize)
     }
     
     private enum Orientation {

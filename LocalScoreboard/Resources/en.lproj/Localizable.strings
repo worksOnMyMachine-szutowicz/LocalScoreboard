@@ -14,7 +14,7 @@
 
 //1000 Dices
 "1000dices.title" = "1000 Dices";
-"1000dices.description" = "Roll dices, create structures and be first to get 1000 points!";
+"1000dices.description" = "Roll dices, create structures and be the first one to get 1000 points!";
 "1000dices.rules.requirements.title" = "Requirements";
 "1000dices.rules.requirements.content" = "5 dices";
 "1000dices.rules.objective.title" = "Objective";
