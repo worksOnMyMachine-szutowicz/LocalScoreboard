@@ -8,25 +8,34 @@ import UIKit
 extension UIStackView {
     convenience init(type: StackType) {
         self.init(frame: .zero)
-        alignment = .fill
-        distribution = .fill
 
         switch type {
         case .verticalWithDefaultSpacing:
+            alignment = .fill
+            distribution = .fill
             axis = .vertical
             spacing = Values.defaultSpacing
-        case .horizontalWithDefaultSpacing:
+        case .verticalBackground:
+            alignment = .fill
+            distribution = .equalCentering
+            axis = .vertical
+            spacing = Values.backgroundGridSpacing
+        case .horizontalBackground:
+            alignment = .fill
+            distribution = .equalCentering
             axis = .horizontal
-            spacing = Values.defaultSpacing
+            spacing = Values.backgroundGridSpacing
         }
     }
 
     enum StackType {
         case verticalWithDefaultSpacing
-        case horizontalWithDefaultSpacing
+        case verticalBackground
+        case horizontalBackground
     }
 
-    struct Values {
+    private struct Values {
         static let defaultSpacing: CGFloat = 20
+        static let backgroundGridSpacing: CGFloat = 19
     }
 }

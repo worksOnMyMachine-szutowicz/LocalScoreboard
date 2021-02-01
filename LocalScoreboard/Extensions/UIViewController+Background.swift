@@ -10,11 +10,11 @@ import UIKit
 
 extension UIViewController {
     func setSheetBackground() {
-        navigationController?.navigationBar.barTintColor = Colors.background
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
         
-        let viewHeight = view.bounds.height - (navigationController?.view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)
-        let bounds = CGRect(x: 0, y: 0, width: view.bounds.width, height: viewHeight)
-        let background = BackgroundView(for: bounds)
+        let background = BackgroundView(for: view)
         view.addSubviewAndFill(background)
         view.sendSubviewToBack(background)
     }

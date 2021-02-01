@@ -6,7 +6,7 @@
 import UIKit
 
 struct ViewConstants {
-    static let backgroundGridSize: CGFloat = 21
+    static let backgroundGridSize: CGFloat = 20
     static let padding: CGFloat = 10
     static let animationTime: TimeInterval = 0.25
 }

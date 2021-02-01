@@ -28,7 +28,7 @@ class GameHeaderView: UIView {
 
     private func layout() {
         let stackView = UIStackView(type: .verticalWithDefaultSpacing)
-        addSubviewAndFill(stackView, insets: Values.stackViewInsets)
+        addSubviewAndFillToSafeArea(stackView, insets: Values.stackViewInsets)
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         stackView.addArrangedSubview(titleLabel)

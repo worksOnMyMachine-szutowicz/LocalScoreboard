@@ -9,12 +9,12 @@
 import UIKit
 
 class BackgroundView: UIView {
-    init(for bounds: CGRect) {
+    init(for view: UIView) {
         super.init(frame: .zero)
         
         backgroundColor = Colors.background
         
-        layout(bounds: bounds)
+        layout(bounds: view.bounds)
     }
     
     required init?(coder: NSCoder) {
@@ -22,11 +22,8 @@ class BackgroundView: UIView {
     }
     
     private func layout(bounds: CGRect) {
-        let verticalStackView = UIStackView(type: .verticalWithDefaultSpacing)
-        verticalStackView.distribution = .equalCentering
-        
-        let horizontalStackView = UIStackView(type: .horizontalWithDefaultSpacing)
-        horizontalStackView.distribution = .equalCentering
+        let verticalStackView = UIStackView(type: .verticalBackground)
+        let horizontalStackView = UIStackView(type: .horizontalBackground)
         
         addSubviewAndFill(verticalStackView)
         addSubviewAndFill(horizontalStackView)
