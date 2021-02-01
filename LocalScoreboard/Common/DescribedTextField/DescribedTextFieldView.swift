@@ -16,8 +16,12 @@ class DescribedTextFieldView: UIView {
 
     init(viewModel: DescribedTextFieldViewModelInterface) {
         self.viewModel = viewModel
-        label.text = viewModel.viewData.labelText
-        textField.borderStyle = .roundedRect
+        label.attributedText = .init(string: viewModel.viewData.labelText, attributes: ViewConstants.labelAttributes)
+        textField.layer.borderWidth = Values.textFieldDefaultBorderWidth
+        textField.layer.borderColor = Colors.backgroundLine.cgColor
+        textField.layer.cornerRadius = Values.textFieldCornerRadius
+        textField.backgroundColor = Colors.background
+        textField.setHorizontalPadding()
         
         super.init(frame: .zero)
 
@@ -41,7 +45,7 @@ class DescribedTextFieldView: UIView {
 
         [textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: ViewConstants.padding),
         textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: ViewConstants.padding),
-        textField.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
+        textField.heightAnchor.constraint(equalToConstant: Values.textFieldHeight)].activate()
     }
     
     private func setupBindigs() {
@@ -74,13 +78,18 @@ class DescribedTextFieldView: UIView {
     }
     
     private func indicateValidationResult(_ result: Bool) {
-        label.textColor = result ? .label : .systemRed
+        textField.layer.borderColor = result ? Colors.backgroundLine.cgColor : Colors.backgroundHighlight.cgColor
+        textField.layer.borderWidth = result ? Values.textFieldDefaultBorderWidth : Values.textFieldHighlightedBorderWidth
     }
 }
 
 extension DescribedTextFieldView {
     private struct Values {
         static let labelWidthMultiplier: CGFloat = 0.25
+        static let textFieldHeight: CGFloat = 2 * ViewConstants.backgroundGridSize
+        static let textFieldDefaultBorderWidth: CGFloat = 2
+        static let textFieldHighlightedBorderWidth: CGFloat = 3
+        static let textFieldCornerRadius: CGFloat = 5
     }
     
     struct ViewData {

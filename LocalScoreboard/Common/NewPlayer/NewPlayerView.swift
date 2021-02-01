@@ -20,8 +20,7 @@ class NewPlayerView: UIView {
         self.viewModel = viewModel
         
         describedTextField = DescribedTextFieldView(viewModel: viewModel.viewData.descibedTextFieldViewModel)
-        deleteButton.setTitle("newGame.addPlayer.delete".localized, for: .normal)
-        deleteButton.titleLabel?.font = Values.deleteButtonFont
+        deleteButton.setAttributedTitle(.init(string: "newGame.addPlayer.delete".localized, attributes: ViewConstants.highlightedLabelAttributes), for: .normal)
         deleteButton.isHidden = !viewModel.viewData.canBeDeleted
         
         super.init(frame: .zero)
@@ -59,7 +58,6 @@ class NewPlayerView: UIView {
 
 extension NewPlayerView {
     private struct Values {
-        static let deleteButtonFont: UIFont = .systemFont(ofSize: 25)
         static let deletebuttonWidth: CGFloat = 30
     }
     

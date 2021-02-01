@@ -46,8 +46,8 @@ class NewGameViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
 
         stackView.addArrangedSubview(GameHeaderView(viewData: viewModel.viewData.gameHeaderViewData))
-        stackView.addArrangedSubview(SeeFullRulesView(delegate: delegate, rulesViewData: viewModel.viewData.rulesViewData))
         stackView.addArrangedSubview(AddPlayersView(viewModel: viewModel.viewData.addPlayersViewModel, viewFactory: NewGameViewFactory()))
+        stackView.addArrangedSubview(SeeFullRulesView(delegate: delegate, rulesViewData: viewModel.viewData.rulesViewData))
         stackView.addArrangedSubview(playButton)
     }
     

@@ -13,10 +13,14 @@ struct ViewConstants {
     static let padding: CGFloat = 10
     static let animationTime: TimeInterval = 0.25
     
-    static let labelTextAttributes: [NSAttributedString.Key : Any] =
+    static let labelAttributes: [NSAttributedString.Key : Any] =
         [.font: UIFont(name: "MarkerFelt-Thin", size: 17) as Any,
          .foregroundColor: Colors.labelTextColor,
          .paragraphStyle: labelParagraphStyle]
+    
+    static let highlightedLabelAttributes : [NSAttributedString.Key : Any] =
+    [.font: UIFont(name: "MarkerFelt-Wide", size: 25) as Any,
+     .foregroundColor: Colors.labelTextColor]
     
     private static var labelParagraphStyle: NSMutableParagraphStyle {
         let style = NSMutableParagraphStyle()

@@ -19,10 +19,9 @@ class AddPlayersView: UIView {
     init(viewModel: AddPlayersViewModelInterface, viewFactory: NewGameViewFactoryInterface) {
         self.viewModel = viewModel
         self.viewFactory = viewFactory
-        headerContainer.backgroundColor = .systemGray4
-        headerTitle.text = "newGame.addPlayer.title".localized
-        addButton.setTitle("newGame.addPlayer.button".localized, for: .normal)
-        addButton.titleLabel?.font = Values.addButtonFont
+        headerContainer.backgroundColor = Colors.backgroundHighlight
+        headerTitle.attributedText = .init(string: "newGame.addPlayer.title".localized, attributes: ViewConstants.highlightedLabelAttributes)
+        addButton.setAttributedTitle(.init(string: "newGame.addPlayer.button".localized, attributes: ViewConstants.highlightedLabelAttributes), for: .normal)
         
         super.init(frame: .zero)
         
@@ -48,7 +47,7 @@ class AddPlayersView: UIView {
         [headerContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
         headerContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
         headerContainer.topAnchor.constraint(equalTo: topAnchor),
-        headerContainer.heightAnchor.constraint(equalTo: addButton.heightAnchor)].activate()
+        headerContainer.heightAnchor.constraint(equalToConstant: Values.headerContainerHeight)].activate()
 
         [headerTitle.leadingAnchor.constraint(equalTo: headerContainer.leadingAnchor, constant: ViewConstants.padding),
          headerTitle.centerYAnchor.constraint(equalTo: headerContainer.centerYAnchor)].activate()
@@ -58,7 +57,7 @@ class AddPlayersView: UIView {
         
         [scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
          scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-         scrollView.topAnchor.constraint(equalTo: addButton.bottomAnchor),
+         scrollView.topAnchor.constraint(equalTo: headerContainer.bottomAnchor, constant: ViewConstants.padding),
          scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
         
         stackView.widthAnchor.constraint(equalTo: widthAnchor, constant: -ViewConstants.padding).isActive = true
@@ -105,7 +104,7 @@ class AddPlayersView: UIView {
 
 extension AddPlayersView {
     private struct Values {
-        static let addButtonFont: UIFont = .systemFont(ofSize: 25)
+        static let headerContainerHeight: CGFloat = 2 * ViewConstants.backgroundGridSize
         static let scrollViewInsets: UIEdgeInsets = .init(top: ViewConstants.padding, left: ViewConstants.padding, bottom: ViewConstants.padding, right: -ViewConstants.padding)
     }
 }

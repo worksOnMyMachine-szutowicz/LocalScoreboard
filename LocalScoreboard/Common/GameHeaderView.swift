@@ -12,7 +12,7 @@ class GameHeaderView: UIView {
     init(viewData: ViewData) {
         titleLabel.attributedText = .init(string: viewData.titleLabelText, attributes: Values.titleAttributes)
         titleLabel.textAlignment = .center
-        descriptionLabel.attributedText = .init(string: viewData.descriptionLabelText, attributes: ViewConstants.labelTextAttributes)
+        descriptionLabel.attributedText = .init(string: viewData.descriptionLabelText, attributes: ViewConstants.labelAttributes)
         descriptionLabel.numberOfLines = 0
 
         super.init(frame: .zero)
