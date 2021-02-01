@@ -38,9 +38,9 @@ class GameHeaderView: UIView {
 
 extension GameHeaderView {
     private struct Values {
-        static let titleFont: UIFont = .boldSystemFont(ofSize: 40)
+        static let titleFont: UIFont = .boldSystemFont(ofSize: 50)
         static let description: UIFont = .systemFont(ofSize: 15)
-        static let stackViewInsets: UIEdgeInsets = .init(top: 50, left: ViewConstants.padding, bottom: ViewConstants.padding, right: ViewConstants.padding)
+        static let stackViewInsets: UIEdgeInsets = .init(top: 40, left: ViewConstants.padding, bottom: ViewConstants.padding, right: ViewConstants.padding)
     }
     
     struct ViewData {

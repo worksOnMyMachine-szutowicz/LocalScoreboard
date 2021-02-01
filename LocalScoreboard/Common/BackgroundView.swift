@@ -9,19 +9,19 @@
 import UIKit
 
 class BackgroundView: UIView {
-    init() {
+    init(for bounds: CGRect) {
         super.init(frame: .zero)
         
         backgroundColor = Colors.background
         
-        layout()
+        layout(bounds: bounds)
     }
     
     required init?(coder: NSCoder) {
         nil
     }
     
-    private func layout() {
+    private func layout(bounds: CGRect) {
         let verticalStackView = UIStackView(type: .verticalWithDefaultSpacing)
         verticalStackView.distribution = .equalCentering
         
@@ -31,10 +31,13 @@ class BackgroundView: UIView {
         addSubviewAndFill(verticalStackView)
         addSubviewAndFill(horizontalStackView)
         
-        for _ in 0...Values.numberOfHorizontalLines{
+        let numberOfHorizontalLines = Int(bounds.height/ViewConstants.backgroundGridSize)
+        let numberOfVerticalLines = Int(bounds.width/ViewConstants.backgroundGridSize)
+        
+        for _ in 0...numberOfHorizontalLines {
             verticalStackView.addArrangedSubview(createLineView(orientation: .row))
         }
-        for index in 0...Values.numberOfVerticalLines {
+        for index in 0...numberOfVerticalLines {
             horizontalStackView.addArrangedSubview(createLineView(orientation: .column, highlighted: index == Values.highlightedLineIndex))
         }
     }
@@ -55,8 +58,6 @@ class BackgroundView: UIView {
 extension BackgroundView {
     private struct Values {
         static let lineSize: CGFloat = 1
-        static let numberOfHorizontalLines = Int(UIScreen.main.bounds.height/ViewConstants.backgroundGridSize)
-        static let numberOfVerticalLines = Int(UIScreen.main.bounds.width/ViewConstants.backgroundGridSize)
         static let highlightedLineIndex = 4
     }
     
