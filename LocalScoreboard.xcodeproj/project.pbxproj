@@ -41,8 +41,10 @@
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
 		F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GameData.swift */; };
+		F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0979125C7E93400C954A4 /* BackgroundView.swift */; };
 		F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */; };
 		F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */; };
+		F2FBCB9225C7FEF400533EA0 /* UIView+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FBCB9125C7FEF400533EA0 /* UIView+Background.swift */; };
 		FAC02B691239E58FFC23751D /* Pods_LocalScoreboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C5C8F88D893ADF3F6B9953 /* Pods_LocalScoreboardTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,8 +111,10 @@
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
 		F27D48D325C5B75800BF02D0 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		F2A0979125C7E93400C954A4 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModelInterface.swift; sourceTree = "<group>"; };
+		F2FBCB9125C7FEF400533EA0 /* UIView+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Background.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,7 @@
 				F277527425C598D40099E995 /* Rules */,
 				F277525F25C596F10099E995 /* DescribedTextField */,
 				1BB1223C25BE299382FDEFA2 /* GameHeaderView.swift */,
+				F2A0979125C7E93400C954A4 /* BackgroundView.swift */,
 				1BB12E8704FF864EB553BD36 /* ViewConstans.swift */,
 				F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */,
 			);
@@ -172,6 +177,7 @@
 				1BB128225FAF746836DE6706 /* Array+Constraints.swift */,
 				1BB12310E5C3581595166933 /* UIView+Fill.swift */,
 				1BB12AD484306657A9B8BC0F /* UIStackView+Init.swift */,
+				F2FBCB9125C7FEF400533EA0 /* UIView+Background.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -548,6 +554,7 @@
 				1BB12C16C2BB1B6A11C81E2A /* AppDelegate.swift in Sources */,
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
 				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
+				F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */,
 				F248282D25C417C8002239E3 /* NewPlayerViewModel.swift in Sources */,
 				F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */,
 				F248282825C40B43002239E3 /* NewPlayerView.swift in Sources */,
@@ -566,6 +573,7 @@
 				1BB120A37D60A82FE94CAC76 /* Array+Constraints.swift in Sources */,
 				1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */,
 				F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */,
+				F2FBCB9225C7FEF400533EA0 /* UIView+Background.swift in Sources */,
 				1BB120D51F2B33F4BFB83D34 /* GameHeaderView.swift in Sources */,
 				1BB12108DA0B7B9EC4A94EFD /* AddPlayersView.swift in Sources */,
 				F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */,

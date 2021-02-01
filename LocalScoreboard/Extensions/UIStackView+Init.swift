@@ -15,11 +15,15 @@ extension UIStackView {
         case .verticalWithDefaultSpacing:
             axis = .vertical
             spacing = Values.defaultSpacing
+        case .horizontalWithDefaultSpacing:
+            axis = .horizontal
+            spacing = Values.defaultSpacing
         }
     }
 
     enum StackType {
         case verticalWithDefaultSpacing
+        case horizontalWithDefaultSpacing
     }
 
     struct Values {

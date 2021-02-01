@@ -33,7 +33,7 @@ class NewGameViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        view.backgroundColor = .systemGroupedBackground
+        view.setSheetBackground()
         title = "newGame.title".localized
         playButton.titleLabel?.font = Values.playButtonFont
         playButton.setTitle("newGame.play".localized, for: .normal)

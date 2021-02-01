@@ -35,5 +35,4 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate {
     func startNewGame(game: GameData.Games, players: [String]) {
         
     }
-    
 }
