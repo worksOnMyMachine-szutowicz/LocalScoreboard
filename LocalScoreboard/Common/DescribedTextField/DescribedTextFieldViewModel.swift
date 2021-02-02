@@ -12,7 +12,7 @@ import RxCocoa
 class DescribedTextFieldViewModel: RxInputOutput<DescribedTextFieldViewModelInput, DescribedTextFieldViewModelOutput>, DescribedTextFieldViewModelInterface {
     
     var output: Driver<Output>{
-        outputRelay.asDriver(onErrorRecover: { Driver.just(Output.error($0)) })
+        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
     }
     var viewData: DescribedTextFieldView.ViewData
     private let userInput: BehaviorRelay<String> = .init(value: "")

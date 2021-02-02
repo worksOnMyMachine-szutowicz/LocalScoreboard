@@ -81,8 +81,6 @@ class NewGameViewController: UIViewController {
             .append(weak: self)
             .subscribe(onNext: { vc, output in
                 switch output {
-                case .error(let output):
-                    print(output)
                 case .showRulesView(let output):
                     vc.delegate?.pushRulesView(rulesViewData: output.rulesViewData)
                 case .startNewGame(let output):

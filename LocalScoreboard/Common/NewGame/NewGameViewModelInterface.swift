@@ -33,7 +33,6 @@ enum NewGameViewModelInput: EnumWithAssociatedValue {
 }
 
 enum NewGameViewModelOutput: EnumWithAssociatedValue {
-    case error(Error)
     case showRulesView(ShowRulesView)
     case startNewGame(StartNewGameModel)
     
@@ -45,8 +44,6 @@ enum NewGameViewModelOutput: EnumWithAssociatedValue {
     
     func associatedValue() -> Any {
         switch self {
-        case .error(let associatedValue):
-            return associatedValue
         case .showRulesView(let associatedValue):
             return associatedValue
         case .startNewGame(let associatedValue):

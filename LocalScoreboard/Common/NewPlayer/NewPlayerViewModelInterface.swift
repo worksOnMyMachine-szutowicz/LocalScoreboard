@@ -40,8 +40,6 @@ enum NewPlayerViewModelInput: EnumWithAssociatedValue {
 }
 
 enum NewPlayerViewModelOutput: EnumWithAssociatedValue {
-    case error(Error)
-    
     //external
     case delete(DeleteModel)
     case validationResult(ValidationResultModel)
@@ -54,8 +52,6 @@ enum NewPlayerViewModelOutput: EnumWithAssociatedValue {
     
     func associatedValue() -> Any {
         switch self {
-        case .error(let associatedValue):
-            return associatedValue
         case .delete(let associatedValue):
             return associatedValue
         case .validationResult(let associatedValue):

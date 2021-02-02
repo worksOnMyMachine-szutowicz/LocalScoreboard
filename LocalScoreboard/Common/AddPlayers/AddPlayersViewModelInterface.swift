@@ -38,8 +38,6 @@ enum AddPlayersViewModelInput: EnumWithAssociatedValue {
 }
 
 enum AddPlayersViewModelOutput: EnumWithAssociatedValue {
-    case error(Error)
-    
     //internal
     case addPlayer(AddPlayerModel)
     case deletePlayer(DeletePlayerModel)
@@ -53,8 +51,6 @@ enum AddPlayersViewModelOutput: EnumWithAssociatedValue {
     
     func associatedValue() -> Any {
         switch self {
-        case .error(let associatedValue):
-            return associatedValue
         case .addPlayer(let associatedValue):
             return associatedValue
         case .deletePlayer(let associatedValue):

@@ -40,8 +40,6 @@ enum DescribedTextFieldViewModelInput: EnumWithAssociatedValue {
 }
 
 enum DescribedTextFieldViewModelOutput: EnumWithAssociatedValue {
-    case error(Error)
-    
     //internal
     case updateView(UpdateViewModel)
     
@@ -56,8 +54,6 @@ enum DescribedTextFieldViewModelOutput: EnumWithAssociatedValue {
     
     func associatedValue() -> Any {
         switch self {
-        case .error(let associatedValue):
-            return associatedValue
         case .updateView(let associatedValue):
             return associatedValue
         case .validationResult(let associatedValue):

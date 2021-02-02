@@ -42,7 +42,7 @@ class GameHeaderView: UIView {
 
 extension GameHeaderView {
     private struct Values {
-        static let titleLabelHeight: 40
+        static let titleLabelHeight: CGFloat = 40
         static let titleAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Chalkduster", size: 48) as Any]
     }
     

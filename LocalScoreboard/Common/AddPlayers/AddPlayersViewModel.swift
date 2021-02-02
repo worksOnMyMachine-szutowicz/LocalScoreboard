@@ -11,7 +11,7 @@ import RxCocoa
 
 class AddPlayersViewModel: RxInputOutput<AddPlayersViewModelInput, AddPlayersViewModelOutput>, AddPlayersViewModelInterface {
     var output: Driver<Output> {
-        outputRelay.asDriver(onErrorRecover: { Driver.just(Output.error($0)) })
+        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
     }
     
     private let requiredPlayers: Int

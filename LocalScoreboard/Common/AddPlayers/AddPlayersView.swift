@@ -73,8 +73,6 @@ class AddPlayersView: UIView {
             .append(weak: self)
             .subscribe(onNext: { view, output in
                 switch output {
-                case .error(let output):
-                    print(output)
                 case .addPlayer(let output):
                     let playerView = view.viewFactory.createNewPlayerView(viewModel: output.newPlayerViewModel)
                     playerView.alpha = 0
