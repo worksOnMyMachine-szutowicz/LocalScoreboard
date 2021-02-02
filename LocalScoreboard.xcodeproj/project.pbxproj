@@ -176,8 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				F248284825C42176002239E3 /* Rx */,
-				1BB12B61C930E09EE48BCB55 /* String+Localized.swift */,
 				1BB128225FAF746836DE6706 /* Array+Constraints.swift */,
+				1BB12B61C930E09EE48BCB55 /* String+Localized.swift */,
 				1BB12310E5C3581595166933 /* UIView+Fill.swift */,
 				1BB12AD484306657A9B8BC0F /* UIStackView+Init.swift */,
 				F2E195E625C87EA80074AA9D /* TextField+Padding.swift */,

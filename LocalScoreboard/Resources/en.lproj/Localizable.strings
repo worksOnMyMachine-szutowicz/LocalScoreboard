@@ -1,4 +1,5 @@
-"newGame.title" = "New game";
+"global.back" = "Back";
+
 "newGame.addPlayer.title" = "Players";
 "newGame.addPlayer.button" = "+";
 "newGame.addPlayer.player" = "Player %@";
@@ -6,9 +7,6 @@
 "newGame.play" = "Let's Play!";
 "newGame.seeRules.title" = "Full rules";
 "newGame.seeRules.chevron" = ">";
-
-"rules.title" = "Rules";
-
 
 //Games data
 
@@ -20,4 +18,4 @@
 "1000dices.rules.objective.title" = "Objective";
 "1000dices.rules.objective.content" = "Be first to get 1000 points";
 "1000dices.rules.rules.title" = "Rules";
-"1000dices.rules.rules.content" = "list \nof \nrules";
+"1000dices.rules.rules.content" = "list \nof \nrulesRoll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!";

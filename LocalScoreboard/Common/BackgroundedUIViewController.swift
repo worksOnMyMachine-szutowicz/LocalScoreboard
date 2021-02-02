@@ -7,14 +7,28 @@
 //
 
 import UIKit
+import RxSwift
 
 class BackgroundedUIViewController: UIViewController {
+    private let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         setSheetBackground()
     }
     
     override func viewDidLayoutSubviews() {
         adjustSafeAreaToGrid()
+    }
+    
+    func setupBackButton() {
+        let backButton = UIButton.stickerButton(title: "global.back".localized)
+        backButton.rx.tap
+            .append(weak: self)
+            .subscribe(onNext: { vc, _ in
+                vc.navigationController?.popViewController(animated: true)
+            }).disposed(by: disposeBag)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
     
     private func setSheetBackground() {

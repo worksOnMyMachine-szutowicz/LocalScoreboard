@@ -28,9 +28,9 @@ extension RulesViewController.ViewData {
 }
 
 extension TitledSectionView.ViewData {
-    static let thousandDiceRequirements = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.requirements.title".localized, contnetLabelText: "1000dices.rules.requirements.content".localized)
+    static let thousandDiceRequirements = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.requirements.title".localized, contentLabelText: "1000dices.rules.requirements.content".localized)
     
-    static let thousandDiceObjective = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.objective.title".localized, contnetLabelText: "1000dices.rules.objective.content".localized)
+    static let thousandDiceObjective = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.objective.title".localized, contentLabelText: "1000dices.rules.objective.content".localized)
     
-    static let thousandDiceRules = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.rules.title".localized, contnetLabelText: "1000dices.rules.rules.content".localized)
+    static let thousandDiceRules = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.rules.title".localized, contentLabelText: "1000dices.rules.rules.content".localized)
 }

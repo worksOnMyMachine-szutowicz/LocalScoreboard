@@ -16,19 +16,12 @@ struct ViewConstants {
     static let animationTime: TimeInterval = 0.25
     
     static let labelAttributes: [NSAttributedString.Key : Any] =
-        [.font: UIFont(name: "MarkerFelt-Thin", size: 17) as Any,
-         .foregroundColor: Colors.labelTextColor,
-         .paragraphStyle: labelParagraphStyle]
+        [.font: UIFont(name: "MarkerFelt-Thin", size: 18.416) as Any,
+         .foregroundColor: Colors.labelTextColor]
     
     static let highlightedLabelAttributes : [NSAttributedString.Key : Any] =
     [.font: UIFont(name: "MarkerFelt-Wide", size: 25) as Any,
      .foregroundColor: Colors.labelTextColor]
-    
-    private static var labelParagraphStyle: NSMutableParagraphStyle {
-        let style = NSMutableParagraphStyle()
-        style.lineSpacing = 3
-        return style
-    }
 }
 
 struct Colors {

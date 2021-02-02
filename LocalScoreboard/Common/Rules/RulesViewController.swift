@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RulesViewController: UIViewController {
+class RulesViewController: BackgroundedUIViewController {
     private let header: GameHeaderView
     private let sections: [TitledSectionView]
     
@@ -24,7 +24,8 @@ class RulesViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        title = "rules.title".localized
+        super.viewDidLoad()
+        setupBackButton()
         
         layout()
     }
@@ -34,7 +35,7 @@ class RulesViewController: UIViewController {
         let scrollView = UIScrollView(frame: .zero)
         
         scrollView.addSubviewAndFill(stackView)
-        view.addSubviewAndFill(scrollView)
+        view.addSubviewAndFillToSafeArea(scrollView)
         stackView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
 
         stackView.addArrangedSubview(header)
