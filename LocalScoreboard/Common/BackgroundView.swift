@@ -9,6 +9,9 @@
 import UIKit
 
 class BackgroundView: UIView {
+    private let verticalStackView = UIStackView(type: .verticalBackground)
+    private let horizontalStackView = UIStackView(type: .horizontalBackground)
+    
     init(for view: UIView) {
         super.init(frame: .zero)
         
@@ -22,10 +25,8 @@ class BackgroundView: UIView {
     }
     
     private func layout(bounds: CGRect) {
-        let verticalStackView = UIStackView(type: .verticalBackground)
-        let horizontalStackView = UIStackView(type: .horizontalBackground)
-        
-        addSubviewAndFill(verticalStackView)
+        let bottomUncoveredSpace = CGFloat(Int(bounds.height) % Int(ViewConstants.backgroundGridSize)) - ViewConstants.backgroundLineSize
+        addSubviewAndFill(verticalStackView, insets: .init(top: 0, left: 0, bottom: bottomUncoveredSpace, right: 0))
         addSubviewAndFill(horizontalStackView)
         
         let numberOfHorizontalLines = Int(bounds.height/ViewConstants.backgroundGridSize)
@@ -44,9 +45,9 @@ class BackgroundView: UIView {
         line.backgroundColor = highlighted ? Colors.backgroundHighlight : Colors.backgroundLine
             
         if orientation == .row {
-            line.heightAnchor.constraint(equalToConstant: Values.lineSize).isActive = true
+            line.heightAnchor.constraint(equalToConstant: ViewConstants.backgroundLineSize).isActive = true
         } else {
-            line.widthAnchor.constraint(equalToConstant: Values.lineSize).isActive = true
+            line.widthAnchor.constraint(equalToConstant: ViewConstants.backgroundLineSize).isActive = true
         }
         return line
     }
@@ -54,7 +55,6 @@ class BackgroundView: UIView {
 
 extension BackgroundView {
     private struct Values {
-        static let lineSize: CGFloat = 1
         static let highlightedLineIndex: Int = Int(ViewConstants.sheetMargin / ViewConstants.backgroundGridSize)
     }
     

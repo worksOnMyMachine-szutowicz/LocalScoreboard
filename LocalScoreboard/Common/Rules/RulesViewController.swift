@@ -24,7 +24,6 @@ class RulesViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        setSheetBackground()
         title = "rules.title".localized
         
         layout()

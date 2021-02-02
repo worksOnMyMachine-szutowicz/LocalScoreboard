@@ -11,7 +11,7 @@ protocol NewGameViewControllerDelegate: class {
     func startNewGame(game: GameData.Games, players: [String])
 }
 
-class NewGameViewController: UIViewController {
+class NewGameViewController: BackgroundedUIViewController {
     typealias VMInput = NewGameViewModel.Input
     typealias VMOutput = NewGameViewModel.Output
     private let disposeBag = DisposeBag()
@@ -21,7 +21,6 @@ class NewGameViewController: UIViewController {
     private let addPlayersView: AddPlayersView
     private let rulesButton = UIButton.stickerButton(title: "newGame.seeRules.title".localized)
     private let playButton = UIButton.stickerButton(title: "newGame.play".localized)
-    
 
     init(delegate: NewGameViewControllerDelegate, viewModel: NewGameViewModelInterface) {
         self.delegate = delegate
@@ -39,8 +38,7 @@ class NewGameViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        setSheetBackground()
-        title = "newGame.title".localized
+        super.viewDidLoad()
 
         layout()
     }

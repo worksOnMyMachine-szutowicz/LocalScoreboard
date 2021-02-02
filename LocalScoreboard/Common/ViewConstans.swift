@@ -6,6 +6,7 @@
 import UIKit
 
 struct ViewConstants {
+    static let backgroundLineSize: CGFloat = 1
     static let backgroundGridSize: CGFloat = 20
     static let sheetMargin: CGFloat = 80
     static let sheetMarginPadding: CGFloat = sheetMargin + padding

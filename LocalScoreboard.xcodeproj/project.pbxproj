@@ -45,7 +45,7 @@
 		F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */; };
 		F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */; };
 		F2E195E725C87EA80074AA9D /* TextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E195E625C87EA80074AA9D /* TextField+Padding.swift */; };
-		F2FBCB9225C7FEF400533EA0 /* UIViewController+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FBCB9125C7FEF400533EA0 /* UIViewController+Background.swift */; };
+		F2FBCB9225C7FEF400533EA0 /* BackgroundedUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */; };
 		FAC02B691239E58FFC23751D /* Pods_LocalScoreboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C5C8F88D893ADF3F6B9953 /* Pods_LocalScoreboardTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,7 +116,7 @@
 		F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModelInterface.swift; sourceTree = "<group>"; };
 		F2E195E625C87EA80074AA9D /* TextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Padding.swift"; sourceTree = "<group>"; };
-		F2FBCB9125C7FEF400533EA0 /* UIViewController+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Background.swift"; sourceTree = "<group>"; };
+		F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundedUIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +158,7 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */,
 				F277525E25C596D80099E995 /* AddPlayers */,
 				F277525D25C596C20099E995 /* NewPlayer */,
 				F27D48D825C5BA0300BF02D0 /* NewGame */,
@@ -179,7 +180,6 @@
 				1BB128225FAF746836DE6706 /* Array+Constraints.swift */,
 				1BB12310E5C3581595166933 /* UIView+Fill.swift */,
 				1BB12AD484306657A9B8BC0F /* UIStackView+Init.swift */,
-				F2FBCB9125C7FEF400533EA0 /* UIViewController+Background.swift */,
 				F2E195E625C87EA80074AA9D /* TextField+Padding.swift */,
 				F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */,
 			);
@@ -577,7 +577,7 @@
 				1BB120A37D60A82FE94CAC76 /* Array+Constraints.swift in Sources */,
 				1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */,
 				F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */,
-				F2FBCB9225C7FEF400533EA0 /* UIViewController+Background.swift in Sources */,
+				F2FBCB9225C7FEF400533EA0 /* BackgroundedUIViewController.swift in Sources */,
 				1BB120D51F2B33F4BFB83D34 /* GameHeaderView.swift in Sources */,
 				1BB12108DA0B7B9EC4A94EFD /* AddPlayersView.swift in Sources */,
 				F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */,
