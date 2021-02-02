@@ -6,7 +6,8 @@
 import UIKit
 import RxSwift
 
-protocol NewGameViewControllerDelegate: SeeFullRulesViewDelegate {
+protocol NewGameViewControllerDelegate: class {
+    func pushRulesView(rulesViewData: RulesViewController.ViewData)
     func startNewGame(game: GameData.Games, players: [String])
 }
 
@@ -16,12 +17,17 @@ class NewGameViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private weak var delegate: NewGameViewControllerDelegate?
     private let viewModel: NewGameViewModelInterface
-    private let stackView = UIStackView(type: .verticalWithDefaultSpacing)
-    private let playButton = UIButton(type: .system)
+    private let gameHeaderView: GameHeaderView
+    private let addPlayersView: AddPlayersView
+    private let rulesButton = UIButton.stickerButton(title: "newGame.seeRules.title".localized)
+    private let playButton = UIButton.stickerButton(title: "newGame.play".localized)
+    
 
     init(delegate: NewGameViewControllerDelegate, viewModel: NewGameViewModelInterface) {
         self.delegate = delegate
         self.viewModel = viewModel
+        self.gameHeaderView = .init(viewData: viewModel.viewData.gameHeaderViewData)
+        self.addPlayersView = .init(viewModel: viewModel.viewData.addPlayersViewModel, viewFactory: NewGameViewFactory())
         
         super.init(nibName: nil, bundle: nil)
         
@@ -35,23 +41,37 @@ class NewGameViewController: UIViewController {
     override func viewDidLoad() {
         setSheetBackground()
         title = "newGame.title".localized
-        playButton.titleLabel?.font = Values.playButtonFont
-        playButton.setTitle("newGame.play".localized, for: .normal)
 
         layout()
     }
 
     private func layout() {
-        view.addSubviewAndFillToSafeArea(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
-        stackView.addArrangedSubview(GameHeaderView(viewData: viewModel.viewData.gameHeaderViewData))
-        stackView.addArrangedSubview(AddPlayersView(viewModel: viewModel.viewData.addPlayersViewModel, viewFactory: NewGameViewFactory()))
-        stackView.addArrangedSubview(SeeFullRulesView(delegate: delegate, rulesViewData: viewModel.viewData.rulesViewData))
-        stackView.addArrangedSubview(playButton)
+        view.addSubviews([gameHeaderView, addPlayersView, rulesButton, playButton])
+        [gameHeaderView, addPlayersView, rulesButton, playButton].disableAutoresizingMask()
+        
+        [gameHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         gameHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+         gameHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)].activate()
+        
+        [addPlayersView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         addPlayersView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+         addPlayersView.topAnchor.constraint(equalTo: gameHeaderView.bottomAnchor, constant: ViewConstants.verticalPadding)].activate()
+        
+        [rulesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
+         rulesButton.topAnchor.constraint(equalTo: addPlayersView.bottomAnchor, constant: ViewConstants.verticalPadding)].activate()
+        
+        [playButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         playButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: ViewConstants.verticalPadding),
+         playButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
     }
     
     private func setupBindigs() {
+        rulesButton.rx.tap
+            .map { _ in VMInput.rulesButtonTapped(.init()) }
+            .bind(to: viewModel.input)
+            .disposed(by: disposeBag)
+        
         playButton.rx.tap
             .map { _ in VMInput.playButtonTapped(.init()) }
             .bind(to: viewModel.input)
@@ -63,6 +83,8 @@ class NewGameViewController: UIViewController {
                 switch output {
                 case .error(let output):
                     print(output)
+                case .showRulesView(let output):
+                    vc.delegate?.pushRulesView(rulesViewData: output.rulesViewData)
                 case .startNewGame(let output):
                     vc.delegate?.startNewGame(game: output.game, players: output.players)
                 }

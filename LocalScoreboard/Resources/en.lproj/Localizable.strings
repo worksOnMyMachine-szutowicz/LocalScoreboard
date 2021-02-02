@@ -4,7 +4,7 @@
 "newGame.addPlayer.player" = "Player %@";
 "newGame.addPlayer.delete" = "-";
 "newGame.play" = "Let's Play!";
-"newGame.seeRules.title" = "See full rules";
+"newGame.seeRules.title" = "Full rules";
 "newGame.seeRules.chevron" = ">";
 
 "rules.title" = "Rules";

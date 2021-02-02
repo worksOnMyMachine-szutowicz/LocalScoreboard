@@ -10,6 +10,7 @@ struct ViewConstants {
     static let sheetMargin: CGFloat = 80
     static let sheetMarginPadding: CGFloat = sheetMargin + padding
     
+    static let verticalPadding: CGFloat = 20
     static let padding: CGFloat = 10
     static let animationTime: TimeInterval = 0.25
     

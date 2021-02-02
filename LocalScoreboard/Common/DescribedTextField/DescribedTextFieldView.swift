@@ -37,15 +37,16 @@ class DescribedTextFieldView: UIView {
         addSubviews([label, textField])
         [label, textField].disableAutoresizingMask()
 
-        heightAnchor.constraint(equalTo: textField.heightAnchor).isActive = true
+        heightAnchor.constraint(equalToConstant: Values.textFieldHeight).isActive = true
 
-        [label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.padding),
-         label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: Values.labelWidthMultiplier),
+        [label.leadingAnchor.constraint(equalTo: leadingAnchor),
+         label.widthAnchor.constraint(equalToConstant: ViewConstants.sheetMargin),
          label.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
 
         [textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: ViewConstants.padding),
         textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: ViewConstants.padding),
-        textField.heightAnchor.constraint(equalToConstant: Values.textFieldHeight)].activate()
+        textField.topAnchor.constraint(equalTo: topAnchor),
+        textField.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
     }
     
     private func setupBindigs() {
@@ -85,7 +86,6 @@ class DescribedTextFieldView: UIView {
 
 extension DescribedTextFieldView {
     private struct Values {
-        static let labelWidthMultiplier: CGFloat = 0.25
         static let textFieldHeight: CGFloat = 2 * ViewConstants.backgroundGridSize
         static let textFieldDefaultBorderWidth: CGFloat = 2
         static let textFieldHighlightedBorderWidth: CGFloat = 3

@@ -37,7 +37,7 @@
 		F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283B25C41A75002239E3 /* RxInputOutput.swift */; };
 		F248284125C42166002239E3 /* Observable+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248284025C42166002239E3 /* Observable+Filter.swift */; };
 		F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25A91B925C157B6002B9C51 /* Localizable.strings */; };
-		F277527625C598E70099E995 /* SeeFullRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527525C598E70099E995 /* SeeFullRulesView.swift */; };
+		F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
 		F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GameData.swift */; };
@@ -108,7 +108,7 @@
 		F248283B25C41A75002239E3 /* RxInputOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxInputOutput.swift; sourceTree = "<group>"; };
 		F248284025C42166002239E3 /* Observable+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Filter.swift"; sourceTree = "<group>"; };
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F277527525C598E70099E995 /* SeeFullRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeFullRulesView.swift; sourceTree = "<group>"; };
+		F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+StickerButton.swift"; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
 		F27D48D325C5B75800BF02D0 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
@@ -181,6 +181,7 @@
 				1BB12AD484306657A9B8BC0F /* UIStackView+Init.swift */,
 				F2FBCB9125C7FEF400533EA0 /* UIViewController+Background.swift */,
 				F2E195E625C87EA80074AA9D /* TextField+Padding.swift */,
+				F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -313,7 +314,6 @@
 		F277527425C598D40099E995 /* Rules */ = {
 			isa = PBXGroup;
 			children = (
-				F277527525C598E70099E995 /* SeeFullRulesView.swift */,
 				F277527D25C5A16A0099E995 /* RulesViewController.swift */,
 			);
 			path = Rules;
@@ -565,10 +565,10 @@
 				1BB129B8A31B2F701AA58952 /* String+Localized.swift in Sources */,
 				F2E195E725C87EA80074AA9D /* TextField+Padding.swift in Sources */,
 				F211719125C429E000880DA4 /* AddPlayersViewModelInterface.swift in Sources */,
-				F277527625C598E70099E995 /* SeeFullRulesView.swift in Sources */,
 				F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */,
 				F248284125C42166002239E3 /* Observable+Filter.swift in Sources */,
 				F248283725C4193A002239E3 /* EnumWithAssociatedValue.swift in Sources */,
+				F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */,
 				F21171A125C45FFC00880DA4 /* DescribedTextFieldViewModel.swift in Sources */,
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
 				F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */,

@@ -17,12 +17,16 @@ protocol NewGameViewModelInterface {
 
 enum NewGameViewModelInput: EnumWithAssociatedValue {
     case playButtonTapped(PlayButtonTappedModel)
+    case rulesButtonTapped(RulesButtonTappedModel)
     
     struct PlayButtonTappedModel { }
+    struct RulesButtonTappedModel { }
     
     func associatedValue() -> Any {
         switch self {
         case .playButtonTapped(let associatedValue):
+            return associatedValue
+        case .rulesButtonTapped(let associatedValue):
             return associatedValue
         }
     }
@@ -30,8 +34,10 @@ enum NewGameViewModelInput: EnumWithAssociatedValue {
 
 enum NewGameViewModelOutput: EnumWithAssociatedValue {
     case error(Error)
+    case showRulesView(ShowRulesView)
     case startNewGame(StartNewGameModel)
     
+    struct ShowRulesView { let rulesViewData: RulesViewController.ViewData }
     struct StartNewGameModel {
         let game: GameData.Games
         let players: [String]
@@ -40,6 +46,8 @@ enum NewGameViewModelOutput: EnumWithAssociatedValue {
     func associatedValue() -> Any {
         switch self {
         case .error(let associatedValue):
+            return associatedValue
+        case .showRulesView(let associatedValue):
             return associatedValue
         case .startNewGame(let associatedValue):
             return associatedValue

@@ -30,19 +30,20 @@ class GameHeaderView: UIView {
         
         [titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
          titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Values.topPadding)].activate()
+         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: ViewConstants.verticalPadding),
+         titleLabel.heightAnchor.constraint(equalToConstant: Values.titleLabelHeight)].activate()
         
         [descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMarginPadding),
          descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewConstants.padding),
-         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ViewConstants.padding),
+         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ViewConstants.verticalPadding),
          descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
     }
 }
 
 extension GameHeaderView {
     private struct Values {
+        static let titleLabelHeight: 40
         static let titleAttributes: [NSAttributedString.Key : Any] = [.font: UIFont(name: "Chalkduster", size: 48) as Any]
-        static let topPadding: CGFloat = 20
     }
     
     struct ViewData {

@@ -14,11 +14,11 @@ class NewGameViewModel: RxInputOutput<NewGameViewModelInput, NewGameViewModelOut
         outputRelay.asDriver(onErrorRecover: { Driver.just(Output.error($0)) })
     }
     var viewData: NewGameViewController.ViewData
-    private let game: GameData.Games
+    private let gameData: GameData
     private let addPlayersViewModel: AddPlayersViewModelInterface
     
     init(gameData: GameData) {
-        game = gameData.game
+        self.gameData = gameData
         addPlayersViewModel = AddPlayersViewModel(requiredPlayers: gameData.requiredPlayers)
         viewData = .init(gameHeaderViewData: gameData.gameHeaderViewData, rulesViewData: gameData.rulesViewData, addPlayersViewModel: addPlayersViewModel)
         
@@ -28,6 +28,12 @@ class NewGameViewModel: RxInputOutput<NewGameViewModelInput, NewGameViewModelOut
     }
     
     private func setupBindigs() {
+        input.asObservable().filterByAssociatedType(Input.RulesButtonTappedModel.self)
+            .append(weak: self)
+            .map { vm, _ in Output.showRulesView(.init(rulesViewData: vm.gameData.rulesViewData)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
         input.asObservable().filterByAssociatedType(Input.PlayButtonTappedModel.self)
             .map { _ in AddPlayersViewModelInput.validate(.init()) }
             .bind(to: addPlayersViewModel.input)
@@ -35,7 +41,7 @@ class NewGameViewModel: RxInputOutput<NewGameViewModelInput, NewGameViewModelOut
         
         addPlayersViewModel.output.asObservable().filterByAssociatedType(AddPlayersViewModelOutput.ValidationSuccessModel.self)
             .append(weak: self)
-            .map { vm, output in Output.startNewGame(.init(game: vm.game, players: output.players)) }
+            .map { vm, output in Output.startNewGame(.init(game: vm.gameData.game, players: output.players)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
     }
