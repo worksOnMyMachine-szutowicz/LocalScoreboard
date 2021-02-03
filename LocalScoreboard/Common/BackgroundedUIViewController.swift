@@ -12,6 +12,11 @@ import RxSwift
 class BackgroundedUIViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         setSheetBackground()
     }
@@ -28,21 +33,17 @@ class BackgroundedUIViewController: UIViewController {
                 vc.navigationController?.popViewController(animated: true)
             }).disposed(by: disposeBag)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        view.addSubview(backButton)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        [backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         backButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
+         backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Values.backButtonTopPadding)].activate()
     }
     
-    private func setSheetBackground() {
-        setNavigationBarInvisible()
-        
+    private func setSheetBackground() {        
         let background = BackgroundView(for: view)
         view.addSubviewAndFill(background)
         view.sendSubviewToBack(background)
-    }
-    
-    private func setNavigationBarInvisible() {
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
     }
     
     private func adjustSafeAreaToGrid() {
@@ -58,5 +59,11 @@ class BackgroundedUIViewController: UIViewController {
             additionalSafeAreaInsets.bottom += bottomInsetToFirstGrid
         }
         viewSafeAreaInsetsDidChange()
+    }
+}
+
+extension BackgroundedUIViewController {
+    private struct Values {
+        static let backButtonTopPadding: CGFloat = 60
     }
 }

@@ -49,7 +49,7 @@ class NewGameViewController: BackgroundedUIViewController {
         
         [gameHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          gameHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-         gameHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)].activate()
+         gameHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Values.topMargin)].activate()
         
         [addPlayersView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          addPlayersView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -91,6 +91,7 @@ class NewGameViewController: BackgroundedUIViewController {
 extension NewGameViewController {
     private struct Values {
         static let playButtonFont: UIFont = .systemFont(ofSize: 25)
+        static let topMargin: CGFloat = 60
     }
     
     struct ViewData {

@@ -1,4 +1,4 @@
-"global.back" = "Back";
+"global.back" = "< Back";
 
 "newGame.addPlayer.title" = "Players";
 "newGame.addPlayer.button" = "+";
@@ -6,7 +6,6 @@
 "newGame.addPlayer.delete" = "-";
 "newGame.play" = "Let's Play!";
 "newGame.seeRules.title" = "Full rules";
-"newGame.seeRules.chevron" = ">";
 
 //Games data
 

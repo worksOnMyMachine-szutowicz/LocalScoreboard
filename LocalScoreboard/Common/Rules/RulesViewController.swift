@@ -25,16 +25,16 @@ class RulesViewController: BackgroundedUIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackButton()
         
         layout()
+        setupBackButton()
     }
     
     private func layout() {
         let stackView = UIStackView(type: .verticalWithDefaultSpacing)
         let scrollView = UIScrollView(frame: .zero)
         
-        scrollView.addSubviewAndFill(stackView)
+        scrollView.addSubviewAndFill(stackView, insets: .init(top: Values.topMargin, left: 0, bottom: 0, right: 0))
         view.addSubviewAndFillToSafeArea(scrollView)
         stackView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
 
@@ -44,6 +44,9 @@ class RulesViewController: BackgroundedUIViewController {
 }
 
 extension RulesViewController {
+    private struct Values {
+        static let topMargin: CGFloat = 60
+    }
     struct ViewData {
         let header: GameHeaderView.ViewData
         let sections: [TitledSectionView.ViewData]
