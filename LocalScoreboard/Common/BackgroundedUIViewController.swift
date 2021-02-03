@@ -37,7 +37,7 @@ class BackgroundedUIViewController: UIViewController {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         [backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          backButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
-         backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Values.backButtonTopPadding)].activate()
+         backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Values.navigationButtonTopPadding)].activate()
     }
     
     private func setSheetBackground() {        
@@ -63,7 +63,7 @@ class BackgroundedUIViewController: UIViewController {
 }
 
 extension BackgroundedUIViewController {
-    private struct Values {
-        static let backButtonTopPadding: CGFloat = 60
+    struct Values {
+        static let navigationButtonTopPadding: CGFloat = 60
     }
 }

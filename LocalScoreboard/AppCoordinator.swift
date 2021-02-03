@@ -9,7 +9,7 @@ protocol AppCoordinatorInterface {
     func start()
 }
 
-class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate {
+class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, DicesViewControllerDelegate {
     private let window: UIWindow
     private let navigationController: UINavigationController
     private let viewControllerFactory: ViewControllerFactoryProtocol
@@ -21,8 +21,7 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate {
     }
 
     func start() {
-        let homeVc = viewControllerFactory.createNewGameViewController(delegate: self)
-        navigationController.setViewControllers([homeVc], animated: true)
+        navigationController.setViewControllers([viewControllerFactory.createNewGameViewController(delegate: self)], animated: true)
 
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
@@ -33,6 +32,13 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate {
     }
     
     func startNewGame(game: GameData.Games, players: [String]) {
-        
+        switch game {
+        case .thousandDices:
+            navigationController.setViewControllers([viewControllerFactory.createDicesViewController(delegate: self, players: players)], animated: true)
+        }
+    }
+    
+    func quitGame() {
+        navigationController.setViewControllers([viewControllerFactory.createNewGameViewController(delegate: self)], animated: true)
     }
 }

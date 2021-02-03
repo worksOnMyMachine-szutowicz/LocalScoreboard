@@ -8,6 +8,7 @@ import UIKit
 protocol ViewControllerFactoryProtocol {
     func createNewGameViewController(delegate: NewGameViewControllerDelegate) -> UIViewController
     func createRulesViewController(rulesViewData: RulesViewController.ViewData) -> UIViewController
+    func createDicesViewController(delegate: DicesViewControllerDelegate, players: [String]) -> UIViewController
 }
 
 class ViewControllerFactory: ViewControllerFactoryProtocol {
@@ -18,5 +19,10 @@ class ViewControllerFactory: ViewControllerFactoryProtocol {
     
     func createRulesViewController(rulesViewData: RulesViewController.ViewData) -> UIViewController {
         return RulesViewController(viewData: rulesViewData)
+    }
+    
+    func createDicesViewController(delegate: DicesViewControllerDelegate, players: [String]) -> UIViewController {
+        let viewModel = DicesViewModel(players: players)
+        return DicesViewController(delegate: delegate, viewModel: viewModel)
     }
 }

@@ -36,6 +36,9 @@
 		F248283725C4193A002239E3 /* EnumWithAssociatedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283625C4193A002239E3 /* EnumWithAssociatedValue.swift */; };
 		F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283B25C41A75002239E3 /* RxInputOutput.swift */; };
 		F248284125C42166002239E3 /* Observable+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248284025C42166002239E3 /* Observable+Filter.swift */; };
+		F252196125CB4049008701DD /* DicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196025CB4049008701DD /* DicesViewController.swift */; };
+		F252196625CB422A008701DD /* DicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196525CB422A008701DD /* DicesViewModel.swift */; };
+		F252196B25CB423D008701DD /* DicesViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196A25CB423D008701DD /* DicesViewModelInterface.swift */; };
 		F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25A91B925C157B6002B9C51 /* Localizable.strings */; };
 		F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
@@ -107,6 +110,9 @@
 		F248283625C4193A002239E3 /* EnumWithAssociatedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumWithAssociatedValue.swift; sourceTree = "<group>"; };
 		F248283B25C41A75002239E3 /* RxInputOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxInputOutput.swift; sourceTree = "<group>"; };
 		F248284025C42166002239E3 /* Observable+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Filter.swift"; sourceTree = "<group>"; };
+		F252196025CB4049008701DD /* DicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewController.swift; sourceTree = "<group>"; };
+		F252196525CB422A008701DD /* DicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewModel.swift; sourceTree = "<group>"; };
+		F252196A25CB423D008701DD /* DicesViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewModelInterface.swift; sourceTree = "<group>"; };
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+StickerButton.swift"; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +217,9 @@
 		1BB124F0C31E2F455C3F42E4 /* Dices */ = {
 			isa = PBXGroup;
 			children = (
+				F252196025CB4049008701DD /* DicesViewController.swift */,
+				F252196525CB422A008701DD /* DicesViewModel.swift */,
+				F252196A25CB423D008701DD /* DicesViewModelInterface.swift */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -567,12 +576,15 @@
 				F211719125C429E000880DA4 /* AddPlayersViewModelInterface.swift in Sources */,
 				F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */,
 				F248284125C42166002239E3 /* Observable+Filter.swift in Sources */,
+				F252196B25CB423D008701DD /* DicesViewModelInterface.swift in Sources */,
 				F248283725C4193A002239E3 /* EnumWithAssociatedValue.swift in Sources */,
 				F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */,
+				F252196625CB422A008701DD /* DicesViewModel.swift in Sources */,
 				F21171A125C45FFC00880DA4 /* DescribedTextFieldViewModel.swift in Sources */,
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
 				F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */,
 				1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */,
+				F252196125CB4049008701DD /* DicesViewController.swift in Sources */,
 				F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */,
 				1BB120A37D60A82FE94CAC76 /* Array+Constraints.swift in Sources */,
 				1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */,

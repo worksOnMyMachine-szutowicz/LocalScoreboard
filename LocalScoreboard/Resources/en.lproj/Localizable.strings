@@ -1,11 +1,12 @@
 "global.back" = "< Back";
+"global.quit" = "Quit";
+"global.fullRules" = "Full rules";
 
 "newGame.addPlayer.title" = "Players";
 "newGame.addPlayer.button" = "+";
 "newGame.addPlayer.player" = "Player %@";
 "newGame.addPlayer.delete" = "-";
 "newGame.play" = "Let's Play!";
-"newGame.seeRules.title" = "Full rules";
 
 //Games data
 
