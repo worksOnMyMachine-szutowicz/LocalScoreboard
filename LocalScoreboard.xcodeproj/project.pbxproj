@@ -39,6 +39,8 @@
 		F252196125CB4049008701DD /* DicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196025CB4049008701DD /* DicesViewController.swift */; };
 		F252196625CB422A008701DD /* DicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196525CB422A008701DD /* DicesViewModel.swift */; };
 		F252196B25CB423D008701DD /* DicesViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196A25CB423D008701DD /* DicesViewModelInterface.swift */; };
+		F252197025CB4AD1008701DD /* DicesBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196F25CB4AD1008701DD /* DicesBoardView.swift */; };
+		F252197525CB4B2E008701DD /* DicesBoardSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */; };
 		F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25A91B925C157B6002B9C51 /* Localizable.strings */; };
 		F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
@@ -113,6 +115,8 @@
 		F252196025CB4049008701DD /* DicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewController.swift; sourceTree = "<group>"; };
 		F252196525CB422A008701DD /* DicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewModel.swift; sourceTree = "<group>"; };
 		F252196A25CB423D008701DD /* DicesViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewModelInterface.swift; sourceTree = "<group>"; };
+		F252196F25CB4AD1008701DD /* DicesBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardView.swift; sourceTree = "<group>"; };
+		F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardSectionView.swift; sourceTree = "<group>"; };
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+StickerButton.swift"; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +224,8 @@
 				F252196025CB4049008701DD /* DicesViewController.swift */,
 				F252196525CB422A008701DD /* DicesViewModel.swift */,
 				F252196A25CB423D008701DD /* DicesViewModelInterface.swift */,
+				F252196F25CB4AD1008701DD /* DicesBoardView.swift */,
+				F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -567,6 +573,7 @@
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
 				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
 				F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */,
+				F252197525CB4B2E008701DD /* DicesBoardSectionView.swift in Sources */,
 				F248282D25C417C8002239E3 /* NewPlayerViewModel.swift in Sources */,
 				F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */,
 				F248282825C40B43002239E3 /* NewPlayerView.swift in Sources */,
@@ -584,6 +591,7 @@
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
 				F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */,
 				1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */,
+				F252197025CB4AD1008701DD /* DicesBoardView.swift in Sources */,
 				F252196125CB4049008701DD /* DicesViewController.swift in Sources */,
 				F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */,
 				1BB120A37D60A82FE94CAC76 /* Array+Constraints.swift in Sources */,

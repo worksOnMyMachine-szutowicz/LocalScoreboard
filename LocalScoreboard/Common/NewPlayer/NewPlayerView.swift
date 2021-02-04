@@ -58,7 +58,7 @@ class NewPlayerView: UIView {
 
 extension NewPlayerView {
     private struct Values {
-        static let deletebuttonWidth: CGFloat = 30
+        static let deletebuttonWidth: CGFloat = 40
     }
     
     struct ViewData {

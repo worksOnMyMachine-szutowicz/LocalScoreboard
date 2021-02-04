@@ -60,7 +60,7 @@ class AddPlayersView: UIView {
          scrollView.topAnchor.constraint(equalTo: headerContainer.bottomAnchor, constant: ViewConstants.padding),
          scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
         
-        stackView.widthAnchor.constraint(equalTo: widthAnchor, constant: -ViewConstants.padding).isActive = true
+        stackView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     }
     
     private func setupBindigs() {
@@ -103,6 +103,6 @@ class AddPlayersView: UIView {
 extension AddPlayersView {
     private struct Values {
         static let headerContainerHeight: CGFloat = 2 * ViewConstants.backgroundGridSize
-        static let scrollViewInsets: UIEdgeInsets = .init(top: ViewConstants.padding, left: ViewConstants.padding, bottom: ViewConstants.padding, right: -ViewConstants.padding)
+        static let scrollViewInsets: UIEdgeInsets = .init(top: ViewConstants.padding, left: 0, bottom: ViewConstants.padding, right: 0)
     }
 }

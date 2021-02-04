@@ -20,6 +20,7 @@ class DicesViewController: BackgroundedUIViewController {
     private let viewModel: DicesViewModelInterface
     private let quitButton = UIButton.stickerButton(title: "global.quit".localized)
     private let rulesButton = UIButton.stickerButton(title: "global.fullRules".localized)
+    private let boardView = DicesBoardView()
     
     init(delegate: DicesViewControllerDelegate, viewModel: DicesViewModelInterface) {
         self.delegate = delegate
@@ -41,12 +42,17 @@ class DicesViewController: BackgroundedUIViewController {
     }
     
     private func layout() {
-        view.addSubviews([quitButton, rulesButton])
-        [quitButton, rulesButton].disableAutoresizingMask()
+        view.addSubviews([quitButton, boardView, rulesButton])
+        [quitButton, boardView, rulesButton].disableAutoresizingMask()
         
         [quitButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          quitButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
          quitButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Values.navigationButtonTopPadding)].activate()
+        
+        [boardView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         boardView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+         boardView.topAnchor.constraint(equalTo: quitButton.bottomAnchor, constant: ViewConstants.verticalPadding),
+         boardView.bottomAnchor.constraint(equalTo: rulesButton.topAnchor, constant: -ViewConstants.verticalPadding)].activate()
         
         [rulesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),

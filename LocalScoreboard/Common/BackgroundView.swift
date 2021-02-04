@@ -26,8 +26,10 @@ class BackgroundView: UIView {
     
     private func layout(bounds: CGRect) {
         let bottomUncoveredSpace = CGFloat(Int(bounds.height) % Int(ViewConstants.backgroundGridSize)) - ViewConstants.backgroundLineSize
+        let rightUncoveredSpace = CGFloat(Int(bounds.width) % Int(ViewConstants.backgroundGridSize)) - ViewConstants.backgroundLineSize
+        
         addSubviewAndFill(verticalStackView, insets: .init(top: 0, left: 0, bottom: bottomUncoveredSpace, right: 0))
-        addSubviewAndFill(horizontalStackView)
+        addSubviewAndFill(horizontalStackView, insets: .init(top: 0, left: 0, bottom: 0, right: rightUncoveredSpace))
         
         let numberOfHorizontalLines = Int(bounds.height/ViewConstants.backgroundGridSize)
         let numberOfVerticalLines = Int(bounds.width/ViewConstants.backgroundGridSize)

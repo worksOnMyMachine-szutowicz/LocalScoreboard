@@ -10,6 +10,11 @@ extension UIStackView {
         self.init(frame: .zero)
 
         switch type {
+        case .verticalWithoutSpacing:
+            alignment = .fill
+            distribution = .fillEqually
+            axis = .vertical
+            spacing = .zero
         case .verticalWithDefaultSpacing:
             alignment = .fill
             distribution = .fill
@@ -29,6 +34,7 @@ extension UIStackView {
     }
 
     enum StackType {
+        case verticalWithoutSpacing
         case verticalWithDefaultSpacing
         case verticalBackground
         case horizontalBackground

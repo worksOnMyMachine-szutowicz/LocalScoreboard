@@ -17,6 +17,7 @@ class DescribedTextFieldView: UIView {
     init(viewModel: DescribedTextFieldViewModelInterface) {
         self.viewModel = viewModel
         label.attributedText = .init(string: viewModel.viewData.labelText, attributes: ViewConstants.labelAttributes)
+        label.textAlignment = .right
         textField.layer.borderWidth = Values.textFieldDefaultBorderWidth
         textField.layer.borderColor = Colors.backgroundLine.cgColor
         textField.layer.cornerRadius = Values.textFieldCornerRadius
@@ -43,7 +44,7 @@ class DescribedTextFieldView: UIView {
          label.widthAnchor.constraint(equalToConstant: ViewConstants.sheetMargin),
          label.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
 
-        [textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: ViewConstants.padding),
+        [textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 2 * ViewConstants.padding),
         textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: ViewConstants.padding),
         textField.topAnchor.constraint(equalTo: topAnchor),
         textField.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
