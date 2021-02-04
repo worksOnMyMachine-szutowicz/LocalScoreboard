@@ -18,11 +18,10 @@ class ViewControllerFactory: ViewControllerFactoryProtocol {
     }
     
     func createRulesViewController(rulesViewData: RulesViewController.ViewData) -> UIViewController {
-        return RulesViewController(viewData: rulesViewData)
+        RulesViewController(viewData: rulesViewData)
     }
     
     func createDicesViewController(delegate: DicesViewControllerDelegate, players: [String]) -> UIViewController {
-        let viewModel = DicesViewModel(players: players)
-        return DicesViewController(delegate: delegate, viewModel: viewModel)
+        DicesViewController(delegate: delegate, viewData: .init(players: players))
     }
 }

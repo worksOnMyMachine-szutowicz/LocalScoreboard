@@ -30,12 +30,12 @@ class GameHeaderView: UIView {
         
         [titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
          titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: ViewConstants.verticalPadding),
+         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: ViewConstants.gridPadding),
          titleLabel.heightAnchor.constraint(equalToConstant: Values.titleLabelHeight)].activate()
         
         [descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMarginPadding),
          descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewConstants.padding),
-         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ViewConstants.verticalPadding),
+         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ViewConstants.gridPadding),
          descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
     }
 }

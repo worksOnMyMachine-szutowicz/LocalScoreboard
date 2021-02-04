@@ -17,14 +17,14 @@ protocol DicesViewControllerDelegate: class {
 class DicesViewController: BackgroundedUIViewController {
     private let disposeBag = DisposeBag()
     private var delegate: DicesViewControllerDelegate?
-    private let viewModel: DicesViewModelInterface
     private let quitButton = UIButton.stickerButton(title: "global.quit".localized)
-    private let rulesButton = UIButton.stickerButton(title: "global.fullRules".localized)
     private let boardView = DicesBoardView()
+    private let playersView: DicesPlayersView
+    private let rulesButton = UIButton.stickerButton(title: "global.fullRules".localized)
     
-    init(delegate: DicesViewControllerDelegate, viewModel: DicesViewModelInterface) {
+    init(delegate: DicesViewControllerDelegate, viewData: ViewData) {
         self.delegate = delegate
-        self.viewModel = viewModel
+        self.playersView = .init(viewData: .init(players: viewData.players))
         
         super.init(nibName: nil, bundle: nil)
         
@@ -42,8 +42,8 @@ class DicesViewController: BackgroundedUIViewController {
     }
     
     private func layout() {
-        view.addSubviews([quitButton, boardView, rulesButton])
-        [quitButton, boardView, rulesButton].disableAutoresizingMask()
+        view.addSubviews([quitButton, boardView, playersView, rulesButton])
+        [quitButton, boardView, playersView, rulesButton].disableAutoresizingMask()
         
         [quitButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          quitButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
@@ -51,8 +51,12 @@ class DicesViewController: BackgroundedUIViewController {
         
         [boardView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          boardView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-         boardView.topAnchor.constraint(equalTo: quitButton.bottomAnchor, constant: ViewConstants.verticalPadding),
-         boardView.bottomAnchor.constraint(equalTo: rulesButton.topAnchor, constant: -ViewConstants.verticalPadding)].activate()
+         boardView.topAnchor.constraint(equalTo: playersView.bottomAnchor),
+         boardView.bottomAnchor.constraint(equalTo: rulesButton.topAnchor, constant: -ViewConstants.gridPadding)].activate()
+        
+        [playersView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: ViewConstants.sheetMarginDoublePadding),
+         playersView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -ViewConstants.gridPadding),
+         playersView.topAnchor.constraint(equalTo: quitButton.bottomAnchor)].activate()
         
         [rulesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
@@ -71,5 +75,11 @@ class DicesViewController: BackgroundedUIViewController {
             .subscribe(onNext: { vc, _ in
                 vc.delegate?.pushRulesView(rulesViewData: GameData.forGame(.thousandDices).rulesViewData)
             }).disposed(by: disposeBag)
+    }
+}
+
+extension DicesViewController {
+    struct ViewData {
+        let players: [String]
     }
 }

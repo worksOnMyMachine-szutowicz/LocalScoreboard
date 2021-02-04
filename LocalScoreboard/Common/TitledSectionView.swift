@@ -43,7 +43,7 @@ class TitledSectionView: UIView {
         
         [contentLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMarginPadding),
          contentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewConstants.padding),
-         contentLabel.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: ViewConstants.verticalPadding),
+         contentLabel.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: ViewConstants.gridPadding),
          contentLabel.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
     }
 }

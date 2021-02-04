@@ -53,14 +53,14 @@ class NewGameViewController: BackgroundedUIViewController {
         
         [addPlayersView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          addPlayersView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-         addPlayersView.topAnchor.constraint(equalTo: gameHeaderView.bottomAnchor, constant: ViewConstants.verticalPadding)].activate()
+         addPlayersView.topAnchor.constraint(equalTo: gameHeaderView.bottomAnchor, constant: ViewConstants.gridPadding)].activate()
         
         [rulesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
-         rulesButton.topAnchor.constraint(equalTo: addPlayersView.bottomAnchor, constant: ViewConstants.verticalPadding)].activate()
+         rulesButton.topAnchor.constraint(equalTo: addPlayersView.bottomAnchor, constant: ViewConstants.gridPadding)].activate()
         
         [playButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         playButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: ViewConstants.verticalPadding),
+         playButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: ViewConstants.gridPadding),
          playButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
     }
     

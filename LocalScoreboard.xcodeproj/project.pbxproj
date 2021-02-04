@@ -37,8 +37,6 @@
 		F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283B25C41A75002239E3 /* RxInputOutput.swift */; };
 		F248284125C42166002239E3 /* Observable+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248284025C42166002239E3 /* Observable+Filter.swift */; };
 		F252196125CB4049008701DD /* DicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196025CB4049008701DD /* DicesViewController.swift */; };
-		F252196625CB422A008701DD /* DicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196525CB422A008701DD /* DicesViewModel.swift */; };
-		F252196B25CB423D008701DD /* DicesViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196A25CB423D008701DD /* DicesViewModelInterface.swift */; };
 		F252197025CB4AD1008701DD /* DicesBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196F25CB4AD1008701DD /* DicesBoardView.swift */; };
 		F252197525CB4B2E008701DD /* DicesBoardSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */; };
 		F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25A91B925C157B6002B9C51 /* Localizable.strings */; };
@@ -47,6 +45,7 @@
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
 		F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GameData.swift */; };
 		F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0979125C7E93400C954A4 /* BackgroundView.swift */; };
+		F2C33ECA25CC90CC00CC0149 /* DicesPlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C33EC925CC90CC00CC0149 /* DicesPlayersView.swift */; };
 		F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */; };
 		F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */; };
 		F2E195E725C87EA80074AA9D /* TextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E195E625C87EA80074AA9D /* TextField+Padding.swift */; };
@@ -113,8 +112,6 @@
 		F248283B25C41A75002239E3 /* RxInputOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxInputOutput.swift; sourceTree = "<group>"; };
 		F248284025C42166002239E3 /* Observable+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Filter.swift"; sourceTree = "<group>"; };
 		F252196025CB4049008701DD /* DicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewController.swift; sourceTree = "<group>"; };
-		F252196525CB422A008701DD /* DicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewModel.swift; sourceTree = "<group>"; };
-		F252196A25CB423D008701DD /* DicesViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewModelInterface.swift; sourceTree = "<group>"; };
 		F252196F25CB4AD1008701DD /* DicesBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardView.swift; sourceTree = "<group>"; };
 		F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardSectionView.swift; sourceTree = "<group>"; };
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -123,6 +120,7 @@
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
 		F27D48D325C5B75800BF02D0 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		F2A0979125C7E93400C954A4 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		F2C33EC925CC90CC00CC0149 /* DicesPlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesPlayersView.swift; sourceTree = "<group>"; };
 		F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModelInterface.swift; sourceTree = "<group>"; };
 		F2E195E625C87EA80074AA9D /* TextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Padding.swift"; sourceTree = "<group>"; };
@@ -222,10 +220,9 @@
 			isa = PBXGroup;
 			children = (
 				F252196025CB4049008701DD /* DicesViewController.swift */,
-				F252196525CB422A008701DD /* DicesViewModel.swift */,
-				F252196A25CB423D008701DD /* DicesViewModelInterface.swift */,
 				F252196F25CB4AD1008701DD /* DicesBoardView.swift */,
 				F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */,
+				F2C33EC925CC90CC00CC0149 /* DicesPlayersView.swift */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -573,6 +570,7 @@
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
 				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
 				F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */,
+				F2C33ECA25CC90CC00CC0149 /* DicesPlayersView.swift in Sources */,
 				F252197525CB4B2E008701DD /* DicesBoardSectionView.swift in Sources */,
 				F248282D25C417C8002239E3 /* NewPlayerViewModel.swift in Sources */,
 				F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */,
@@ -583,10 +581,8 @@
 				F211719125C429E000880DA4 /* AddPlayersViewModelInterface.swift in Sources */,
 				F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */,
 				F248284125C42166002239E3 /* Observable+Filter.swift in Sources */,
-				F252196B25CB423D008701DD /* DicesViewModelInterface.swift in Sources */,
 				F248283725C4193A002239E3 /* EnumWithAssociatedValue.swift in Sources */,
 				F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */,
-				F252196625CB422A008701DD /* DicesViewModel.swift in Sources */,
 				F21171A125C45FFC00880DA4 /* DescribedTextFieldViewModel.swift in Sources */,
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
 				F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */,

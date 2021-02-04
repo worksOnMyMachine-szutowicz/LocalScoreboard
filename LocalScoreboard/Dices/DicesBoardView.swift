@@ -28,8 +28,8 @@ class DicesBoardView: UIView {
     }
     
     private func layout() {
-        addSubviews([stackView])
-        [stackView].disableAutoresizingMask()
+        addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         [stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
          stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
