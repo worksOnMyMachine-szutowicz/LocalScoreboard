@@ -50,7 +50,7 @@ class BackgroundedUIViewController: UIViewController {
         let topInsetToFirstGrid = ViewConstants.backgroundGridSize - CGFloat(Int(view.safeAreaInsets.top) % Int(ViewConstants.backgroundGridSize))
         
         let bottomUncoveredSpace = CGFloat(Int(view.bounds.height) % Int(ViewConstants.backgroundGridSize))
-        let bottomInsetToFirstGrid = ViewConstants.backgroundGridSize - CGFloat(Int(view.safeAreaInsets.bottom - bottomUncoveredSpace) % Int(ViewConstants.backgroundGridSize))
+        let bottomInsetToFirstGrid = ViewConstants.backgroundGridSize - CGFloat(abs(Int(view.safeAreaInsets.bottom - bottomUncoveredSpace)) % Int(ViewConstants.backgroundGridSize))
         
         if topInsetToFirstGrid < ViewConstants.backgroundGridSize {
             additionalSafeAreaInsets.top += topInsetToFirstGrid
