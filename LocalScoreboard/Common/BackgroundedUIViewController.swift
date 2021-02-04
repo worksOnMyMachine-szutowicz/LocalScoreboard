@@ -58,7 +58,6 @@ class BackgroundedUIViewController: UIViewController {
         if bottomInsetToFirstGrid < ViewConstants.backgroundGridSize {
             additionalSafeAreaInsets.bottom += bottomInsetToFirstGrid
         }
-        viewSafeAreaInsetsDidChange()
     }
 }
 

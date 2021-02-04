@@ -21,11 +21,32 @@ class DicesBoardView: UIView {
         nil
     }
     
+    override func layoutSubviews() {
+        let minimumBoardSize = CGFloat(Values.numberOfSections) * ViewConstants.backgroundGridSize
+        let boardSize = CGFloat(Int(bounds.height/minimumBoardSize)) * minimumBoardSize
+        stackView.heightAnchor.constraint(equalToConstant: boardSize).isActive = true
+    }
+    
     private func layout() {
-        addSubviewAndFill(stackView)
+        addSubviews([stackView])
+        [stackView].disableAutoresizingMask()
         
-        for index in -1...10 {
-            stackView.addArrangedSubview(DicesBoardSectionView(viewData: .init(title: String(index * 100), higlighted: index % 3 == 0)))
+        [stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+         stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+         stackView.topAnchor.constraint(equalTo: topAnchor)].activate()
+        
+        for index in 0..<Values.numberOfSections {
+            let sectionTitle = String(index * 100)
+            stackView.addArrangedSubview(DicesBoardSectionView(viewData: .init(title: sectionTitle, higlighted: Values.highlightedSections.contains(index), enlargedTitle: index == Values.enlargedTitleSection)))
         }
+        
+    }
+}
+
+extension DicesBoardView {
+    private struct Values {
+        static let numberOfSections: Int = 11
+        static let highlightedSections: [Int] = [4, 8]
+        static let enlargedTitleSection: Int = 10
     }
 }
