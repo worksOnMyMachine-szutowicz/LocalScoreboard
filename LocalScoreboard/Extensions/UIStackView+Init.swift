@@ -30,10 +30,11 @@ extension UIStackView {
             distribution = .equalCentering
             axis = .horizontal
             spacing = Values.backgroundGridSpacing
-        case .horizontalWithEqualCentering:
+        case .horizontalWithEqualSpacing:
             alignment = .fill
-            distribution = .equalCentering
+            distribution = .equalSpacing
             axis = .horizontal
+            spacing = Values.doubleSpacing
         }
     }
 
@@ -43,11 +44,12 @@ extension UIStackView {
         case verticalBackground
         
         case horizontalBackground
-        case horizontalWithEqualCentering
+        case horizontalWithEqualSpacing
     }
 
     private struct Values {
         static let defaultSpacing: CGFloat = 20
+        static let doubleSpacing: CGFloat = 2 * defaultSpacing
         static let backgroundGridSpacing: CGFloat = 19
     }
 }

@@ -8,14 +8,14 @@
 
 import UIKit
 
-class DicesPlayersView: UIView {
+class DicesPlayersView: UIScrollView {
     private let players: [UIView]
-    private let stackView = UIStackView(type: .horizontalBackground)
+    private let stackView = UIStackView(type: .horizontalWithEqualSpacing)
     
     init(viewData: ViewData) {
         players = viewData.players.map {
             let label = UILabel()
-            label.attributedText = .init(string: $0, attributes: ViewConstants.labelAttributes)
+            label.attributedText = .init(string: $0, attributes: ViewConstants.highlightedLabelAttributes)
             return label
         }
         
@@ -28,20 +28,10 @@ class DicesPlayersView: UIView {
         nil
     }
     
-    override func layoutSubviews() {
-        let stackViewWidth = CGFloat(Int(bounds.width/ViewConstants.backgroundGridSize)) * ViewConstants.backgroundGridSize
-        
-        stackView.widthAnchor.constraint(equalToConstant: stackViewWidth).isActive = true
-    }
-    
     private func layout() {
-        addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubviewAndFill(stackView)
         
-        [stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-         stackView.topAnchor.constraint(equalTo: topAnchor),
-         stackView.heightAnchor.constraint(equalToConstant: Values.viewHeight),
-         stackView.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
+        heightAnchor.constraint(equalToConstant: Values.viewHeight).isActive = true
         
         players.forEach {
             stackView.addArrangedSubview($0)
