@@ -61,10 +61,10 @@ class DicesBoardView: UIView {
 }
 
 extension DicesBoardView {
-    private struct Values {
+    struct Values {
         static let numberOfSections: Int = 11
         static let highlightedSections: [Int] = [4, 8]
-        static let enlargedTitleSection: Int = 10
+        fileprivate static let enlargedTitleSection: Int = 10
     }
     struct ViewData {
         let players: [String]

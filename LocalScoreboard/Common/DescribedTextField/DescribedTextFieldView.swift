@@ -70,13 +70,13 @@ class DescribedTextFieldView: UIView {
     }
     
     private func animateUpdate(labelText: String) {
-        UIView.animate(withDuration: ViewConstants.animationTime, animations: { [weak self] () -> Void in
+        UIView.animate(withDuration: ViewConstants.animationTime) { [weak self] () -> Void in
             self?.label.alpha = 0
-        })
+        }
         label.text = labelText
-        UIView.animate(withDuration: ViewConstants.animationTime, animations: { [weak self] () -> Void in
+        UIView.animate(withDuration: ViewConstants.animationTime) { [weak self] () -> Void in
             self?.label.alpha = 1
-        })
+        }
     }
     
     private func indicateValidationResult(_ result: Bool) {

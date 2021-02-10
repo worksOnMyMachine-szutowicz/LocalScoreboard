@@ -15,10 +15,28 @@ protocol DicesPlayerViewModelInterface {
     var viewData: DicesPlayerView.ViewData { get }
 }
 
-enum DicesPlayerViewModelInput {
+enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
+    case addScoreTapped(AddScoreTappedModel)
     
+    struct AddScoreTappedModel { let score: Int }
+    
+    func associatedValue() -> Any {
+        switch self {
+        case .addScoreTapped(let associatedValue):
+            return associatedValue
+        }
+    }
 }
 
-enum DicesPlayerViewModelOutput {
+enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
+    case scoreChanged(ScoreChangedModel)
     
+    struct ScoreChangedModel { let multiplier: CGFloat? }
+    
+    func associatedValue() -> Any {
+        switch self {
+        case .scoreChanged(let associatedValue):
+            return associatedValue
+        }
+    }
 }
