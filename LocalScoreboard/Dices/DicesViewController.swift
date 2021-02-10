@@ -17,14 +17,13 @@ protocol DicesViewControllerDelegate: class {
 class DicesViewController: BackgroundedUIViewController {
     private let disposeBag = DisposeBag()
     private var delegate: DicesViewControllerDelegate?
+    private let boardView: DicesBoardView
     private let quitButton = UIButton.stickerButton(title: "global.quit".localized)
-    private let boardView = DicesBoardView()
-    private let playersView: DicesPlayersView
     private let rulesButton = UIButton.stickerButton(title: "global.fullRules".localized)
     
     init(delegate: DicesViewControllerDelegate, viewData: ViewData) {
         self.delegate = delegate
-        self.playersView = .init(viewData: .init(players: viewData.players))
+        self.boardView = .init(viewData: .init(players: viewData.players), viewFactory: DicesFactory())
         
         super.init(nibName: nil, bundle: nil)
         
@@ -42,8 +41,8 @@ class DicesViewController: BackgroundedUIViewController {
     }
     
     private func layout() {
-        view.addSubviews([quitButton, boardView, playersView, rulesButton])
-        [quitButton, boardView, playersView, rulesButton].disableAutoresizingMask()
+        view.addSubviews([quitButton, boardView, rulesButton])
+        [quitButton, boardView, rulesButton].disableAutoresizingMask()
         
         [quitButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          quitButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
@@ -51,12 +50,8 @@ class DicesViewController: BackgroundedUIViewController {
         
         [boardView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          boardView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-         boardView.topAnchor.constraint(equalTo: playersView.bottomAnchor),
+         boardView.topAnchor.constraint(equalTo: quitButton.bottomAnchor),
          boardView.bottomAnchor.constraint(equalTo: rulesButton.topAnchor, constant: -ViewConstants.gridPadding)].activate()
-        
-        [playersView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: ViewConstants.sheetMarginDoublePadding),
-         playersView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -ViewConstants.gridPadding),
-         playersView.topAnchor.constraint(equalTo: quitButton.bottomAnchor)].activate()
         
         [rulesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),

@@ -9,9 +9,15 @@
 import UIKit
 
 class DicesBoardView: UIView {
-    private let stackView = UIStackView(type: .verticalWithoutSpacing)
+    private let boardStackView = UIStackView(type: .verticalWithoutSpacing)
+    private let players: [DicesPlayerView]
+    private let playersStackView = UIStackView(type: .horizontalWithEqualSpacing)
     
-    init() {
+    init(viewData: ViewData, viewFactory: DicesFactoryInterface) {
+        players = viewData.players.map {
+            viewFactory.createPlayerView(playerName: $0)
+        }
+        
         super.init(frame: .zero)
         
         layout()
@@ -24,22 +30,33 @@ class DicesBoardView: UIView {
     override func layoutSubviews() {
         let minimumBoardSize = CGFloat(Values.numberOfSections) * ViewConstants.backgroundGridSize
         let boardSize = CGFloat(Int(bounds.height/minimumBoardSize)) * minimumBoardSize
-        stackView.heightAnchor.constraint(equalToConstant: boardSize).isActive = true
+        boardStackView.heightAnchor.constraint(equalToConstant: boardSize).isActive = true
     }
     
     private func layout() {
-        addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        let playersScrollView = UIScrollView()
+        addSubviews([boardStackView, playersScrollView])
+        [boardStackView, playersScrollView].disableAutoresizingMask()
         
-        [stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-         stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-         stackView.topAnchor.constraint(equalTo: topAnchor)].activate()
+        playersScrollView.addSubviewAndFill(playersStackView)
         
         for index in 0..<Values.numberOfSections {
             let sectionTitle = String(index * 100)
-            stackView.addArrangedSubview(DicesBoardSectionView(viewData: .init(title: sectionTitle, higlighted: Values.highlightedSections.contains(index), enlargedTitle: index == Values.enlargedTitleSection)))
+            boardStackView.addArrangedSubview(DicesBoardSectionView(viewData: .init(title: sectionTitle, higlighted: Values.highlightedSections.contains(index), enlargedTitle: index == Values.enlargedTitleSection)))
+        }
+        players.forEach {
+            playersStackView.addArrangedSubview($0)
         }
         
+        [playersScrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMarginDoublePadding),
+         playersScrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+         playersScrollView.topAnchor.constraint(equalTo: topAnchor),
+         playersScrollView.heightAnchor.constraint(equalTo: playersStackView.heightAnchor),
+         playersScrollView.bottomAnchor.constraint(equalTo: boardStackView.bottomAnchor)].activate()
+        
+        [boardStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+         boardStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+         boardStackView.topAnchor.constraint(equalTo: players[0].headerBottomAnchor)].activate()
     }
 }
 
@@ -48,5 +65,8 @@ extension DicesBoardView {
         static let numberOfSections: Int = 11
         static let highlightedSections: [Int] = [4, 8]
         static let enlargedTitleSection: Int = 10
+    }
+    struct ViewData {
+        let players: [String]
     }
 }
