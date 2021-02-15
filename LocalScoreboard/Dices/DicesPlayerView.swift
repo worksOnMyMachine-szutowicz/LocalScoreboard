@@ -17,22 +17,14 @@ class DicesPlayerView: UIView {
     private let disposeBag = DisposeBag()
     private let viewModel: DicesPlayerViewModelInterface
     private let button: UIButton
-    private let scoreContainer = UIView()
-    private let scoreView = UIView()
-    private let negativeScorePlaceholder = UIView()
-    private let positiveScorePlaceholder = UIView()
-    
-    private var scoreHeight: NSLayoutConstraint?
-    private var negativeScorePlaceholderHeight: NSLayoutConstraint?
-    
+    private let scoreView = DicesScoreView()
+
     init(viewModel: DicesPlayerViewModelInterface) {
         self.viewModel = viewModel
         button =  UIButton.stickerButton(title: viewModel.viewData.name)
         headerBottomAnchor = button.bottomAnchor
         
         super.init(frame: .zero)
-        
-        scoreView.backgroundColor = .green
         
         layout()
         setupBindings()
@@ -43,36 +35,18 @@ class DicesPlayerView: UIView {
     }
     
     private func layout() {
-        addSubviews([button, scoreContainer])
-        scoreContainer.addSubviews([scoreView, negativeScorePlaceholder, positiveScorePlaceholder])
-        [button, scoreContainer, scoreView, negativeScorePlaceholder, positiveScorePlaceholder].disableAutoresizingMask()
+        addSubviews([button, scoreView])
+        [button, scoreView].disableAutoresizingMask()
         
         [button.leadingAnchor.constraint(equalTo: leadingAnchor),
-         button.widthAnchor.constraint(greaterThanOrEqualToConstant: Values.scoreWidth),
+         button.widthAnchor.constraint(greaterThanOrEqualToConstant: Values.minimumWidth),
          button.trailingAnchor.constraint(equalTo: trailingAnchor),
          button.topAnchor.constraint(equalTo: topAnchor)].activate()
         
-        [scoreContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
-         scoreContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
-         scoreContainer.topAnchor.constraint(equalTo: button.bottomAnchor),
-         scoreContainer.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
-        
-        negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: scoreContainer.heightAnchor, multiplier: Values.initialNegativePlaceholderHeightMultiplier)
-        negativeScorePlaceholderHeight?.isActive = true
-        [negativeScorePlaceholder.centerXAnchor.constraint(equalTo: centerXAnchor),
-         negativeScorePlaceholder.widthAnchor.constraint(equalTo: widthAnchor),
-         negativeScorePlaceholder.topAnchor.constraint(equalTo: scoreContainer.topAnchor)].activate()
-        
-        scoreHeight = scoreView.heightAnchor.constraint(equalTo: scoreContainer.heightAnchor, multiplier: Values.initialScoreHeightMultiplier)
-        scoreHeight?.isActive = true
-        [scoreView.centerXAnchor.constraint(equalTo: centerXAnchor),
-         scoreView.widthAnchor.constraint(equalToConstant: Values.scoreWidth),
-         scoreView.topAnchor.constraint(equalTo: negativeScorePlaceholder.bottomAnchor)].activate()
-        
-        [positiveScorePlaceholder.centerXAnchor.constraint(equalTo: centerXAnchor),
-         positiveScorePlaceholder.widthAnchor.constraint(equalTo: widthAnchor),
-         positiveScorePlaceholder.topAnchor.constraint(equalTo: scoreView.bottomAnchor),
-         positiveScorePlaceholder.bottomAnchor.constraint(equalTo: scoreContainer.bottomAnchor)].activate()
+        [scoreView.leadingAnchor.constraint(equalTo: leadingAnchor),
+         scoreView.trailingAnchor.constraint(equalTo: trailingAnchor),
+         scoreView.topAnchor.constraint(equalTo: button.bottomAnchor),
+         scoreView.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
     }
     
     private func setupBindings() {
@@ -86,38 +60,17 @@ class DicesPlayerView: UIView {
             .subscribe(onNext: { view, output in
                 switch output {
                 case .scoreChanged(let output):
-                    view.changeScore(heightMultiplier: output.multiplier)
+                    view.scoreView.changeScore(heightMultiplier: output.multiplier)
                 }
             }).disposed(by: disposeBag)
-    }
-    
-    private func changeScore(heightMultiplier: CGFloat?) {
-        negativeScorePlaceholderHeight?.isActive = false
-        scoreHeight?.isActive = false
-        if let heightMultiplier = heightMultiplier {
-            negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: scoreContainer.heightAnchor, multiplier: Values.initialNegativePlaceholderHeightMultiplier)
-            scoreHeight = scoreView.heightAnchor.constraint(equalTo: scoreContainer.heightAnchor, multiplier: heightMultiplier)
-        } else {
-            negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: scoreContainer.heightAnchor, multiplier: Values.halfOfSectionHeight)
-            scoreHeight = scoreView.heightAnchor.constraint(equalTo: scoreContainer.heightAnchor, multiplier: Values.halfOfSectionHeight)
-        }
-        negativeScorePlaceholderHeight?.isActive = true
-        scoreHeight?.isActive = true
-        
-        
-        UIView.animate(withDuration: ViewConstants.animationTime) { [weak self] () -> Void in
-            self?.scoreContainer.layoutIfNeeded()
-        }
     }
 }
 
 extension DicesPlayerView {
     private struct Values {
-        static let scoreWidth: CGFloat = 40
-        static let initialScoreHeightMultiplier: CGFloat = 0
-        static let initialNegativePlaceholderHeightMultiplier: CGFloat = 1 / CGFloat(DicesBoardView.Values.numberOfSections)
-        static let halfOfSectionHeight: CGFloat = 1 / 2 / CGFloat(DicesBoardView.Values.numberOfSections)
+        static let minimumWidth: CGFloat = 40
     }
+    
     struct ViewData {
         let name: String
     }

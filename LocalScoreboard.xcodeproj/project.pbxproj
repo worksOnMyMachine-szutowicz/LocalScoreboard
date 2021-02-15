@@ -52,6 +52,7 @@
 		F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */; };
 		F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */; };
 		F2E195E725C87EA80074AA9D /* TextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E195E625C87EA80074AA9D /* TextField+Padding.swift */; };
+		F2EDF60B25D461E900835288 /* DicesScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EDF60A25D461E900835288 /* DicesScoreView.swift */; };
 		F2FBCB9225C7FEF400533EA0 /* BackgroundedUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */; };
 		FAC02B691239E58FFC23751D /* Pods_LocalScoreboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C5C8F88D893ADF3F6B9953 /* Pods_LocalScoreboardTests.framework */; };
 /* End PBXBuildFile section */
@@ -130,6 +131,7 @@
 		F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModelInterface.swift; sourceTree = "<group>"; };
 		F2E195E625C87EA80074AA9D /* TextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Padding.swift"; sourceTree = "<group>"; };
+		F2EDF60A25D461E900835288 /* DicesScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesScoreView.swift; sourceTree = "<group>"; };
 		F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundedUIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -232,6 +234,7 @@
 				F248595D25D104B000F8EB1E /* DicesPlayerViewModel.swift */,
 				F248596225D104C900F8EB1E /* DicesPlayerViewModelInterface.swift */,
 				F248596725D105F200F8EB1E /* DicesFactory.swift */,
+				F2EDF60A25D461E900835288 /* DicesScoreView.swift */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 			files = (
 				1BB12C16C2BB1B6A11C81E2A /* AppDelegate.swift in Sources */,
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
+				F2EDF60B25D461E900835288 /* DicesScoreView.swift in Sources */,
 				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
 				F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */,
 				F252197525CB4B2E008701DD /* DicesBoardSectionView.swift in Sources */,
