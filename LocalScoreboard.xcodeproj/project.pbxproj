@@ -24,6 +24,7 @@
 		1BB12C16C2BB1B6A11C81E2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB128DF5DC3AD07F5BFBB1F /* AppDelegate.swift */; };
 		1BB12DD331F76DBF39B58330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB12AFA59C4A060148680B1 /* Assets.xcassets */; };
 		2B904EDD945640CD943D601C /* Pods_LocalScoreboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F24665F181AB7B147F8352 /* Pods_LocalScoreboard.framework */; };
+		F20E57ED25DAD80B006F0BD0 /* InputPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E57EC25DAD80B006F0BD0 /* InputPopoverViewController.swift */; };
 		F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211718125C425F400880DA4 /* Observable+Weak.swift */; };
 		F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211718625C4279A00880DA4 /* NewGameViewFactory.swift */; };
 		F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211718B25C429B000880DA4 /* AddPlayersViewModel.swift */; };
@@ -44,6 +45,8 @@
 		F252197025CB4AD1008701DD /* DicesBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252196F25CB4AD1008701DD /* DicesBoardView.swift */; };
 		F252197525CB4B2E008701DD /* DicesBoardSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */; };
 		F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25A91B925C157B6002B9C51 /* Localizable.strings */; };
+		F25C76DE25DC53CC00455B2E /* InputPopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C76DD25DC53CC00455B2E /* InputPopoverPresentationController.swift */; };
+		F25C76F225DC6CF700455B2E /* InputPopoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C76F125DC6CF700455B2E /* InputPopoverViewModel.swift */; };
 		F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
@@ -103,6 +106,7 @@
 		A3C995F0EBEDD478F2BB2B66 /* Pods-LocalScoreboardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboardTests.debug.xcconfig"; path = "Target Support Files/Pods-LocalScoreboardTests/Pods-LocalScoreboardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AFC5FE019A2E8032E5A1B81B /* Pods-LocalScoreboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboard.debug.xcconfig"; path = "Target Support Files/Pods-LocalScoreboard/Pods-LocalScoreboard.debug.xcconfig"; sourceTree = "<group>"; };
 		BF8D5336A17A12548104D269 /* Pods-LocalScoreboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboard.release.xcconfig"; path = "Target Support Files/Pods-LocalScoreboard/Pods-LocalScoreboard.release.xcconfig"; sourceTree = "<group>"; };
+		F20E57EC25DAD80B006F0BD0 /* InputPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverViewController.swift; sourceTree = "<group>"; };
 		F211718125C425F400880DA4 /* Observable+Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Weak.swift"; sourceTree = "<group>"; };
 		F211718625C4279A00880DA4 /* NewGameViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewFactory.swift; sourceTree = "<group>"; };
 		F211718B25C429B000880DA4 /* AddPlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayersViewModel.swift; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 		F252196F25CB4AD1008701DD /* DicesBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardView.swift; sourceTree = "<group>"; };
 		F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardSectionView.swift; sourceTree = "<group>"; };
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F25C76DD25DC53CC00455B2E /* InputPopoverPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverPresentationController.swift; sourceTree = "<group>"; };
+		F25C76F125DC6CF700455B2E /* InputPopoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverViewModel.swift; sourceTree = "<group>"; };
 		F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+StickerButton.swift"; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F20E57EB25DAD0DB006F0BD0 /* InputPopover */,
 				F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */,
 				F277525E25C596D80099E995 /* AddPlayers */,
 				F277525D25C596C20099E995 /* NewPlayer */,
@@ -292,6 +299,16 @@
 				17AC5EDEC769CBD52A014A7B /* Pods-LocalScoreboardTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F20E57EB25DAD0DB006F0BD0 /* InputPopover */ = {
+			isa = PBXGroup;
+			children = (
+				F20E57EC25DAD80B006F0BD0 /* InputPopoverViewController.swift */,
+				F25C76DD25DC53CC00455B2E /* InputPopoverPresentationController.swift */,
+				F25C76F125DC6CF700455B2E /* InputPopoverViewModel.swift */,
+			);
+			path = InputPopover;
 			sourceTree = "<group>";
 		};
 		F248284825C42176002239E3 /* Rx */ = {
@@ -579,6 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BB12C16C2BB1B6A11C81E2A /* AppDelegate.swift in Sources */,
+				F25C76F225DC6CF700455B2E /* InputPopoverViewModel.swift in Sources */,
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
 				F2EDF60B25D461E900835288 /* DicesScoreView.swift in Sources */,
 				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
@@ -593,6 +611,7 @@
 				F2E195E725C87EA80074AA9D /* TextField+Padding.swift in Sources */,
 				F248596825D105F200F8EB1E /* DicesFactory.swift in Sources */,
 				F211719125C429E000880DA4 /* AddPlayersViewModelInterface.swift in Sources */,
+				F25C76DE25DC53CC00455B2E /* InputPopoverPresentationController.swift in Sources */,
 				F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */,
 				F248284125C42166002239E3 /* Observable+Filter.swift in Sources */,
 				F248283725C4193A002239E3 /* EnumWithAssociatedValue.swift in Sources */,
@@ -616,6 +635,7 @@
 				F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */,
 				F248595E25D104B000F8EB1E /* DicesPlayerViewModel.swift in Sources */,
 				F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */,
+				F20E57ED25DAD80B006F0BD0 /* InputPopoverViewController.swift in Sources */,
 				1BB1294457B0CEE9DF5F4B5B /* UIStackView+Init.swift in Sources */,
 				1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */,
 				F248283225C4181A002239E3 /* NewPlayerViewModelInterface.swift in Sources */,

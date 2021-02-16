@@ -26,7 +26,7 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     }
     
     private func setupBindings() {
-        input.asObservable().filterByAssociatedType(Input.AddScoreTappedModel.self)
+        input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
             .append(weak: self)
             .do { vm, input in vm.score += input.score }
             .map { vm, input in Output.scoreChanged(.init(multiplier: vm.calculateMultiplier())) }

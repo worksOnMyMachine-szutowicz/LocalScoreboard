@@ -1,12 +1,18 @@
 "global.back" = "< Back";
 "global.quit" = "Quit";
+"global.cancel" = "Cancel";
+"global.save" = "Save";
 "global.fullRules" = "Full rules";
+"global.+" = "+";
+"global.-" = "-";
 
 "newGame.addPlayer.title" = "Players";
 "newGame.addPlayer.button" = "+";
 "newGame.addPlayer.player" = "Player %@";
 "newGame.addPlayer.delete" = "-";
 "newGame.play" = "Let's Play!";
+
+"inputPopover.title" = "Add roll score for: %@";
 
 //Games data
 

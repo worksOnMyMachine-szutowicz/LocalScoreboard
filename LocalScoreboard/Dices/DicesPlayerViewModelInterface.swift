@@ -16,13 +16,13 @@ protocol DicesPlayerViewModelInterface {
 }
 
 enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
-    case addScoreTapped(AddScoreTappedModel)
+    case addScore(AddScoreModel)
     
-    struct AddScoreTappedModel { let score: Int }
+    struct AddScoreModel { let score: Int }
     
     func associatedValue() -> Any {
         switch self {
-        case .addScoreTapped(let associatedValue):
+        case .addScore(let associatedValue):
             return associatedValue
         }
     }

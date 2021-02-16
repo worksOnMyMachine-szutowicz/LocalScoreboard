@@ -4,12 +4,13 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol AppCoordinatorInterface {
     func start()
 }
 
-class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, DicesViewControllerDelegate {
+class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, DicesViewControllerDelegate, DicesPlayerViewDelegate {
     private let window: UIWindow
     private let navigationController: UINavigationController
     private let viewControllerFactory: ViewControllerFactoryProtocol
@@ -40,5 +41,9 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, Di
     
     func quitGame() {
         navigationController.setViewControllers([viewControllerFactory.createNewGameViewController(delegate: self)], animated: true)
+    }
+    
+    func showAddScoreView(for player: String) -> Observable<Int> {
+        InputPopoverViewController.showInController(with: .forDices(player: player), in: navigationController)
     }
 }

@@ -7,12 +7,12 @@
 //
 
 protocol DicesFactoryInterface {
-    func createPlayerView(playerName: String) -> DicesPlayerView
+    func createPlayerView(playerName: String, delegate: DicesPlayerViewDelegate) -> DicesPlayerView
 }
 
 class DicesFactory: DicesFactoryInterface {
-    func createPlayerView(playerName: String) -> DicesPlayerView {
+    func createPlayerView(playerName: String, delegate: DicesPlayerViewDelegate) -> DicesPlayerView {
         let viewModel = DicesPlayerViewModel(viewData: .init(name: playerName))
-        return .init(viewModel: viewModel)
+        return .init(viewModel: viewModel, delegate: delegate)
     }
 }

@@ -9,6 +9,10 @@
 import UIKit
 import RxSwift
 
+protocol DicesPlayerViewDelegate: class {
+    func showAddScoreView(for player: String) -> Observable<Int>
+}
+
 class DicesPlayerView: UIView {
     let headerBottomAnchor: NSLayoutYAxisAnchor
     
@@ -16,11 +20,13 @@ class DicesPlayerView: UIView {
     typealias VMOutput = DicesPlayerViewModelOutput
     private let disposeBag = DisposeBag()
     private let viewModel: DicesPlayerViewModelInterface
+    private weak var delegate: DicesPlayerViewDelegate?
     private let button: UIButton
     private let scoreView = DicesScoreView()
 
-    init(viewModel: DicesPlayerViewModelInterface) {
+    init(viewModel: DicesPlayerViewModelInterface, delegate: DicesPlayerViewDelegate) {
         self.viewModel = viewModel
+        self.delegate = delegate
         button =  UIButton.stickerButton(title: viewModel.viewData.name)
         headerBottomAnchor = button.bottomAnchor
         
@@ -51,7 +57,12 @@ class DicesPlayerView: UIView {
     
     private func setupBindings() {
         button.rx.tap
-            .map { _ in VMInput.addScoreTapped(.init(score: 40)) }
+            .append(weak: self)
+            .flatMapLatest { view, _ -> Observable<Int> in
+                guard let delegate = view.delegate else { return .empty() }
+                return delegate.showAddScoreView(for: view.viewModel.viewData.name)
+            }
+            .map { VMInput.addScore(.init(score: $0)) }
             .bind(to: viewModel.input)
             .disposed(by: disposeBag)
         

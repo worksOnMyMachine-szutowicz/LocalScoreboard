@@ -9,21 +9,21 @@
 import UIKit
 import RxSwift
 
-protocol DicesViewControllerDelegate: class {
+protocol DicesViewControllerDelegate: DicesPlayerViewDelegate {
     func quitGame()
     func pushRulesView(rulesViewData: RulesViewController.ViewData)
 }
 
 class DicesViewController: BackgroundedUIViewController {
     private let disposeBag = DisposeBag()
-    private var delegate: DicesViewControllerDelegate?
+    private weak var delegate: DicesViewControllerDelegate?
     private let boardView: DicesBoardView
     private let quitButton = UIButton.stickerButton(title: "global.quit".localized)
     private let rulesButton = UIButton.stickerButton(title: "global.fullRules".localized)
     
     init(delegate: DicesViewControllerDelegate, viewData: ViewData) {
         self.delegate = delegate
-        self.boardView = .init(viewData: .init(players: viewData.players), viewFactory: DicesFactory())
+        self.boardView = .init(viewData: .init(players: viewData.players), viewFactory: DicesFactory(), delegate: delegate)
         
         super.init(nibName: nil, bundle: nil)
         
