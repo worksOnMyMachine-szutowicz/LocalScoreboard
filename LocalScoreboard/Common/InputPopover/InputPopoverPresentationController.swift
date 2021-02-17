@@ -55,6 +55,6 @@ class InputPopoverPresentationController: UIPresentationController {
 
 extension InputPopoverPresentationController {
     private struct Values {
-        static let heightMultiplier: CGFloat = 1/3
+        static let heightMultiplier: CGFloat = 2/5
     }
 }

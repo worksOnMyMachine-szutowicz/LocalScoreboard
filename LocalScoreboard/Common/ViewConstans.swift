@@ -18,11 +18,15 @@ struct ViewConstants {
     
     static let labelAttributes: [NSAttributedString.Key : Any] =
         [.font: UIFont(name: "MarkerFelt-Thin", size: 18.416) as Any,
-         .foregroundColor: Colors.labelTextColor]
+         .foregroundColor: Colors.labelText]
     
     static let highlightedLabelAttributes : [NSAttributedString.Key : Any] =
-    [.font: UIFont(name: "MarkerFelt-Wide", size: 25) as Any,
-     .foregroundColor: Colors.labelTextColor]
+        [.font: UIFont(name: "MarkerFelt-Wide", size: 25) as Any,
+         .foregroundColor: Colors.labelText]
+    
+    static let errorLabelAttributes : [NSAttributedString.Key : Any] =
+        [.font: UIFont(name: "MarkerFelt-Thin", size: 18.416) as Any,
+         .foregroundColor: Colors.errorLabelText]
 }
 
 struct Colors {
@@ -30,5 +34,6 @@ struct Colors {
     static let backgroundLine = UIColor(red: 0.427, green: 0.584, blue: 0.858, alpha: 1.0)
     static let backgroundHighlight = UIColor(red: 0.961, green: 0.768, blue: 0.839, alpha: 1.0)
     
-    static let labelTextColor = UIColor(red: 0.114, green: 0.172, blue: 0.549, alpha: 1.0)
+    static let labelText = UIColor(red: 0.114, green: 0.172, blue: 0.549, alpha: 1.0)
+    static let errorLabelText = UIColor(red: 0.961, green: 0.768, blue: 0.839, alpha: 1.0)
 }

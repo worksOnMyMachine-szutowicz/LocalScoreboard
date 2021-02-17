@@ -1,10 +1,12 @@
 "global.back" = "< Back";
 "global.quit" = "Quit";
+"global.ok" = "Ok";
 "global.cancel" = "Cancel";
 "global.save" = "Save";
 "global.fullRules" = "Full rules";
 "global.+" = "+";
 "global.-" = "-";
+"global.warning" = "Warning";
 
 "newGame.addPlayer.title" = "Players";
 "newGame.addPlayer.button" = "+";

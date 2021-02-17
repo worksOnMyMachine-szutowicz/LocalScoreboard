@@ -11,11 +11,13 @@ import RxSwift
 
 class InputPopoverViewController: UIViewController, UIViewControllerTransitioningDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     typealias VMInput = InputPopoverViewModelInput
+    typealias VMOutput = InputPopoverViewModelOutput
     private let disposeBag = DisposeBag()
     private let viewModel: InputPopoverViewModelInterface
     private let completion: ((Int) -> Void)
     private let titleLabel = UILabel()
     private let pickerView = UIPickerView()
+    private let errorLabel = UILabel()
     private let cancelButton = UIButton.stickerButton(title: "global.cancel".localized)
     private let saveButton = UIButton.stickerButton(title: "global.save".localized)
     private var pickerSelections: [Int] {
@@ -39,6 +41,9 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
         titleLabel.textAlignment = .center
         pickerView.delegate = self
         pickerView.dataSource = self
+        errorLabel.textAlignment = .center
+        errorLabel.isHidden = true
+        errorLabel.numberOfLines = 0
         
         setupBindings()
     }
@@ -81,17 +86,22 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
     }
     
     private func layout() {
-        view.addSubviews([titleLabel, pickerView, cancelButton, saveButton])
-        [titleLabel, pickerView, cancelButton, saveButton].disableAutoresizingMask()
+        view.addSubviews([titleLabel, pickerView, errorLabel, cancelButton, saveButton])
+        [titleLabel, pickerView, errorLabel, cancelButton, saveButton].disableAutoresizingMask()
         
-        [titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.titleLabelPadding),
-         titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.titleLabelPadding),
-         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Values.titleLabelPadding),
-         titleLabel.heightAnchor.constraint(equalToConstant: Values.titleLabelHeight)].activate()
+        [titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.labelPadding),
+         titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.labelPadding),
+         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Values.labelPadding),
+         titleLabel.heightAnchor.constraint(equalToConstant: Values.labelHeight)].activate()
         
         [pickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
          pickerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-         pickerView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor)].activate()
+         pickerView.bottomAnchor.constraint(equalTo: errorLabel.topAnchor)].activate()
+        
+        [errorLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.labelPadding),
+         errorLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.labelPadding),
+         errorLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -Values.labelPadding),
+         errorLabel.heightAnchor.constraint(equalToConstant: Values.labelHeight)].activate()
         
         [cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
@@ -112,19 +122,37 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
             .bind(to: viewModel.input)
             .disposed(by: disposeBag)
         
-        viewModel.output.asObservable()
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.FinishWithScoreModel.self)
             .append(weak: self)
             .subscribe(onNext: { vc, output in
-                switch output {
-                case .finishWithScore(let output):
-                    vc.completion(output.score)
-                }
+                vc.errorLabel.isHidden = true
+                vc.completion(output.score)
+            }).disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.ShowWarningModel.self)
+            .append(weak: self)
+            .flatMapLatest { vc, output -> Observable<(DecisionAlertViewController.Decision, Int)> in
+                vc.errorLabel.isHidden = true
+                
+                let decision = DecisionAlertViewController.showAlertInController(with: .init(title: "global.warning".localized, message: output.message), in: vc)
+                return Observable.zip(decision, Observable.just(output.score))
+            }.filter { $0.0 == .ok }
+            .append(weak: self)
+            .subscribe(onNext: { vc, output in
+                vc.completion(output.1)
+            }).disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.ValidationErrorModel.self)
+            .append(weak: self)
+            .subscribe(onNext: { vc, output in
+                vc.errorLabel.isHidden = false
+                vc.errorLabel.attributedText = .init(string: output.message, attributes: ViewConstants.errorLabelAttributes)
             }).disposed(by: disposeBag)
     }
 }
 
 extension InputPopoverViewController {
-    static func showInController(with viewModel: InputPopoverViewModelInterface, in controller: UIViewController) -> Observable<Int> {
+    static func showInController(viewModel: InputPopoverViewModelInterface, in controller: UIViewController) -> Observable<Int> {
         return Observable.create { [weak controller] observer in
             let inputPopoverController = InputPopoverViewController(viewModel: viewModel, completion: { input in
                 observer.onNext(input)
@@ -142,8 +170,8 @@ extension InputPopoverViewController {
 
 extension InputPopoverViewController {
     private struct Values {
-        static let titleLabelPadding: CGFloat = 20
-        static let titleLabelHeight: CGFloat = 40
+        static let labelPadding: CGFloat = 20
+        static let labelHeight: CGFloat = 40
         static let pickerItemPadding: CGFloat = 20
     }
     struct ViewData {
