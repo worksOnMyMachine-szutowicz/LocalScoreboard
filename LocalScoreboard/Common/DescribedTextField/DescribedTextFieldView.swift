@@ -18,6 +18,7 @@ class DescribedTextFieldView: UIView {
         self.viewModel = viewModel
         label.attributedText = .init(string: viewModel.viewData.labelText, attributes: ViewConstants.labelAttributes)
         label.textAlignment = .right
+        textField.autocorrectionType = .no
         textField.layer.borderWidth = Values.textFieldDefaultBorderWidth
         textField.layer.borderColor = Colors.backgroundLine.cgColor
         textField.layer.cornerRadius = Values.textFieldCornerRadius

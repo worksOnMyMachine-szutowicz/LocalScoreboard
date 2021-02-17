@@ -37,6 +37,8 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
         modalPresentationStyle = .custom
         transitioningDelegate = self
         view.backgroundColor = Colors.background
+        view.layer.cornerRadius = Values.cornerRadius
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         titleLabel.attributedText = .init(string: String(format: "inputPopover.title".localized, viewModel.viewData.playerName), attributes: ViewConstants.highlightedLabelAttributes)
         titleLabel.textAlignment = .center
         pickerView.delegate = self
@@ -161,8 +163,8 @@ extension InputPopoverViewController {
 
             controller?.present(inputPopoverController, animated: true, completion: nil)
             
-            return Disposables.create { [weak inputPopoverController] in
-                inputPopoverController?.dismiss(animated: true, completion: nil)
+            return Disposables.create { [weak controller] in
+                controller?.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -170,6 +172,7 @@ extension InputPopoverViewController {
 
 extension InputPopoverViewController {
     private struct Values {
+        static let cornerRadius: CGFloat = 20
         static let labelPadding: CGFloat = 20
         static let labelHeight: CGFloat = 40
         static let pickerItemPadding: CGFloat = 20

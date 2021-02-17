@@ -54,6 +54,7 @@
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
 		F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GameData.swift */; };
 		F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0979125C7E93400C954A4 /* BackgroundView.swift */; };
+		F2C7791A25DD5DB200FD3947 /* DecisionAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C7791925DD5DB200FD3947 /* DecisionAlertPresentationController.swift */; };
 		F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */; };
 		F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */; };
 		F2E195E725C87EA80074AA9D /* TextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E195E625C87EA80074AA9D /* TextField+Padding.swift */; };
@@ -138,6 +139,7 @@
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
 		F27D48D325C5B75800BF02D0 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		F2A0979125C7E93400C954A4 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		F2C7791925DD5DB200FD3947 /* DecisionAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionAlertPresentationController.swift; sourceTree = "<group>"; };
 		F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModelInterface.swift; sourceTree = "<group>"; };
 		F2E195E625C87EA80074AA9D /* TextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Padding.swift"; sourceTree = "<group>"; };
@@ -184,7 +186,7 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F25C771125DD1AAF00455B2E /* DecisionAlertViewController.swift */,
+				F2C7791825DD5D8700FD3947 /* DecisionAlert */,
 				F20E57EB25DAD0DB006F0BD0 /* InputPopover */,
 				F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */,
 				F277525E25C596D80099E995 /* AddPlayers */,
@@ -375,6 +377,15 @@
 				F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */,
 			);
 			path = NewGame;
+			sourceTree = "<group>";
+		};
+		F2C7791825DD5D8700FD3947 /* DecisionAlert */ = {
+			isa = PBXGroup;
+			children = (
+				F25C771125DD1AAF00455B2E /* DecisionAlertViewController.swift */,
+				F2C7791925DD5DB200FD3947 /* DecisionAlertPresentationController.swift */,
+			);
+			path = DecisionAlert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -626,6 +637,7 @@
 				F21171A125C45FFC00880DA4 /* DescribedTextFieldViewModel.swift in Sources */,
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
 				F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */,
+				F2C7791A25DD5DB200FD3947 /* DecisionAlertPresentationController.swift in Sources */,
 				1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */,
 				F252197025CB4AD1008701DD /* DicesBoardView.swift in Sources */,
 				F252196125CB4049008701DD /* DicesViewController.swift in Sources */,
