@@ -31,7 +31,7 @@ enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
 enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
     case scoreChanged(ScoreChangedModel)
     
-    struct ScoreChangedModel { let multiplier: CGFloat? }
+    struct ScoreChangedModel { let score: Int }
     
     func associatedValue() -> Any {
         switch self {

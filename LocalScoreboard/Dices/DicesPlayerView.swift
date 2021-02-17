@@ -71,7 +71,7 @@ class DicesPlayerView: UIView {
             .subscribe(onNext: { view, output in
                 switch output {
                 case .scoreChanged(let output):
-                    view.scoreView.changeScore(heightMultiplier: output.multiplier)
+                    view.scoreView.changeScore(to: output.score)
                 }
             }).disposed(by: disposeBag)
     }

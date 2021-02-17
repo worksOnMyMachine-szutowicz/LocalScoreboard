@@ -29,16 +29,8 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
         input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
             .append(weak: self)
             .do { vm, input in vm.score += input.score }
-            .map { vm, input in Output.scoreChanged(.init(multiplier: vm.calculateMultiplier())) }
+            .map { vm, input in Output.scoreChanged(.init(score: vm.score)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
-    }
-    
-    private func calculateMultiplier() -> CGFloat? {
-        if score < 0 {
-            return nil
-        }
-        let multiplier = CGFloat(score) / 100 / CGFloat(DicesBoardView.Values.numberOfSections)
-        return multiplier
     }
 }

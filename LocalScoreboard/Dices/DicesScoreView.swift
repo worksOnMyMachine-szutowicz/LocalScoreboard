@@ -10,16 +10,19 @@ import UIKit
 
 class DicesScoreView: UIView {
     private let scoreView = UIView()
+    private let scoreLabel = UILabel()
     private let negativeScorePlaceholder = UIView()
     private let positiveScorePlaceholder = UIView()
     
     private var scoreHeight: NSLayoutConstraint?
     private var negativeScorePlaceholderHeight: NSLayoutConstraint?
+    private var scoreLabelVerticalPosition: NSLayoutConstraint?
     
     init() {
         super.init(frame: .zero)
         
         scoreView.backgroundColor = .green
+        scoreLabel.isHidden = true
         
         layout()
     }
@@ -29,8 +32,8 @@ class DicesScoreView: UIView {
     }
     
     private func layout() {
-        addSubviews([scoreView, negativeScorePlaceholder, positiveScorePlaceholder])
-        [scoreView, negativeScorePlaceholder, positiveScorePlaceholder].disableAutoresizingMask()
+        addSubviews([scoreView, scoreLabel, negativeScorePlaceholder, positiveScorePlaceholder])
+        [scoreView, scoreLabel, negativeScorePlaceholder, positiveScorePlaceholder].disableAutoresizingMask()
         
         negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.initialNegativePlaceholderHeightMultiplier)
         negativeScorePlaceholderHeight?.isActive = true
@@ -44,28 +47,57 @@ class DicesScoreView: UIView {
          scoreView.widthAnchor.constraint(equalToConstant: Values.scoreWidth),
          scoreView.topAnchor.constraint(equalTo: negativeScorePlaceholder.bottomAnchor)].activate()
         
+        scoreLabelVerticalPosition = scoreLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor)
+        scoreLabelVerticalPosition?.isActive = true
+        scoreLabel.centerXAnchor.constraint(equalTo: scoreView.rightAnchor).isActive = true
+        
         [positiveScorePlaceholder.centerXAnchor.constraint(equalTo: centerXAnchor),
          positiveScorePlaceholder.widthAnchor.constraint(equalTo: widthAnchor),
          positiveScorePlaceholder.topAnchor.constraint(equalTo: scoreView.bottomAnchor),
          positiveScorePlaceholder.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
     }
     
-    func changeScore(heightMultiplier: CGFloat?) {
-        negativeScorePlaceholderHeight?.isActive = false
-        scoreHeight?.isActive = false
-        if let heightMultiplier = heightMultiplier {
+    func changeScore(to score: Int) {
+        toggleChangeableConstraints()
+        setupScoreLabel(for: score)
+        
+        if let heightMultiplier = calculateHeightMultiplier(score: score) {
             negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.initialNegativePlaceholderHeightMultiplier)
             scoreHeight = scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: heightMultiplier)
+            scoreLabelVerticalPosition = scoreLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor)
         } else {
             negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.halfOfSectionHeight)
             scoreHeight = scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.halfOfSectionHeight)
+            scoreLabelVerticalPosition = scoreLabel.bottomAnchor.constraint(equalTo: scoreView.topAnchor)
         }
-        negativeScorePlaceholderHeight?.isActive = true
-        scoreHeight?.isActive = true
         
+        toggleChangeableConstraints()
         
         UIView.animate(withDuration: ViewConstants.animationTime) { [weak self] () -> Void in
             self?.layoutIfNeeded()
+        }
+    }
+    
+    private func calculateHeightMultiplier(score: Int) -> CGFloat? {
+        if score < 0 {
+            return nil
+        }
+        let multiplier = CGFloat(score) / 100 / CGFloat(DicesBoardView.Values.numberOfSections)
+        return multiplier
+    }
+    
+    private func toggleChangeableConstraints() {
+        negativeScorePlaceholderHeight?.isActive.toggle()
+        scoreHeight?.isActive.toggle()
+        scoreLabelVerticalPosition?.isActive.toggle()
+    }
+    
+    private func setupScoreLabel(for score: Int) {
+        if score != 0 {
+            scoreLabel.attributedText = .init(string: String(score), attributes: ViewConstants.labelAttributes)
+            scoreLabel.isHidden = false
+        } else {
+            scoreLabel.isHidden = true
         }
     }
 }

@@ -31,12 +31,13 @@ class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, Inpu
     }
     
     func validate(score: Int) -> InputPopoverViewModelValidationResultModel {
-        if score == 5 {
-            return .init(resultType: .ok, message: "")
-        } else if score == 10 {
-            return .init(resultType: .warning, message: "Trochę średnio ale jak mocno chcesz to dajesz byczq")
-        } else {
-            return .init(resultType: .error, message: "Nie pykło coś bardzo bardzo bardzo bardzo bardzo bardzo bardzo Nie pykło coś bardzo bardzo bardzo bardzo bardzo bardzo bardzo")
-        }
+        return .init(resultType: .ok, message: "")
+//        if score == 5 {
+//            return .init(resultType: .ok, message: "")
+//        } else if score == 10 {
+//            return .init(resultType: .warning, message: "Trochę średnio ale jak mocno chcesz to dajesz byczq")
+//        } else {
+//            return .init(resultType: .error, message: "Nie pykło coś bardzo bardzo bardzo bardzo bardzo bardzo bardzo Nie pykło coś bardzo bardzo bardzo bardzo bardzo bardzo bardzo")
+//        }
     }
 }
