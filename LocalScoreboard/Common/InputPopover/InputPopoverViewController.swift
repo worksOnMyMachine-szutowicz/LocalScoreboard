@@ -10,18 +10,23 @@ import UIKit
 import RxSwift
 
 class InputPopoverViewController: UIViewController, UIViewControllerTransitioningDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    typealias VMInput = InputPopoverViewModelInput
     private let disposeBag = DisposeBag()
     private let viewModel: InputPopoverViewModelInterface
-    private let completion: ((Int?) -> Void)
+    private let completion: ((Int) -> Void)
     private let titleLabel = UILabel()
     private let pickerView = UIPickerView()
     private let cancelButton = UIButton.stickerButton(title: "global.cancel".localized)
     private let saveButton = UIButton.stickerButton(title: "global.save".localized)
-    private var pickerSelection: (operationSelection: Int, dataSelection: Int) {
-        (pickerView.selectedRow(inComponent: 0), pickerView.selectedRow(inComponent: 1))
+    private var pickerSelections: [Int] {
+        var selections: [Int] = []
+        for i in 0..<viewModel.viewData.scoresSource.count {
+            selections.append(pickerView.selectedRow(inComponent: i))
+        }
+        return selections
     }
 
-    private init(viewModel: InputPopoverViewModelInterface, completion: @escaping ((Int?) -> Void)) {
+    private init(viewModel: InputPopoverViewModelInterface, completion: @escaping ((Int) -> Void)) {
         self.viewModel = viewModel
         self.completion = completion
         
@@ -31,6 +36,7 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
         transitioningDelegate = self
         view.backgroundColor = Colors.background
         titleLabel.attributedText = .init(string: String(format: "inputPopover.title".localized, viewModel.viewData.playerName), attributes: ViewConstants.highlightedLabelAttributes)
+        titleLabel.textAlignment = .center
         pickerView.delegate = self
         pickerView.dataSource = self
         
@@ -96,28 +102,32 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
     
     private func setupBindings() {
         cancelButton.rx.tap
-            .append(weak: self)
-            .subscribe(onNext: { view, _ in
-                view.completion(nil)
-            }).disposed(by: disposeBag)
+            .map { _ in VMInput.cancelButtonTapped(.init()) }
+            .bind(to: viewModel.input)
+            .disposed(by: disposeBag)
         
         saveButton.rx.tap
             .append(weak: self)
-            .subscribe(onNext: { view, _ in
-                let score = view.viewModel.calculateScoreFor(operationSelection: view.pickerSelection.operationSelection, dataSelection: view.pickerSelection.dataSelection)
-                view.completion(score)
+            .map { vc, _ in VMInput.saveButtonTapped(.init(selections: vc.pickerSelections)) }
+            .bind(to: viewModel.input)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.asObservable()
+            .append(weak: self)
+            .subscribe(onNext: { vc, output in
+                switch output {
+                case .finishWithScore(let output):
+                    vc.completion(output.score)
+                }
             }).disposed(by: disposeBag)
     }
 }
 
 extension InputPopoverViewController {
-    static func showInController(with viewModel: InputPopoverViewModel, in controller: UIViewController) -> Observable<Int> {
+    static func showInController(with viewModel: InputPopoverViewModelInterface, in controller: UIViewController) -> Observable<Int> {
         return Observable.create { [weak controller] observer in
             let inputPopoverController = InputPopoverViewController(viewModel: viewModel, completion: { input in
-                if let input = input {
-                    observer.onNext(input)
-                }
-                
+                observer.onNext(input)
                 observer.onCompleted()
             })
 

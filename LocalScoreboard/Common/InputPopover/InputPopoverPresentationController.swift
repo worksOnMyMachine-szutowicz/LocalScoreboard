@@ -13,7 +13,7 @@ class InputPopoverPresentationController: UIPresentationController {
     
     override var frameOfPresentedViewInContainerView: CGRect {
         let bounds = presentingViewController.view.bounds
-        let size = CGSize(width: bounds.width, height: Values.presentationHeight)
+        let size = CGSize(width: bounds.width, height: bounds.height * Values.heightMultiplier)
         let origin = CGPoint(x: 0, y: bounds.maxY - size.height)
         
         return CGRect(origin: origin, size: size)
@@ -55,6 +55,6 @@ class InputPopoverPresentationController: UIPresentationController {
 
 extension InputPopoverPresentationController {
     private struct Values {
-        static let presentationHeight: CGFloat = 300
+        static let heightMultiplier: CGFloat = 1/3
     }
 }

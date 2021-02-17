@@ -46,7 +46,8 @@
 		F252197525CB4B2E008701DD /* DicesBoardSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */; };
 		F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F25A91B925C157B6002B9C51 /* Localizable.strings */; };
 		F25C76DE25DC53CC00455B2E /* InputPopoverPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C76DD25DC53CC00455B2E /* InputPopoverPresentationController.swift */; };
-		F25C76F225DC6CF700455B2E /* InputPopoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C76F125DC6CF700455B2E /* InputPopoverViewModel.swift */; };
+		F25C76F225DC6CF700455B2E /* InputPopoverViewModelBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C76F125DC6CF700455B2E /* InputPopoverViewModelBinder.swift */; };
+		F25C770525DD071400455B2E /* DicesInputPopoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C770425DD071300455B2E /* DicesInputPopoverViewModel.swift */; };
 		F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
@@ -128,7 +129,8 @@
 		F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardSectionView.swift; sourceTree = "<group>"; };
 		F25A91B825C157B6002B9C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F25C76DD25DC53CC00455B2E /* InputPopoverPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverPresentationController.swift; sourceTree = "<group>"; };
-		F25C76F125DC6CF700455B2E /* InputPopoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverViewModel.swift; sourceTree = "<group>"; };
+		F25C76F125DC6CF700455B2E /* InputPopoverViewModelBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverViewModelBinder.swift; sourceTree = "<group>"; };
+		F25C770425DD071300455B2E /* DicesInputPopoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesInputPopoverViewModel.swift; sourceTree = "<group>"; };
 		F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+StickerButton.swift"; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				F248596225D104C900F8EB1E /* DicesPlayerViewModelInterface.swift */,
 				F248596725D105F200F8EB1E /* DicesFactory.swift */,
 				F2EDF60A25D461E900835288 /* DicesScoreView.swift */,
+				F25C770425DD071300455B2E /* DicesInputPopoverViewModel.swift */,
 			);
 			path = Dices;
 			sourceTree = "<group>";
@@ -306,7 +309,7 @@
 			children = (
 				F20E57EC25DAD80B006F0BD0 /* InputPopoverViewController.swift */,
 				F25C76DD25DC53CC00455B2E /* InputPopoverPresentationController.swift */,
-				F25C76F125DC6CF700455B2E /* InputPopoverViewModel.swift */,
+				F25C76F125DC6CF700455B2E /* InputPopoverViewModelBinder.swift */,
 			);
 			path = InputPopover;
 			sourceTree = "<group>";
@@ -596,7 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BB12C16C2BB1B6A11C81E2A /* AppDelegate.swift in Sources */,
-				F25C76F225DC6CF700455B2E /* InputPopoverViewModel.swift in Sources */,
+				F25C76F225DC6CF700455B2E /* InputPopoverViewModelBinder.swift in Sources */,
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
 				F2EDF60B25D461E900835288 /* DicesScoreView.swift in Sources */,
 				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
@@ -632,6 +635,7 @@
 				1BB12108DA0B7B9EC4A94EFD /* AddPlayersView.swift in Sources */,
 				F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */,
 				F21171A625C4618200880DA4 /* DescribedTextFileViewModelInterface.swift in Sources */,
+				F25C770525DD071400455B2E /* DicesInputPopoverViewModel.swift in Sources */,
 				F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */,
 				F248595E25D104B000F8EB1E /* DicesPlayerViewModel.swift in Sources */,
 				F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */,

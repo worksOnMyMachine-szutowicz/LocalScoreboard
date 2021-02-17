@@ -44,6 +44,6 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, Di
     }
     
     func showAddScoreView(for player: String) -> Observable<Int> {
-        InputPopoverViewController.showInController(with: .forDices(player: player), in: navigationController)
+        InputPopoverViewController.showInController(with: DicesInputPopoverViewModel(playerName: player), in: navigationController)
     }
 }
