@@ -20,10 +20,38 @@
 
 //1000 Dices
 "1000dices.title" = "1000 Dices";
-"1000dices.description" = "Roll dices, create structures and be the first one to get 1000 points!";
+"1000dices.description" = "Roll the dices, create structures and be the first one to score 1000 points!";
 "1000dices.rules.requirements.title" = "Requirements";
-"1000dices.rules.requirements.content" = "5 dices";
+"1000dices.rules.requirements.content" = "You need 5 dices, that's it! Some friend or few to roll the with You would be nice too.";
 "1000dices.rules.objective.title" = "Objective";
-"1000dices.rules.objective.content" = "Be first to get 1000 points";
-"1000dices.rules.rules.title" = "Rules";
-"1000dices.rules.rules.content" = "list \nof \nrulesRoll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!Roll dices, create structures and be the first one to get 1000 points!";
+"1000dices.rules.objective.content" = "Be the first one to collect 1000 points.";
+"1000dices.rules.generalRules.title" = "General rules";
+"1000dices.rules.generalRules.content" = "Player's turn is to roll the dices and combine the scoring ones. When You would roll one or more scoring ones You MAY push Your luck and roll once again leaving at least one dice behind. In case when You managed to make all five dices scoring You MUST roll again with all five dices, keeping in mind already gathered score. Turn ends when player didn't roll any of scoring dices in the last roll, which leaves him with score 0 and phase-specific punishment, or when he wishes to submit his current score instead of rerolling. Current score is sum of phase-specific values of already rolled scoring dices. Game is divided into two phases described in detail below.
+Terminology:
+Rolled dice with single dot on the top -> 1.
+Rolled dice with two dots on the top -> 2.
+Rolled dice with three dots on the top -> 3.
+...
+Rolled dice with six dots on the top -> 6.";
+"1000dices.rules.phaseOneRules.title" = "Phase One rules";
+"1000dices.rules.phaseOneRules.content" = "In order to win the game player has to enter it first. In Phase One You need to score at least 50 points in single turn to start Phase Two with 0 points and finish Phase One. Any surplus over the minimum 50 will be added to the initial score. The trick is, that the only scoring dices are 1. (10 points) and 5. (5 points). However, there's no real punishment for not getting any scoring dice in each roll, beside loosing the turn ofcourse. So manage Your rerolls wisely and You will get there sooner rather than later!";
+"1000dices.rules.phaseTwoRules.title" = "Phase Two rules";
+"1000dices.rules.phaseTwoRules.content" = "In Phase two things get a little tricky. It lasts for the rest of the game, which means many points need to be collected. Luckly, beside scoring rules from Phase One, Phase Two comes with so called structures. Structures are simply three or more dices which have been rolled with the same number in SINGLE ROLL. Once rolled structure cannot be divided. Their score can be counted using following equastion:
+Rn * 10 * 2^Ssd
+where Rn stands for \"Rolled number\" and Ssd for \"Surplus structure dices\"
+Here are few examples:
+3. 3. 3. 6. 2. -> 30
+4. 4. 4. 4. 4. -> 160
+1. 1. 1. 1. 3. -> 200
+And adding scoring rules from Phase one:
+2. 2. 2. 5. 3. -> 25
+3. 3. 3. 5. 5. -> 40
+6. 6. 6. 6. 1. -> 130
+
+The goods of Phase Two has been discovered, but what would they be without a bit of bitterness? Here's the list:
+1. Punishment for not rolling any scoring dice in FIRST roll of the turn is -10 points
+2. After surpassing 100 points mark watchout for Your playmates! When any of them IS SURPASSING Your current score You will get burdened with -100 points. However, if they would align with Your exact score noone would get taxed.
+3. There are two passages on the way to 1000 points: from 300 to 400 points and from 700 to 800 points, where boundaries are excluded. Passage means that You must not sumbit more than one score during the passage. So this basically means that You are enforced to make a one big leap instead of many little steps.
+4. You must get exact 1000 points. You won't be able to submit more.
+
+Good Luck!";

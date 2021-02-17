@@ -20,6 +20,7 @@ class TitledSectionView: UIView {
         titleLabel.attributedText = .init(string: viewData.titleLabelText, attributes: ViewConstants.highlightedLabelAttributes)
         contentLabel.attributedText = .init(string: viewData.contentLabelText, attributes: ViewConstants.labelAttributes)
         contentLabel.numberOfLines = 0
+        contentLabel.textAlignment = .justified
         
         layout()
     }

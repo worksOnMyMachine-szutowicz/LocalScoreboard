@@ -29,7 +29,7 @@ extension GameHeaderView.ViewData {
 }
 
 extension RulesViewController.ViewData {
-    static let thousandDices = RulesViewController.ViewData(header: .thousandDices, sections: [.thousandDiceRequirements, .thousandDiceObjective, .thousandDiceRules])
+    static let thousandDices = RulesViewController.ViewData(header: .thousandDices, sections: [.thousandDiceRequirements, .thousandDiceObjective, .thousandDiceGeneralRules, .thousandDicePhaseOneRules, .thousandDicePhaseTwoRules])
 }
 
 extension TitledSectionView.ViewData {
@@ -37,5 +37,9 @@ extension TitledSectionView.ViewData {
     
     static let thousandDiceObjective = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.objective.title".localized, contentLabelText: "1000dices.rules.objective.content".localized)
     
-    static let thousandDiceRules = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.rules.title".localized, contentLabelText: "1000dices.rules.rules.content".localized)
+    static let thousandDiceGeneralRules = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.generalRules.title".localized, contentLabelText: "1000dices.rules.generalRules.content".localized)
+    
+    static let thousandDicePhaseOneRules = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.phaseOneRules.title".localized, contentLabelText: "1000dices.rules.phaseOneRules.content".localized)
+    
+    static let thousandDicePhaseTwoRules = TitledSectionView.ViewData(titleLabelText: "1000dices.rules.phaseTwoRules.title".localized, contentLabelText: "1000dices.rules.phaseTwoRules.content".localized)
 }
