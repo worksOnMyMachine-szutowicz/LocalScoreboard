@@ -10,7 +10,7 @@ protocol AppCoordinatorInterface {
     func start()
 }
 
-class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, DicesViewControllerDelegate, DicesPlayerViewDelegate {
+class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, DicesViewControllerDelegate, DicesPlayerViewDelegate, InputPopoverViewControllerDelegate {
     private let window: UIWindow
     private let navigationController: UINavigationController
     private let viewControllerFactory: ViewControllerFactoryProtocol
@@ -44,6 +44,16 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, Di
     }
     
     func showAddScoreView(for player: String) -> Observable<Int> {
-        InputPopoverViewController.showInController(viewModel: DicesInputPopoverViewModel(playerName: player), in: navigationController)
+        let inputPopoverController = InputPopoverViewController(viewModel: DicesInputPopoverViewModel(playerName: player), delegate: self)
+        navigationController.present(inputPopoverController, animated: true, completion: nil)
+        
+        return inputPopoverController.rx.output
+    }
+    
+    func showInputWarning(with viewData: DecisionAlertViewController.ViewData, on vc: UIViewController) -> Observable<DecisionAlertViewController.Decision> {
+        let decisionAlertController = DecisionAlertViewController(viewData: viewData)
+        vc.present(decisionAlertController, animated: true, completion: nil)
+        
+        return decisionAlertController.rx.output
     }
 }

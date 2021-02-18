@@ -73,7 +73,7 @@ class DicesScoreView: UIView {
         
         toggleChangeableConstraints()
         
-        UIView.animate(withDuration: ViewConstants.animationTime) { [weak self] () -> Void in
+        UIView.animate(withDuration: Values.animationTime.secondsValue) { [weak self] () -> Void in
             self?.layoutIfNeeded()
         }
     }
@@ -103,10 +103,14 @@ class DicesScoreView: UIView {
 }
 
 extension DicesScoreView {
-    private struct Values {
-        static let scoreWidth: CGFloat = 40
-        static let initialScoreHeightMultiplier: CGFloat = 0
-        static let initialNegativePlaceholderHeightMultiplier: CGFloat = 1 / CGFloat(DicesBoardView.Values.numberOfSections)
-        static let halfOfSectionHeight: CGFloat = 1 / 2 / CGFloat(DicesBoardView.Values.numberOfSections)
+    struct Values {
+        static var animationTime: (secondsValue: Double, milisecondsValue: Int) {
+            (animationDuration, Int(animationDuration * 1000))
+        }
+        private static let animationDuration: Double = 0.01
+        fileprivate static let scoreWidth: CGFloat = 40
+        fileprivate static let initialScoreHeightMultiplier: CGFloat = 0
+        fileprivate static let initialNegativePlaceholderHeightMultiplier: CGFloat = 1 / CGFloat(DicesBoardView.Values.numberOfSections)
+        fileprivate static let halfOfSectionHeight: CGFloat = 1 / 2 / CGFloat(DicesBoardView.Values.numberOfSections)
     }
 }

@@ -9,12 +9,17 @@
 import UIKit
 import RxSwift
 
-class InputPopoverViewController: UIViewController, UIViewControllerTransitioningDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+protocol InputPopoverViewControllerDelegate: class {
+    func showInputWarning(with viewData: DecisionAlertViewController.ViewData, on vc: UIViewController) -> Observable<DecisionAlertViewController.Decision>
+}
+
+class InputPopoverViewController: UIViewController, OutputableViewController, UIViewControllerTransitioningDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    typealias Output = Int
     typealias VMInput = InputPopoverViewModelInput
     typealias VMOutput = InputPopoverViewModelOutput
     private let disposeBag = DisposeBag()
     private let viewModel: InputPopoverViewModelInterface
-    private let completion: ((Int) -> Void)
+    private weak var delegate: InputPopoverViewControllerDelegate?
     private let titleLabel = UILabel()
     private let pickerView = UIPickerView()
     private let errorLabel = UILabel()
@@ -27,10 +32,12 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
         }
         return selections
     }
+    
+    var outputSubject: PublishSubject<Output> = . init()
 
-    private init(viewModel: InputPopoverViewModelInterface, completion: @escaping ((Int) -> Void)) {
+    init(viewModel: InputPopoverViewModelInterface, delegate: InputPopoverViewControllerDelegate) {
         self.viewModel = viewModel
-        self.completion = completion
+        self.delegate = delegate
         
         super.init(nibName: nil, bundle: nil)
         
@@ -125,24 +132,22 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
             .disposed(by: disposeBag)
         
         viewModel.output.asObservable().filterByAssociatedType(VMOutput.FinishWithScoreModel.self)
-            .append(weak: self)
-            .subscribe(onNext: { vc, output in
-                vc.errorLabel.isHidden = true
-                vc.completion(output.score)
-            }).disposed(by: disposeBag)
+            .map { $0.score }
+            .bind(to: outputSubject)
+            .disposed(by: disposeBag)
         
         viewModel.output.asObservable().filterByAssociatedType(VMOutput.ShowWarningModel.self)
             .append(weak: self)
             .flatMapLatest { vc, output -> Observable<(DecisionAlertViewController.Decision, Int)> in
                 vc.errorLabel.isHidden = true
+                guard let delegate = vc.delegate else { return .empty() }
                 
-                let decision = DecisionAlertViewController.showAlertInController(with: .init(title: "global.warning".localized, message: output.message), in: vc)
+                let decision = delegate.showInputWarning(with: .init(title: "global.warning".localized, message: output.message), on: vc)
                 return Observable.zip(decision, Observable.just(output.score))
             }.filter { $0.0 == .ok }
-            .append(weak: self)
-            .subscribe(onNext: { vc, output in
-                vc.completion(output.1)
-            }).disposed(by: disposeBag)
+            .map { $0.1 }
+            .bind(to: outputSubject)
+            .disposed(by: disposeBag)
         
         viewModel.output.asObservable().filterByAssociatedType(VMOutput.ValidationErrorModel.self)
             .append(weak: self)
@@ -150,23 +155,6 @@ class InputPopoverViewController: UIViewController, UIViewControllerTransitionin
                 vc.errorLabel.isHidden = false
                 vc.errorLabel.attributedText = .init(string: output.message, attributes: ViewConstants.errorLabelAttributes)
             }).disposed(by: disposeBag)
-    }
-}
-
-extension InputPopoverViewController {
-    static func showInController(viewModel: InputPopoverViewModelInterface, in controller: UIViewController) -> Observable<Int> {
-        return Observable.create { [weak controller] observer in
-            let inputPopoverController = InputPopoverViewController(viewModel: viewModel, completion: { input in
-                observer.onNext(input)
-                observer.onCompleted()
-            })
-
-            controller?.present(inputPopoverController, animated: true, completion: nil)
-            
-            return Disposables.create { [weak controller] in
-                controller?.dismiss(animated: true, completion: nil)
-            }
-        }
     }
 }
 

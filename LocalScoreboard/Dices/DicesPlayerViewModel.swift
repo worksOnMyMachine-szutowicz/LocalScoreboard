@@ -28,8 +28,23 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     private func setupBindings() {
         input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
             .append(weak: self)
-            .do { vm, input in vm.score += input.score }
-            .map { vm, input in Output.scoreChanged(.init(score: vm.score)) }
+            .map { vc, input -> [Output] in
+                let newScore = vc.score + input.score
+                let stepScores = Array(min(vc.score, newScore)...max(vc.score, newScore))
+                    .sorted { abs($0.distance(to: vc.score)) < abs($1.distance(to: vc.score)) }
+                    .map { Output.scoreChanged(.init(score: $0)) }
+                vc.score = newScore
+                
+                return stepScores
+            }
+            .append(weak: self)
+            .flatMapLatest { vc, stepOutput -> Observable<(Int, DicesPlayerViewModel.Output)> in
+                let delayer = Observable<Int>.interval(.milliseconds(DicesScoreView.Values.animationTime.milisecondsValue), scheduler: MainScheduler.instance)
+                let output =  Observable.range(start: 0, count: stepOutput.count)
+                    .map { stepOutput[$0] }
+                
+                return Observable.zip(delayer, output)
+            }.map { $0.1 }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
     }

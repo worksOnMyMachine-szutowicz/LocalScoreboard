@@ -9,9 +9,9 @@
 import UIKit
 import RxSwift
 
-class DecisionAlertViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class DecisionAlertViewController: UIViewController, OutputableViewController, UIViewControllerTransitioningDelegate {
+    typealias Output = Decision
     private let disposeBag = DisposeBag()
-    private let completion: ((Decision) -> Void)
     private let titleLabel = UILabel()
     private let messageLabel = UILabel()
     private let cancelButton = UIButton.stickerButton(title: Decision.cancel.localized)
@@ -19,9 +19,9 @@ class DecisionAlertViewController: UIViewController, UIViewControllerTransitioni
     private let verticalButtonsSeparator = UIView()
     private let horizontalButtonsSeparator = UIView()
     
-    private init(viewData: ViewData, completion: @escaping ((Decision) -> Void)) {
-        self.completion = completion
-        
+    var outputSubject: PublishSubject<Output> = .init()
+    
+    init(viewData: ViewData) {
         super.init(nibName: nil, bundle: nil)
         
         modalPresentationStyle = .custom
@@ -93,31 +93,14 @@ class DecisionAlertViewController: UIViewController, UIViewControllerTransitioni
     
     private func setupBindings() {
         cancelButton.rx.tap
-            .append(weak: self)
-            .subscribe(onNext: { vc, _ in vc.completion(.cancel) })
+            .map { _ in Decision.cancel }
+            .bind(to: outputSubject)
             .disposed(by: disposeBag)
             
         okButton.rx.tap
-            .append(weak: self)
-            .subscribe(onNext: { vc, _ in vc.completion(.ok) })
+            .map { _ in Decision.ok }
+            .bind(to: outputSubject)
             .disposed(by: disposeBag)
-    }
-}
-
-extension DecisionAlertViewController {
-    static func showAlertInController(with viewData: ViewData, in controller: UIViewController) -> Observable<Decision> {
-        return Observable.create { [weak controller] observer in
-            let alertController = DecisionAlertViewController(viewData: viewData, completion: { decision in
-                observer.onNext(decision)
-                observer.onCompleted()
-            })
-
-            controller?.present(alertController, animated: true, completion: nil)
-            
-            return Disposables.create { [weak controller] in
-                controller?.dismiss(animated: true, completion: nil)
-            }
-        }
     }
 }
 

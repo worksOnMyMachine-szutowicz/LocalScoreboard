@@ -14,7 +14,7 @@
 "newGame.addPlayer.delete" = "-";
 "newGame.play" = "Let's Play!";
 
-"inputPopover.title" = "Add roll score for: %@";
+"inputPopover.title" = "Add score for: %@";
 
 //Games data
 
