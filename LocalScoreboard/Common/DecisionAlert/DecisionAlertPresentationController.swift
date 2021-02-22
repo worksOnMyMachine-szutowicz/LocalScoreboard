@@ -12,7 +12,7 @@ class DecisionAlertPresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         let bounds = presentingViewController.view.bounds
         let size = CGSize(width: Values.width, height: Values.height)
-        let origin = CGPoint(x: bounds.midX - 1/2 * Values.width, y: bounds.midY + 1/2 * Values.height)
+        let origin = CGPoint(x: bounds.midX - 1/2 * Values.width, y: bounds.midY)
         
         return CGRect(origin: origin, size: size)
     }
@@ -21,6 +21,6 @@ class DecisionAlertPresentationController: UIPresentationController {
 extension DecisionAlertPresentationController {
     private struct Values {
         static let width: CGFloat = 300
-        static let height: CGFloat = 200
+        static let height: CGFloat = 300
     }
 }

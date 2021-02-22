@@ -16,9 +16,17 @@ class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, Inpu
     
     private let operations: [(description: String, operation: ((Int) -> Int))] = [("global.+".localized, { $0 }), ("global.-".localized, { -$0 })]
     private let data: [Int] = Array(stride(from: 5, to: 1000, by: 5))
+    private let gamePhase: DicesPlayerViewModel.GamePhase
+    private let currentScore: Int
     
-    init(playerName: String) {
+    private let phaseOneTax = 50
+    private let firstPassage = 301..<400
+    private let secondPassage = 701..<800
+    
+    init(playerName: String, gamePhase: DicesPlayerViewModel.GamePhase, currentScore: Int) {
         viewData = .init(playerName: playerName, scoresSource: [operations.map { $0.description }, data.map { String($0) }])
+        self.gamePhase = gamePhase
+        self.currentScore = currentScore
         
         super.init()
         setupBindigs()
@@ -31,13 +39,65 @@ class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, Inpu
     }
     
     func validate(score: Int) -> InputPopoverViewModelValidationResultModel {
-        return .init(resultType: .ok, message: "")
-//        if score == 5 {
-//            return .init(resultType: .ok, message: "")
-//        } else if score == 10 {
-//            return .init(resultType: .warning, message: "Trochę średnio ale jak mocno chcesz to dajesz byczq")
-//        } else {
-//            return .init(resultType: .error, message: "Nie pykło coś bardzo bardzo bardzo bardzo bardzo bardzo bardzo Nie pykło coś bardzo bardzo bardzo bardzo bardzo bardzo bardzo")
-//        }
+        switch (gamePhase: gamePhase, currentScore: currentScore, score: score) {
+            // .error
+            case let scoreData where isPhaseOneError(gamePhase: scoreData.gamePhase, score: scoreData.score):
+                return .init(resultType: .error, message: String(format: "1000dices.input.error.phaseOne".localized, arguments: [String(phaseOneTax)]))
+            case let scoreData where isOnPassage(currentScore: scoreData.currentScore, score: scoreData.score):
+                return .init(resultType: .error, message: "1000dices.input.error.passage".localized)
+            case let scoreData where isSurplus(currentScore: scoreData.currentScore, score: scoreData.score):
+                return .init(resultType: .error, message: "1000dices.input.error.surplus".localized)
+                
+            // .warning
+            case let scoreData where isUnsafelyEnteringPassage(currentScore: scoreData.currentScore, score: scoreData.score):
+                return .init(score: score, resultType: .warning, message: String(format: "1000dices.input.warning.passage".localized, arguments: [String(score), String((currentScore + score).distanceToNearestHundred)]))
+        
+            // .ok
+            case let scoreData where isPhaseOneCompleted(gamePhase: scoreData.gamePhase, score: scoreData.score):
+                return .init(score: score - phaseOneTax, resultType: .ok, message: "")
+            default:
+                return .init(score: score, resultType: .ok, message: "")
+        }
+    }
+    
+    // .error
+    private func isPhaseOneError(gamePhase: DicesPlayerViewModel.GamePhase, score: Int) -> Bool {
+        gamePhase == .phaseOne && score < phaseOneTax
+    }
+    
+    private func isOnPassage(currentScore: Int, score: Int) -> Bool {
+        guard score > 0 else { return false }
+
+        return firstPassage.contains(currentScore) && firstPassage.contains(currentScore + score) ||
+            secondPassage.contains(currentScore) && secondPassage.contains(currentScore + score)
+    }
+    
+    private func isSurplus(currentScore: Int, score: Int) -> Bool {
+        currentScore + score > 1000
+    }
+    
+    // .warning
+    private func isUnsafelyEnteringPassage(currentScore: Int, score: Int) -> Bool {
+        guard score > 0 else { return false }
+        
+        return firstPassage.firstHalf.contains(currentScore + score) ||
+            secondPassage.firstHalf.contains(currentScore + score)
+    }
+    
+    // .ok
+    private func isPhaseOneCompleted(gamePhase: DicesPlayerViewModel.GamePhase, score: Int) -> Bool {
+        gamePhase == .phaseOne && score >= phaseOneTax
+    }
+}
+
+private extension Range where Bound == Int {
+    var firstHalf: Range<Int> {
+        self[startIndex]..<(self[startIndex] + count/2)
+    }
+}
+
+private extension Int {
+    var distanceToNearestHundred: Int {
+        100 - (self % 100)
     }
 }

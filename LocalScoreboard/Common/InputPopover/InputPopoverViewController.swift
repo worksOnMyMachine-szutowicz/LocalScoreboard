@@ -14,7 +14,7 @@ protocol InputPopoverViewControllerDelegate: class {
 }
 
 class InputPopoverViewController: UIViewController, OutputableViewController, UIViewControllerTransitioningDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-    typealias Output = Int
+    typealias Output = Int?
     typealias VMInput = InputPopoverViewModelInput
     typealias VMOutput = InputPopoverViewModelOutput
     private let disposeBag = DisposeBag()
@@ -110,7 +110,7 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
         [errorLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.labelPadding),
          errorLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.labelPadding),
          errorLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -Values.labelPadding),
-         errorLabel.heightAnchor.constraint(equalToConstant: Values.labelHeight)].activate()
+         errorLabel.heightAnchor.constraint(equalToConstant: Values.errorLabelHeight)].activate()
         
         [cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
@@ -163,6 +163,7 @@ extension InputPopoverViewController {
         static let cornerRadius: CGFloat = 20
         static let labelPadding: CGFloat = 20
         static let labelHeight: CGFloat = 40
+        static let errorLabelHeight: CGFloat = 60
         static let pickerItemPadding: CGFloat = 20
     }
     struct ViewData {

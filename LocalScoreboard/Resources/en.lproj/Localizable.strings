@@ -55,3 +55,10 @@ The goods of Phase Two has been discovered, but what would they be without a bit
 4. You must get exact 1000 points. You won't be able to submit more.
 
 Good Luck!";
+"1000dices.input.error.phaseOne" = "You need to score at least %@ points to get into the game!
+See Rules -> Phase One for more info";
+"1000dices.input.error.passage" = "You are on passage!
+See Rules -> Phase Two -> Point 3. for more info";
+"1000dices.input.error.surplus" = "You can't exceed 1000 points!
+See Rules -> Phase Two -> Point 4. for more info";
+"1000dices.input.warning.passage" = "You are about to submit %@ points which will place You in the lower half of the passage. It means that You'll need to score at least %@ points in next turn. Are You sure?";

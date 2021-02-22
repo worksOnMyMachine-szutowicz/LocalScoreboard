@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 protocol DicesPlayerViewDelegate: class {
-    func showAddScoreView(for player: String) -> Observable<Int>
+    func showAddScoreView(for viewModel: InputPopoverViewModelInterface) -> Observable<Int?>
 }
 
 class DicesPlayerView: UIView {
@@ -57,22 +57,24 @@ class DicesPlayerView: UIView {
     
     private func setupBindings() {
         button.rx.tap
+            .map { _ in VMInput.addScoreTapped(.init()) }
+            .bind(to: viewModel.input)
+            .disposed(by: disposeBag)
+
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.ShowInputPopoverModel.self)
             .append(weak: self)
-            .flatMapLatest { view, _ -> Observable<Int> in
+            .flatMapFirst { view, output -> Observable<Int?> in
                 guard let delegate = view.delegate else { return .empty() }
-                return delegate.showAddScoreView(for: view.viewModel.viewData.name)
-            }
+                return delegate.showAddScoreView(for: output.inputPopoverViewModel)
+            }.compactMap { $0 }
             .map { VMInput.addScore(.init(score: $0)) }
             .bind(to: viewModel.input)
             .disposed(by: disposeBag)
         
-        viewModel.output.asObservable()
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.ScoreChangedModel.self)
             .append(weak: self)
             .subscribe(onNext: { view, output in
-                switch output {
-                case .scoreChanged(let output):
-                    view.scoreView.changeScore(to: output.score)
-                }
+                view.scoreView.changeScore(to: output.score)
             }).disposed(by: disposeBag)
     }
 }

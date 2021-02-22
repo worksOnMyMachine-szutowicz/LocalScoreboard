@@ -43,15 +43,15 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, Di
         navigationController.setViewControllers([viewControllerFactory.createNewGameViewController(delegate: self)], animated: true)
     }
     
-    func showAddScoreView(for player: String) -> Observable<Int> {
-        let inputPopoverController = InputPopoverViewController(viewModel: DicesInputPopoverViewModel(playerName: player), delegate: self)
+    func showAddScoreView(for viewModel: InputPopoverViewModelInterface) -> Observable<Int?> {
+        let inputPopoverController = viewControllerFactory.createInputPopoverViewController(viewModel: viewModel, delegate: self)
         navigationController.present(inputPopoverController, animated: true, completion: nil)
         
         return inputPopoverController.rx.output
     }
     
     func showInputWarning(with viewData: DecisionAlertViewController.ViewData, on vc: UIViewController) -> Observable<DecisionAlertViewController.Decision> {
-        let decisionAlertController = DecisionAlertViewController(viewData: viewData)
+        let decisionAlertController = viewControllerFactory.createDecisionAlertViewController(viewData: viewData)
         vc.present(decisionAlertController, animated: true, completion: nil)
         
         return decisionAlertController.rx.output

@@ -15,6 +15,7 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     }
     var viewData: DicesPlayerView.ViewData
     
+    private var gamePhase: GamePhase = .phaseOne
     private var score: Int = 0
     
     init(viewData: DicesPlayerView.ViewData) {
@@ -26,6 +27,13 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     }
     
     private func setupBindings() {
+        input.asObservable().filterByAssociatedType(Input.AddScoreTappedModel.self)
+            .append(weak: self)
+            .map { vm, _ in DicesInputPopoverViewModel(playerName: vm.viewData.name, gamePhase: vm.gamePhase, currentScore: vm.score) }
+            .map { Output.showInputPopover(.init(inputPopoverViewModel: $0)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
         input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
             .append(weak: self)
             .map { vc, input -> [Output] in
@@ -33,8 +41,9 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
                 let stepScores = Array(min(vc.score, newScore)...max(vc.score, newScore))
                     .sorted { abs($0.distance(to: vc.score)) < abs($1.distance(to: vc.score)) }
                     .map { Output.scoreChanged(.init(score: $0)) }
-                vc.score = newScore
                 
+                vc.score = newScore
+                vc.gamePhase = .phaseTwo
                 return stepScores
             }
             .append(weak: self)
@@ -49,3 +58,11 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .disposed(by: disposeBag)
     }
 }
+
+extension DicesPlayerViewModel {
+    enum GamePhase {
+        case phaseOne
+        case phaseTwo
+    }
+}
+

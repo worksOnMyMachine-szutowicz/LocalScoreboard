@@ -16,12 +16,16 @@ protocol DicesPlayerViewModelInterface {
 }
 
 enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
+    case addScoreTapped(AddScoreTappedModel)
     case addScore(AddScoreModel)
     
+    struct AddScoreTappedModel { }
     struct AddScoreModel { let score: Int }
     
     func associatedValue() -> Any {
         switch self {
+        case .addScoreTapped(let associatedValue):
+            return associatedValue
         case .addScore(let associatedValue):
             return associatedValue
         }
@@ -29,12 +33,16 @@ enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
 }
 
 enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
+    case showInputPopover(ShowInputPopoverModel)
     case scoreChanged(ScoreChangedModel)
     
+    struct ShowInputPopoverModel { let inputPopoverViewModel: InputPopoverViewModelInterface}
     struct ScoreChangedModel { let score: Int }
     
     func associatedValue() -> Any {
         switch self {
+        case .showInputPopover(let associatedValue):
+            return associatedValue
         case .scoreChanged(let associatedValue):
             return associatedValue
         }

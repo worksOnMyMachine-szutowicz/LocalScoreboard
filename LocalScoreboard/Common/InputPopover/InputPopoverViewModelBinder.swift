@@ -38,7 +38,7 @@ enum InputPopoverViewModelOutput: EnumWithAssociatedValue {
     case showWarning(ShowWarningModel)
     case validationError(ValidationErrorModel)
     
-    struct FinishWithScoreModel { let score: Int }
+    struct FinishWithScoreModel { let score: Int? }
     struct ShowWarningModel {
         let score: Int
         let message: String
@@ -63,8 +63,18 @@ struct InputPopoverViewModelValidationResultModel {
         case warning
         case error
     }
+    private let score: Int?
     let resultType: ResultType
     let message: String
+    var obtainedScore: Int {
+        score ?? 0
+    }
+    
+    init(score: Int? = nil, resultType: ResultType, message: String) {
+        self.score = score
+        self.resultType = resultType
+        self.message = message
+    }
 }
 
 protocol InputPopoverViewModelProtocol: RxInputOutput<InputPopoverViewModelInput, InputPopoverViewModelOutput> {
@@ -77,7 +87,7 @@ protocol InputPopoverViewModelBinder: InputPopoverViewModelProtocol, InputPopove
 extension InputPopoverViewModelBinder {
     func setupBindigs() {
         input.asObservable().filterByAssociatedType(Input.CancelButtonTappedModel.self)
-            .map { _ in Output.finishWithScore(.init(score: 0)) }
+            .map { _ in Output.finishWithScore(.init(score: nil)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
             
@@ -85,24 +95,24 @@ extension InputPopoverViewModelBinder {
             .append(weak: self)
             .map { vm, input in vm.calculateScoreFor(selections: input.selections) }
             .append(weak: self)
-            .map { vm, score in (validationResult: vm.validate(score: score), score: score) }
+            .map { vm, score in vm.validate(score: score) }
             .share()
         
         validationResult
-            .filter { $0.validationResult.resultType == .ok }
-            .map { Output.finishWithScore(.init(score: $0.score)) }
+            .filter { $0.resultType == .ok }
+            .map { Output.finishWithScore(.init(score: $0.obtainedScore)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
         
         validationResult
-            .filter { $0.validationResult.resultType == .warning }
-            .map { Output.showWarning(.init(score: $0.score, message: $0.validationResult.message)) }
+            .filter { $0.resultType == .warning }
+            .map { Output.showWarning(.init(score: $0.obtainedScore, message: $0.message)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
         
         validationResult
-            .filter { $0.validationResult.resultType == .error }
-            .map { Output.validationError(.init(message: $0.validationResult.message)) }
+            .filter { $0.resultType == .error }
+            .map { Output.validationError(.init(message: $0.message)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
     }

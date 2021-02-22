@@ -47,9 +47,9 @@ class DicesScoreView: UIView {
          scoreView.widthAnchor.constraint(equalToConstant: Values.scoreWidth),
          scoreView.topAnchor.constraint(equalTo: negativeScorePlaceholder.bottomAnchor)].activate()
         
-        scoreLabelVerticalPosition = scoreLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor)
+        scoreLabelVerticalPosition = scoreLabel.bottomAnchor.constraint(equalTo: scoreView.bottomAnchor)
         scoreLabelVerticalPosition?.isActive = true
-        scoreLabel.centerXAnchor.constraint(equalTo: scoreView.rightAnchor).isActive = true
+        scoreLabel.centerXAnchor.constraint(equalTo: scoreView.centerXAnchor).isActive = true
         
         [positiveScorePlaceholder.centerXAnchor.constraint(equalTo: centerXAnchor),
          positiveScorePlaceholder.widthAnchor.constraint(equalTo: widthAnchor),
@@ -64,7 +64,7 @@ class DicesScoreView: UIView {
         if let heightMultiplier = calculateHeightMultiplier(score: score) {
             negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.initialNegativePlaceholderHeightMultiplier)
             scoreHeight = scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: heightMultiplier)
-            scoreLabelVerticalPosition = scoreLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor)
+            scoreLabelVerticalPosition = scoreLabel.bottomAnchor.constraint(equalTo: scoreView.bottomAnchor)
         } else {
             negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.halfOfSectionHeight)
             scoreHeight = scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.halfOfSectionHeight)
@@ -93,12 +93,8 @@ class DicesScoreView: UIView {
     }
     
     private func setupScoreLabel(for score: Int) {
-        if score != 0 {
-            scoreLabel.attributedText = .init(string: String(score), attributes: ViewConstants.labelAttributes)
-            scoreLabel.isHidden = false
-        } else {
-            scoreLabel.isHidden = true
-        }
+        scoreLabel.attributedText = .init(string: String(score), attributes: ViewConstants.labelAttributes)
+        scoreLabel.isHidden = false
     }
 }
 
