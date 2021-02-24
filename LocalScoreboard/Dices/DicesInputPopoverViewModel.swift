@@ -20,8 +20,11 @@ class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, Inpu
     private let firstPassage = 301..<400
     private let secondPassage = 701..<800
     
+    private let quickDraws = [-10, 20, 100, 50, 40, 30]
+    
     init(playerName: String, gamePhase: DicesPlayerViewModel.GamePhase, currentScore: Int) {
-        viewData = .init(playerName: playerName, scoresSource: [operations.map { $0.description }, data.map { String($0) }])
+        viewData = .init(playerName: playerName, scoresSource: [operations.map { $0.description }, data.map { String($0) }],
+                         quickDrawsSource: quickDraws.map { String($0) })
         self.gamePhase = gamePhase
         self.currentScore = currentScore
         
@@ -33,6 +36,14 @@ class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, Inpu
         let operationSelection = selections[0]
         let dataSelection = selections[1]
         return operations[operationSelection].operation(data[dataSelection])
+    }
+    
+    func calculateSelectionFor(quickDraw: Int) -> [Int] {
+        let selection = quickDraws[quickDraw]
+        let operationSelection = selection > 0 ? 0 : 1
+        guard let dataSelection = data.firstIndex(of: abs(selection)) else { return [] }
+        
+        return [operationSelection, dataSelection]
     }
     
     func validate(score: Int) -> InputPopoverViewModelValidationResultModel {

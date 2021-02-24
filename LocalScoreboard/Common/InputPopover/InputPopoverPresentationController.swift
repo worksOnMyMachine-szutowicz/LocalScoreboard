@@ -20,6 +20,6 @@ class InputPopoverPresentationController: BlurredBackgroundUIPresentationControl
 
 extension InputPopoverPresentationController {
     private struct Values {
-        static let heightMultiplier: CGFloat = 2/5
+        static let heightMultiplier: CGFloat = 0.5
     }
 }

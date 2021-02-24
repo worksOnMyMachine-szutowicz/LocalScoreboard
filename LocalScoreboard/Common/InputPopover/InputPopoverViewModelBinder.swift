@@ -17,14 +17,18 @@ protocol InputPopoverViewModelInterface {
 }
 
 enum InputPopoverViewModelInput: EnumWithAssociatedValue {
+    case quickDrawTapped(QuickDrawTappedModel)
     case cancelButtonTapped(CancelButtonTappedModel)
     case saveButtonTapped(SaveButtonTappedModel)
     
+    struct QuickDrawTappedModel { let index: Int }
     struct CancelButtonTappedModel { }
     struct SaveButtonTappedModel { let selections: [Int] }
     
     func associatedValue() -> Any {
         switch self {
+        case .quickDrawTapped(let associatedValue):
+            return associatedValue
         case .cancelButtonTapped(let associatedValue):
             return associatedValue
         case .saveButtonTapped(let associatedValue):
@@ -34,10 +38,12 @@ enum InputPopoverViewModelInput: EnumWithAssociatedValue {
 }
 
 enum InputPopoverViewModelOutput: EnumWithAssociatedValue {
+    case select(SelectModel)
     case finishWithScore(FinishWithScoreModel)
     case showWarning(ShowWarningModel)
     case validationError(ValidationErrorModel)
     
+    struct SelectModel { let selections: [Int] }
     struct FinishWithScoreModel { let score: Int? }
     struct ShowWarningModel {
         let score: Int
@@ -47,6 +53,8 @@ enum InputPopoverViewModelOutput: EnumWithAssociatedValue {
     
     func associatedValue() -> Any {
         switch self {
+        case .select(let associatedValue):
+            return associatedValue
         case .finishWithScore(let associatedValue):
             return associatedValue
         case .showWarning(let associatedValue):
@@ -79,6 +87,7 @@ struct InputPopoverViewModelValidationResultModel {
 
 protocol InputPopoverViewModelProtocol: RxInputOutput<InputPopoverViewModelInput, InputPopoverViewModelOutput> {
     func calculateScoreFor(selections: [Int]) -> Int
+    func calculateSelectionFor(quickDraw: Int) -> [Int]
     func validate(score: Int) -> InputPopoverViewModelValidationResultModel
 }
 
@@ -88,6 +97,13 @@ extension InputPopoverViewModelBinder {
     func setupBindigs() {
         input.asObservable().filterByAssociatedType(Input.CancelButtonTappedModel.self)
             .map { _ in Output.finishWithScore(.init(score: nil)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        input.asObservable().filterByAssociatedType(Input.QuickDrawTappedModel.self)
+            .append(weak: self)
+            .map { vm, input in vm.calculateSelectionFor(quickDraw: input.index) }
+            .map { Output.select(.init(selections: $0)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
             
