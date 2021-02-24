@@ -19,6 +19,8 @@ class DicesScoreView: UIView {
         super.init(frame: .zero)
         
         scoreView.backgroundColor = .green
+        scoreView.layer.cornerRadius = Values.scoreCornerRadius
+        scoreView.layer.maskedCorners = []
         scoreLabel.isHidden = true
         
         layout()
@@ -70,6 +72,8 @@ class DicesScoreView: UIView {
         heightConstraints = [scorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: placeholderMultiplier),
             scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: scoreMultiplier)]
         heightConstraints.append(score < 0 ? scoreLabel.bottomAnchor.constraint(equalTo: scoreView.topAnchor) : scoreLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor))
+        
+        scoreView.layer.maskedCorners = score < 0 ? [.layerMinXMinYCorner, .layerMaxXMinYCorner] : [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
 
         heightConstraints.activate()
     }
@@ -87,6 +91,7 @@ extension DicesScoreView {
         }
         private static let animationDuration: Double = 0.03
         fileprivate static let scoreWidth: CGFloat = 40
+        fileprivate static let scoreCornerRadius: CGFloat = 10
         fileprivate static let sectionHeight: CGFloat = 1 / CGFloat(DicesBoardView.Values.numberOfSections)
         fileprivate static let halfOfSectionHeight: CGFloat = 1 / 2 / CGFloat(DicesBoardView.Values.numberOfSections)
         fileprivate static let scoreHeightMultiplier: CGFloat = 1 / 100 / CGFloat(DicesBoardView.Values.numberOfSections)

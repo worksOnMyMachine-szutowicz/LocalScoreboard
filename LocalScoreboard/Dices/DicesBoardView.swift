@@ -9,9 +9,11 @@
 import UIKit
 
 class DicesBoardView: UIView {
-    private let boardStackView = UIStackView(type: .verticalWithoutSpacing)
     private let players: [DicesPlayerView]
+    private let boardStackView = UIStackView(type: .verticalWithoutSpacing)
     private let playersStackView = UIStackView(type: .horizontalWithEqualSpacing)
+    private let playersScrollView = UIScrollView()
+    private let scrollViewClipper = UIView()
     
     init(viewModel: DicesBoardViewModelInterface, viewFactory: DicesFactoryInterface, delegate: DicesPlayerViewDelegate) {
         players = viewModel.viewData.players.map {
@@ -19,6 +21,9 @@ class DicesBoardView: UIView {
         }
         
         super.init(frame: .zero)
+        
+        playersScrollView.clipsToBounds = false
+        scrollViewClipper.clipsToBounds = true
         
         layout()
     }
@@ -34,10 +39,10 @@ class DicesBoardView: UIView {
     }
     
     private func layout() {
-        let playersScrollView = UIScrollView()
-        addSubviews([boardStackView, playersScrollView])
-        [boardStackView, playersScrollView].disableAutoresizingMask()
+        addSubviews([boardStackView, scrollViewClipper])
+        [boardStackView, scrollViewClipper, playersScrollView].disableAutoresizingMask()
         
+        scrollViewClipper.addSubview(playersScrollView)
         playersScrollView.addSubviewAndFill(playersStackView)
         
         for index in 0..<Values.numberOfSections {
@@ -48,9 +53,14 @@ class DicesBoardView: UIView {
             playersStackView.addArrangedSubview($0)
         }
         
-        [playersScrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMarginDoublePadding),
-         playersScrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-         playersScrollView.topAnchor.constraint(equalTo: topAnchor),
+        [scrollViewClipper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMargin),
+         scrollViewClipper.trailingAnchor.constraint(equalTo: trailingAnchor),
+         scrollViewClipper.topAnchor.constraint(equalTo: topAnchor),
+         scrollViewClipper.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
+        
+        [playersScrollView.leadingAnchor.constraint(equalTo: scrollViewClipper.leadingAnchor),
+         playersScrollView.trailingAnchor.constraint(equalTo: scrollViewClipper.trailingAnchor),
+         playersScrollView.topAnchor.constraint(equalTo: scrollViewClipper.topAnchor),
          playersScrollView.heightAnchor.constraint(equalTo: playersStackView.heightAnchor),
          playersScrollView.bottomAnchor.constraint(equalTo: boardStackView.bottomAnchor)].activate()
         
