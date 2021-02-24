@@ -10,10 +10,6 @@ import RxSwift
 import RxCocoa
 
 class AddPlayersViewModel: RxInputOutput<AddPlayersViewModelInput, AddPlayersViewModelOutput>, AddPlayersViewModelInterface {
-    var output: Driver<Output> {
-        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
-    }
-    
     private let requiredPlayers: Int
     private var players: [Observable<NewPlayerViewModelOutput.ValidationResultModel>] = []
     

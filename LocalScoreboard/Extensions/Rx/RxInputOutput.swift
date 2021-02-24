@@ -16,6 +16,9 @@ class RxInputOutput<I, O> {
 
     let input = PublishRelay<I>()
     let outputRelay = PublishRelay<O>()
+    var output: Driver<Output>{
+        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
+    }
 }
 
 class RxOutput<O> {

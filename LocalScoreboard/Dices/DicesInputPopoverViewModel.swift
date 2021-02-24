@@ -9,9 +9,6 @@
 import RxCocoa
 
 class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, InputPopoverViewModelOutput>, InputPopoverViewModelBinder {
-    var output: Driver<Output>{
-        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
-    }
     var viewData: InputPopoverViewController.ViewData
     
     private let operations: [(description: String, operation: ((Int) -> Int))] = [("global.+".localized, { $0 }), ("global.-".localized, { -$0 })]

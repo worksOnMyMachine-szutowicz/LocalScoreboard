@@ -10,9 +10,6 @@ import RxSwift
 import RxCocoa
 
 class NewGameViewModel: RxInputOutput<NewGameViewModelInput, NewGameViewModelOutput>, NewGameViewModelInterface {
-    var output: Driver<Output>{
-        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
-    }
     var viewData: NewGameViewController.ViewData
     private let gameData: GameData
     private let addPlayersViewModel: AddPlayersViewModelInterface

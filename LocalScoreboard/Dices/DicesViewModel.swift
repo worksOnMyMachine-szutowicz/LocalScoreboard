@@ -10,9 +10,6 @@ import RxSwift
 import RxCocoa
 
 class DicesViewModel: RxInputOutput<DicesViewModelInput, DicesViewModelOutput>, DicesViewModelInterface {
-    var output: Driver<Output>{
-        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
-    }
     var viewData: DicesViewController.ViewData
     
     private let players: [String]

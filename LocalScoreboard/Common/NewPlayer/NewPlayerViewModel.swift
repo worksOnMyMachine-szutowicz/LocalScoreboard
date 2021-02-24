@@ -10,9 +10,6 @@ import RxSwift
 import RxCocoa
 
 class NewPlayerViewModel: RxInputOutput<NewPlayerViewModelInput, NewPlayerViewModelOutput>, NewPlayerViewModelInterface {
-    var output: Driver<Output> {
-        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
-    }
     var viewData: NewPlayerView.ViewData
     
     private let describedTextFieldViewModel: DescribedTextFieldViewModelInterface
