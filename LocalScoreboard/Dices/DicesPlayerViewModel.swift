@@ -57,7 +57,7 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .disposed(by: disposeBag)
         
         score
-            .filter { $0 > 0}
+            .filter { $0 > 0} //bug here
             .take(1)
             .append(weak: self)
             .subscribe(onNext: { vm, _ in

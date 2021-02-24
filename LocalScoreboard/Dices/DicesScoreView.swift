@@ -11,12 +11,9 @@ import UIKit
 class DicesScoreView: UIView {
     private let scoreView = UIView()
     private let scoreLabel = UILabel()
-    private let negativeScorePlaceholder = UIView()
-    private let positiveScorePlaceholder = UIView()
+    private let scorePlaceholder = UIView()
     
-    private var scoreHeight: NSLayoutConstraint?
-    private var negativeScorePlaceholderHeight: NSLayoutConstraint?
-    private var scoreLabelVerticalPosition: NSLayoutConstraint?
+    private var heightConstraints: [NSLayoutConstraint] = []
     
     init() {
         super.init(frame: .zero)
@@ -31,65 +28,50 @@ class DicesScoreView: UIView {
         nil
     }
     
-    private func layout() {
-        addSubviews([scoreView, scoreLabel, negativeScorePlaceholder, positiveScorePlaceholder])
-        [scoreView, scoreLabel, negativeScorePlaceholder, positiveScorePlaceholder].disableAutoresizingMask()
-        
-        negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.initialNegativePlaceholderHeightMultiplier)
-        negativeScorePlaceholderHeight?.isActive = true
-        [negativeScorePlaceholder.centerXAnchor.constraint(equalTo: centerXAnchor),
-         negativeScorePlaceholder.widthAnchor.constraint(equalTo: widthAnchor),
-         negativeScorePlaceholder.topAnchor.constraint(equalTo: topAnchor)].activate()
-        
-        scoreHeight = scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.initialScoreHeightMultiplier)
-        scoreHeight?.isActive = true
-        [scoreView.centerXAnchor.constraint(equalTo: centerXAnchor),
-         scoreView.widthAnchor.constraint(equalToConstant: Values.scoreWidth),
-         scoreView.topAnchor.constraint(equalTo: negativeScorePlaceholder.bottomAnchor)].activate()
-        
-        scoreLabelVerticalPosition = scoreLabel.bottomAnchor.constraint(equalTo: scoreView.bottomAnchor)
-        scoreLabelVerticalPosition?.isActive = true
-        scoreLabel.centerXAnchor.constraint(equalTo: scoreView.centerXAnchor).isActive = true
-        
-        [positiveScorePlaceholder.centerXAnchor.constraint(equalTo: centerXAnchor),
-         positiveScorePlaceholder.widthAnchor.constraint(equalTo: widthAnchor),
-         positiveScorePlaceholder.topAnchor.constraint(equalTo: scoreView.bottomAnchor),
-         positiveScorePlaceholder.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
-    }
-    
     func changeScore(to score: Int) {
-        toggleChangeableConstraints()
+        setupHeightConstraints(for: score)
         setupScoreLabel(for: score)
-        
-        if let heightMultiplier = calculateHeightMultiplier(score: score) {
-            negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.initialNegativePlaceholderHeightMultiplier)
-            scoreHeight = scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: heightMultiplier)
-            scoreLabelVerticalPosition = scoreLabel.bottomAnchor.constraint(equalTo: scoreView.bottomAnchor)
-        } else {
-            negativeScorePlaceholderHeight = negativeScorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.halfOfSectionHeight)
-            scoreHeight = scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Values.halfOfSectionHeight)
-            scoreLabelVerticalPosition = scoreLabel.bottomAnchor.constraint(equalTo: scoreView.topAnchor)
-        }
-        
-        toggleChangeableConstraints()
         
         UIView.animate(withDuration: Values.animationTime.secondsValue) { [weak self] () -> Void in
             self?.layoutIfNeeded()
         }
     }
     
-    private func calculateHeightMultiplier(score: Int) -> CGFloat? {
-        if score < 0 {
-            return nil
-        }
-        let multiplier = CGFloat(score) / 100 / CGFloat(DicesBoardView.Values.numberOfSections)
-        return multiplier
+    private func layout() {
+        addSubviews([scoreView, scoreLabel, scorePlaceholder])
+        [scoreView, scoreLabel, scorePlaceholder].disableAutoresizingMask()
+        
+        [scorePlaceholder.centerXAnchor.constraint(equalTo: centerXAnchor),
+         scorePlaceholder.widthAnchor.constraint(equalTo: widthAnchor),
+         scorePlaceholder.topAnchor.constraint(equalTo: topAnchor)].activate()
+        
+        [scoreView.centerXAnchor.constraint(equalTo: centerXAnchor),
+         scoreView.widthAnchor.constraint(equalToConstant: Values.scoreWidth),
+         scoreView.topAnchor.constraint(equalTo: scorePlaceholder.bottomAnchor)].activate()
+        
+        scoreLabel.centerXAnchor.constraint(equalTo: scoreView.trailingAnchor).isActive = true
+
+        setupHeightConstraints(for: 0)
     }
     
-    private func toggleChangeableConstraints() {
-        negativeScorePlaceholderHeight?.isActive.toggle()
-        scoreHeight?.isActive.toggle()
-        scoreLabelVerticalPosition?.isActive.toggle()
+    private func setupHeightConstraints(for score: Int) {
+        heightConstraints.deactivate()
+        
+        var scoreMultiplier: CGFloat
+        var placeholderMultiplier: CGFloat
+        if score < 0 {
+            scoreMultiplier = min(CGFloat(abs(score)) * Values.scoreHeightMultiplier, Values.halfOfSectionHeight)
+            placeholderMultiplier = Values.sectionHeight - scoreMultiplier
+        } else {
+            scoreMultiplier = CGFloat(score) * Values.scoreHeightMultiplier
+            placeholderMultiplier = Values.sectionHeight
+        }
+        
+        heightConstraints = [scorePlaceholder.heightAnchor.constraint(equalTo: heightAnchor, multiplier: placeholderMultiplier),
+            scoreView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: scoreMultiplier)]
+        heightConstraints.append(score < 0 ? scoreLabel.bottomAnchor.constraint(equalTo: scoreView.topAnchor) : scoreLabel.topAnchor.constraint(equalTo: scoreView.bottomAnchor))
+
+        heightConstraints.activate()
     }
     
     private func setupScoreLabel(for score: Int) {
@@ -103,10 +85,10 @@ extension DicesScoreView {
         static var animationTime: (secondsValue: Double, milisecondsValue: Int) {
             (animationDuration, Int(animationDuration * 1000))
         }
-        private static let animationDuration: Double = 0.01
+        private static let animationDuration: Double = 0.03
         fileprivate static let scoreWidth: CGFloat = 40
-        fileprivate static let initialScoreHeightMultiplier: CGFloat = 0
-        fileprivate static let initialNegativePlaceholderHeightMultiplier: CGFloat = 1 / CGFloat(DicesBoardView.Values.numberOfSections)
+        fileprivate static let sectionHeight: CGFloat = 1 / CGFloat(DicesBoardView.Values.numberOfSections)
         fileprivate static let halfOfSectionHeight: CGFloat = 1 / 2 / CGFloat(DicesBoardView.Values.numberOfSections)
+        fileprivate static let scoreHeightMultiplier: CGFloat = 1 / 100 / CGFloat(DicesBoardView.Values.numberOfSections)
     }
 }
