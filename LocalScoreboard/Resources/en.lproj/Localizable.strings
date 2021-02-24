@@ -62,3 +62,5 @@ See Rules -> Phase Two -> Point 3. for more info";
 "1000dices.input.error.surplus" = "You can't exceed 1000 points!
 See Rules -> Phase Two -> Point 4. for more info";
 "1000dices.input.warning.passage" = "You are about to submit %@ points which will place You in the lower half of the passage. It means that You'll need to score at least %@ points in next turn. Are You sure?";
+"1000dices.finishGame.title" = "%@ has won!";
+"1000dices.finishGame.message" = "How about another round with the same players?";

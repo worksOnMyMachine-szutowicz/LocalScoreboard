@@ -24,7 +24,8 @@ class ViewControllerFactory: ViewControllerFactoryProtocol {
     }
     
     func createDicesViewController(delegate: DicesViewControllerDelegate, players: [String]) -> UIViewController {
-        DicesViewController(delegate: delegate, viewData: .init(players: players))
+        let viewModel = DicesViewModel(players: players)
+        return DicesViewController(delegate: delegate, viewModel: viewModel, viewFactory: DicesFactory())
     }
     
     func createDecisionAlertViewController(viewData: DecisionAlertViewController.ViewData) -> DecisionAlertViewController {

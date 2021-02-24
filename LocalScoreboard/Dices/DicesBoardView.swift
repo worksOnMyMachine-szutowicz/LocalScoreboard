@@ -13,9 +13,9 @@ class DicesBoardView: UIView {
     private let players: [DicesPlayerView]
     private let playersStackView = UIStackView(type: .horizontalWithEqualSpacing)
     
-    init(viewData: ViewData, viewFactory: DicesFactoryInterface, delegate: DicesPlayerViewDelegate) {
-        players = viewData.players.map {
-            viewFactory.createPlayerView(playerName: $0, delegate: delegate)
+    init(viewModel: DicesBoardViewModelInterface, viewFactory: DicesFactoryInterface, delegate: DicesPlayerViewDelegate) {
+        players = viewModel.viewData.players.map {
+            viewFactory.createPlayerView(viewModel: $0, delegate: delegate)
         }
         
         super.init(frame: .zero)
@@ -67,6 +67,6 @@ extension DicesBoardView {
         fileprivate static let enlargedTitleSection: Int = 10
     }
     struct ViewData {
-        let players: [String]
+        let players: [DicesPlayerViewModelInterface]
     }
 }

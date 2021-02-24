@@ -11,19 +11,25 @@ import RxSwift
 
 protocol DicesViewControllerDelegate: DicesPlayerViewDelegate {
     func quitGame()
+    func finishGame(winner: String) -> Observable<DecisionAlertViewController.Decision>
+    func startNewGame(players: [String])
     func pushRulesView(rulesViewData: RulesViewController.ViewData)
 }
 
 class DicesViewController: BackgroundedUIViewController {
+    typealias VMInput = DicesViewModelInput
+    typealias VMOutput = DicesViewModelOutput
+    private let viewModel: DicesViewModelInterface
     private let disposeBag = DisposeBag()
     private weak var delegate: DicesViewControllerDelegate?
     private let boardView: DicesBoardView
     private let quitButton = UIButton.stickerButton(title: "global.quit".localized)
     private let rulesButton = UIButton.stickerButton(title: "global.fullRules".localized)
     
-    init(delegate: DicesViewControllerDelegate, viewData: ViewData) {
+    init(delegate: DicesViewControllerDelegate, viewModel: DicesViewModelInterface, viewFactory: DicesFactoryInterface) {
+        self.viewModel = viewModel
         self.delegate = delegate
-        self.boardView = .init(viewData: .init(players: viewData.players), viewFactory: DicesFactory(), delegate: delegate)
+        self.boardView = viewFactory.createBoardView(viewModel: viewModel.viewData.boardViewModel, delegate: delegate)
         
         super.init(nibName: nil, bundle: nil)
         
@@ -70,11 +76,38 @@ class DicesViewController: BackgroundedUIViewController {
             .subscribe(onNext: { vc, _ in
                 vc.delegate?.pushRulesView(rulesViewData: GameData.forGame(.thousandDices).rulesViewData)
             }).disposed(by: disposeBag)
+        
+        let finishGameRequest =  viewModel.output.asObservable().filterByAssociatedType(VMOutput.FinishGameModel.self)
+            .append(weak: self)
+            .flatMapFirst { vc, output -> Observable<DecisionAlertViewController.Decision>in
+                guard let delegate = vc.delegate else { return .empty() }
+                
+                return delegate.finishGame(winner: output.winner)
+            }.share()
+        
+        finishGameRequest
+            .filter { $0 == .quit }
+            .append(weak: self)
+            .subscribe(onNext: { vc, _ in
+                vc.delegate?.quitGame()
+            }).disposed(by: disposeBag)
+        
+        finishGameRequest
+            .filter { $0 == .ok }
+            .map { _ in VMInput.newGameDataRequest(.init()) }
+            .bind(to: viewModel.input)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.StartNewGameModel.self)
+            .append(weak: self)
+            .subscribe(onNext: { vc, output in
+                vc.delegate?.startNewGame(players: output.players)
+            }).disposed(by: disposeBag)
     }
 }
 
 extension DicesViewController {
     struct ViewData {
-        let players: [String]
+        let boardViewModel: DicesBoardViewModelInterface
     }
 }

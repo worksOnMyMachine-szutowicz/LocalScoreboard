@@ -11,17 +11,22 @@ import RxSwift
 
 class DecisionAlertViewController: UIViewController, OutputableViewController, UIViewControllerTransitioningDelegate {
     typealias Output = Decision
+    private let viewData: ViewData
     private let disposeBag = DisposeBag()
     private let titleLabel = UILabel()
     private let messageLabel = UILabel()
-    private let cancelButton = UIButton.stickerButton(title: Decision.cancel.localized)
-    private let okButton = UIButton.stickerButton(title: Decision.ok.localized)
+    private let firstButton: UIButton
+    private let secondButton: UIButton
     private let verticalButtonsSeparator = UIView()
     private let horizontalButtonsSeparator = UIView()
     
     var outputSubject: PublishSubject<Output> = .init()
     
     init(viewData: ViewData) {
+        self.viewData = viewData
+        firstButton = UIButton.stickerButton(title: viewData.firstButton.localized)
+        secondButton = UIButton.stickerButton(title: viewData.secondButton.localized)
+        
         super.init(nibName: nil, bundle: nil)
         
         modalPresentationStyle = .custom
@@ -34,10 +39,10 @@ class DecisionAlertViewController: UIViewController, OutputableViewController, U
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         
-        cancelButton.layer.cornerRadius = Values.cornerRadius
-        cancelButton.layer.maskedCorners = .layerMinXMaxYCorner
-        okButton.layer.cornerRadius = Values.cornerRadius
-        okButton.layer.maskedCorners = .layerMaxXMaxYCorner
+        firstButton.layer.cornerRadius = Values.cornerRadius
+        firstButton.layer.maskedCorners = .layerMinXMaxYCorner
+        secondButton.layer.cornerRadius = Values.cornerRadius
+        secondButton.layer.maskedCorners = .layerMaxXMaxYCorner
         verticalButtonsSeparator.backgroundColor = Colors.backgroundLine
         horizontalButtonsSeparator.backgroundColor = Colors.backgroundLine
         
@@ -59,8 +64,8 @@ class DecisionAlertViewController: UIViewController, OutputableViewController, U
     }
     
     private func layout() {
-        view.addSubviews([titleLabel, messageLabel, cancelButton, okButton, verticalButtonsSeparator, horizontalButtonsSeparator])
-        [titleLabel, messageLabel, cancelButton, okButton, verticalButtonsSeparator, horizontalButtonsSeparator].disableAutoresizingMask()
+        view.addSubviews([titleLabel, messageLabel, firstButton, secondButton, verticalButtonsSeparator, horizontalButtonsSeparator])
+        [titleLabel, messageLabel, firstButton, secondButton, verticalButtonsSeparator, horizontalButtonsSeparator].disableAutoresizingMask()
         
         [titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.labelPadding),
          titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.labelPadding),
@@ -70,35 +75,37 @@ class DecisionAlertViewController: UIViewController, OutputableViewController, U
         [messageLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.labelPadding),
          messageLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.labelPadding),
          messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Values.labelPadding),
-         messageLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -Values.labelPadding)].activate()
+         messageLabel.bottomAnchor.constraint(equalTo: firstButton.topAnchor, constant: -Values.labelPadding)].activate()
         
-        [cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         cancelButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-         cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
+        [firstButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         firstButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+         firstButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
         
-        [okButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-         okButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-         okButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
+        [secondButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+         secondButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+         secondButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
         
         [verticalButtonsSeparator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
          verticalButtonsSeparator.widthAnchor.constraint(equalToConstant: Values.buttonBordersSize),
-         verticalButtonsSeparator.topAnchor.constraint(equalTo: cancelButton.topAnchor),
-         verticalButtonsSeparator.bottomAnchor.constraint(equalTo: cancelButton.bottomAnchor)].activate()
+         verticalButtonsSeparator.topAnchor.constraint(equalTo: firstButton.topAnchor),
+         verticalButtonsSeparator.bottomAnchor.constraint(equalTo: firstButton.bottomAnchor)].activate()
         
         [horizontalButtonsSeparator.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          horizontalButtonsSeparator.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-         horizontalButtonsSeparator.centerYAnchor.constraint(equalTo: cancelButton.topAnchor),
+         horizontalButtonsSeparator.centerYAnchor.constraint(equalTo: firstButton.topAnchor),
          horizontalButtonsSeparator.heightAnchor.constraint(equalToConstant: Values.buttonBordersSize)].activate()
     }
     
     private func setupBindings() {
-        cancelButton.rx.tap
-            .map { _ in Decision.cancel }
+        firstButton.rx.tap
+            .append(weak: self)
+            .map { vc, _ in vc.viewData.firstButton }
             .bind(to: outputSubject)
             .disposed(by: disposeBag)
             
-        okButton.rx.tap
-            .map { _ in Decision.ok }
+        secondButton.rx.tap
+            .append(weak: self)
+            .map { vc, _ in vc.viewData.secondButton }
             .bind(to: outputSubject)
             .disposed(by: disposeBag)
     }
@@ -112,8 +119,9 @@ extension DecisionAlertViewController {
         static let buttonBordersSize: CGFloat = 2
     }
     enum Decision: String {
-        case ok
         case cancel
+        case ok
+        case quit
         
         var localized: String {
             "global.\(rawValue)".localized
@@ -122,5 +130,7 @@ extension DecisionAlertViewController {
     struct ViewData {
         let title: String
         let message: String
+        let firstButton: Decision
+        let secondButton: Decision
     }
 }

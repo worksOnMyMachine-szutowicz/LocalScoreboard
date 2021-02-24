@@ -16,7 +16,7 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     var viewData: DicesPlayerView.ViewData
     
     private var gamePhase: GamePhase = .phaseOne
-    private var score: Int = 0
+    private var score: BehaviorSubject<Int> = .init(value: 0)
     
     init(viewData: DicesPlayerView.ViewData) {
         self.viewData = viewData
@@ -28,32 +28,52 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     
     private func setupBindings() {
         input.asObservable().filterByAssociatedType(Input.AddScoreTappedModel.self)
+            .withLatestFrom(score)
             .append(weak: self)
-            .map { vm, _ in DicesInputPopoverViewModel(playerName: vm.viewData.name, gamePhase: vm.gamePhase, currentScore: vm.score) }
+            .map { vm, currentScore in DicesInputPopoverViewModel(playerName: vm.viewData.name, gamePhase: vm.gamePhase, currentScore: currentScore) }
             .map { Output.showInputPopover(.init(inputPopoverViewModel: $0)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
         
-        input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
+        let scoreUpdates = input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
             .append(weak: self)
-            .map { vc, input -> [Output] in
-                let newScore = vc.score + input.score
-                let stepScores = Array(min(vc.score, newScore)...max(vc.score, newScore))
-                    .sorted { abs($0.distance(to: vc.score)) < abs($1.distance(to: vc.score)) }
-                    .map { Output.scoreChanged(.init(score: $0)) }
+            .withLatestFrom(score) { ($0.0, $0.1, $1) }
+            .map { vc, input, currentScore -> [Int] in
+                let newScore = currentScore + input.score
                 
-                vc.score = newScore
-                vc.gamePhase = .phaseTwo
-                return stepScores
-            }
-            .append(weak: self)
-            .flatMapLatest { vc, stepOutput -> Observable<(Int, DicesPlayerViewModel.Output)> in
+                return Array(min(currentScore, newScore)...max(currentScore, newScore))
+                    .sorted { abs($0.distance(to: currentScore)) < abs($1.distance(to: currentScore)) }
+            }.append(weak: self)
+            .flatMapLatest { vc, stepOutput -> Observable<(Int, Int)> in
                 let delayer = Observable<Int>.interval(.milliseconds(DicesScoreView.Values.animationTime.milisecondsValue), scheduler: MainScheduler.instance)
                 let output =  Observable.range(start: 0, count: stepOutput.count)
                     .map { stepOutput[$0] }
-                
+
                 return Observable.zip(delayer, output)
             }.map { $0.1 }
+            .share()
+
+        scoreUpdates
+            .bind(to: score)
+            .disposed(by: disposeBag)
+        
+        score
+            .filter { $0 > 0}
+            .take(1)
+            .append(weak: self)
+            .subscribe(onNext: { vm, _ in
+                vm.gamePhase = .phaseTwo
+            }).disposed(by: disposeBag)
+
+        scoreUpdates
+            .map { Output.scoreChanged(.init(score: $0)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        scoreUpdates
+            .filter { $0 == 1000 }
+            .append(weak: self)
+            .map { vm, _ in Output.playerWon(.init(playerName: vm.viewData.name)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
     }

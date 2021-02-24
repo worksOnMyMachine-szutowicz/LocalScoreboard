@@ -8,11 +8,11 @@
 
 import UIKit
 
-class DecisionAlertPresentationController: UIPresentationController {
+class DecisionAlertPresentationController: BlurredBackgroundUIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
-        let bounds = presentingViewController.view.bounds
+        let bounds = UIScreen.main.bounds
         let size = CGSize(width: Values.width, height: Values.height)
-        let origin = CGPoint(x: bounds.midX - 1/2 * Values.width, y: bounds.midY)
+        let origin = CGPoint(x: bounds.midX - 1/2 * Values.width, y: bounds.midY - 1/2 * Values.height)
         
         return CGRect(origin: origin, size: size)
     }

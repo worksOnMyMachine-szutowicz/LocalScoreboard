@@ -17,3 +17,13 @@ class RxInputOutput<I, O> {
     let input = PublishRelay<I>()
     let outputRelay = PublishRelay<O>()
 }
+
+class RxOutput<O> {
+    typealias Output = O
+    let disposeBag = DisposeBag()
+
+    let outputRelay = PublishRelay<O>()
+    var output: Driver<Output>{
+        outputRelay.asDriver(onErrorRecover: { _ in .empty() })
+    }
+}
