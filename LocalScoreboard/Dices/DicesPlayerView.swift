@@ -74,7 +74,7 @@ class DicesPlayerView: UIView {
         viewModel.output.asObservable().filterByAssociatedType(VMOutput.ScoreChangedModel.self)
             .append(weak: self)
             .subscribe(onNext: { view, output in
-                view.scoreView.changeScore(to: output.score)
+                view.scoreView.changeScore(to: output.stepScore)
             }).disposed(by: disposeBag)
     }
 }

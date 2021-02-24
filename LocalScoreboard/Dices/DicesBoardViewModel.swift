@@ -24,5 +24,22 @@ class DicesBoardViewModel: RxOutput<DicesBoardViewModelOutput>, DicesBoardViewMo
             .map { Output.finishGame(.init(winner: $0.playerName)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
+        
+        for (raisingPlayerIndex, raisingPlayer) in viewData.players.enumerated() {
+            for (stillPlayerIndex, stillPlayer) in viewData.players.enumerated() where stillPlayerIndex != raisingPlayerIndex {
+                raisingPlayer.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.ScoreChangedModel.self)
+                    .withLatestFrom(stillPlayer.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.ScoreChangedModel.self)) { (input: $0, output: $1.stepScore) }
+                    .append(weak: self)
+                    .filter { vm, data in
+                        data.output >= 100 && vm.isOnePlayerSurpasingAnother(raisingPlayer: data.input, stillPlayer: data.output)
+                    }.map { _ in DicesPlayerViewModelInput.addScore(.init(score: -100)) }
+                    .bind(to: stillPlayer.input)
+                    .disposed(by: disposeBag)
+            }
+        }
+    }
+    
+    private func isOnePlayerSurpasingAnother(raisingPlayer: DicesPlayerViewModelOutput.ScoreChangedModel, stillPlayer: Int) -> Bool {
+        raisingPlayer.startedFrom < stillPlayer && stillPlayer.distance(to: raisingPlayer.stepScore) == 1
     }
 }

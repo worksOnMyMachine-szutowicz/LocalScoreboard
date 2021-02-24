@@ -38,13 +38,14 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
         let scoreUpdates = input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
             .append(weak: self)
             .withLatestFrom(score) { ($0.0, $0.1, $1) }
-            .map { vc, input, currentScore -> [Int] in
+            .map { vc, input, currentScore -> [Output.ScoreChangedModel] in
                 let newScore = currentScore + input.score
                 
                 return Array(min(currentScore, newScore)...max(currentScore, newScore))
                     .sorted { abs($0.distance(to: currentScore)) < abs($1.distance(to: currentScore)) }
+                    .map { Output.ScoreChangedModel(startedFrom: currentScore, stepScore: $0) }
             }.append(weak: self)
-            .flatMapLatest { vc, stepOutput -> Observable<(Int, Int)> in
+            .flatMapLatest { vc, stepOutput -> Observable<(Int, Output.ScoreChangedModel)> in
                 let delayer = Observable<Int>.interval(.milliseconds(DicesScoreView.Values.animationTime.milisecondsValue), scheduler: MainScheduler.instance)
                 let output =  Observable.range(start: 0, count: stepOutput.count)
                     .map { stepOutput[$0] }
@@ -54,6 +55,7 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .share()
 
         scoreUpdates
+            .map { $0.stepScore }
             .bind(to: score)
             .disposed(by: disposeBag)
         
@@ -66,12 +68,12 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             }).disposed(by: disposeBag)
 
         scoreUpdates
-            .map { Output.scoreChanged(.init(score: $0)) }
+            .map { Output.scoreChanged($0) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
         
         scoreUpdates
-            .filter { $0 == 1000 }
+            .filter { $0.stepScore == 1000 }
             .append(weak: self)
             .map { vm, _ in Output.playerWon(.init(playerName: vm.viewData.name)) }
             .bind(to: outputRelay)

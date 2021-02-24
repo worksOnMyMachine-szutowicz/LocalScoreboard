@@ -38,7 +38,10 @@ enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
     case playerWon(PlayerWon)
     
     struct ShowInputPopoverModel { let inputPopoverViewModel: InputPopoverViewModelInterface}
-    struct ScoreChangedModel { let score: Int }
+    struct ScoreChangedModel {
+        let startedFrom: Int
+        let stepScore: Int
+    }
     struct PlayerWon { let playerName: String }
     
     func associatedValue() -> Any {
