@@ -25,7 +25,7 @@ enum AddPlayersViewModelInput: EnumWithAssociatedValue {
     struct AddPlayerTappedModel { }
     struct ValidateModel { }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .addRequiredPlayers(let associatedValue):
             return associatedValue
@@ -49,7 +49,7 @@ enum AddPlayersViewModelOutput: EnumWithAssociatedValue {
     struct DeletePlayerModel { let index: Int }
     struct ValidationSuccessModel { let players: [String] }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .addPlayer(let associatedValue):
             return associatedValue

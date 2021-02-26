@@ -7,5 +7,5 @@
 //
 
 protocol EnumWithAssociatedValue {
-    func associatedValue() -> Any
+    var associatedValue: Any { get }
 }

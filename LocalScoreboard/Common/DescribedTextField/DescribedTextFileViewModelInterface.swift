@@ -27,7 +27,7 @@ enum DescribedTextFieldViewModelInput: EnumWithAssociatedValue {
     struct UpdateModel { let labelText: String }
     struct ValidateModel { }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .userInput(let associatedValue):
             return associatedValue
@@ -52,7 +52,7 @@ enum DescribedTextFieldViewModelOutput: EnumWithAssociatedValue {
         let userInput: String
     }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .updateView(let associatedValue):
             return associatedValue

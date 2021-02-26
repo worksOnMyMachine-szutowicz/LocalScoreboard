@@ -25,7 +25,7 @@ enum InputPopoverViewModelInput: EnumWithAssociatedValue {
     struct CancelButtonTappedModel { }
     struct SaveButtonTappedModel { let selections: [Int] }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .quickDrawTapped(let associatedValue):
             return associatedValue
@@ -51,7 +51,7 @@ enum InputPopoverViewModelOutput: EnumWithAssociatedValue {
     }
     struct ValidationErrorModel { let message: String }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .select(let associatedValue):
             return associatedValue

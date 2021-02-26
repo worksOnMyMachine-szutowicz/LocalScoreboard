@@ -18,15 +18,19 @@ protocol DicesPlayerViewModelInterface {
 enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
     case addScoreTapped(AddScoreTappedModel)
     case addScore(AddScoreModel)
+    case playerSurpassed(PlayerSurpassedModel)
     
     struct AddScoreTappedModel { }
     struct AddScoreModel { let score: Int }
+    struct PlayerSurpassedModel { }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .addScoreTapped(let associatedValue):
             return associatedValue
         case .addScore(let associatedValue):
+            return associatedValue
+        case .playerSurpassed(let associatedValue):
             return associatedValue
         }
     }
@@ -44,7 +48,7 @@ enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
     }
     struct PlayerWon { let playerName: String }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .showInputPopover(let associatedValue):
             return associatedValue

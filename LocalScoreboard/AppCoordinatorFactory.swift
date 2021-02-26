@@ -5,7 +5,7 @@
 
 import UIKit
 
-protocol ViewControllerFactoryProtocol {
+protocol AppCoordinatorFactoryProtocol {
     func createNewGameViewController(delegate: NewGameViewControllerDelegate) -> UIViewController
     func createRulesViewController(rulesViewData: RulesViewController.ViewData) -> UIViewController
     func createDicesViewController(delegate: DicesViewControllerDelegate, players: [String]) -> UIViewController
@@ -13,7 +13,13 @@ protocol ViewControllerFactoryProtocol {
     func createInputPopoverViewController(viewModel: InputPopoverViewModelInterface, delegate: InputPopoverViewControllerDelegate) -> InputPopoverViewController
 }
 
-class ViewControllerFactory: ViewControllerFactoryProtocol {
+class AppCoordinatorFactory: AppCoordinatorFactoryProtocol {
+    private let storageService: StorageServiceInterface
+    
+    init(storageService: StorageServiceInterface) {
+        self.storageService = storageService
+    }
+    
     func createNewGameViewController(delegate: NewGameViewControllerDelegate) -> UIViewController {
         let viewModel = NewGameViewModel(gameData: .thousandDices)
         return NewGameViewController(delegate: delegate, viewModel: viewModel)
@@ -24,7 +30,7 @@ class ViewControllerFactory: ViewControllerFactoryProtocol {
     }
     
     func createDicesViewController(delegate: DicesViewControllerDelegate, players: [String]) -> UIViewController {
-        let viewModel = DicesViewModel(players: players)
+        let viewModel = DicesViewModel(players: players, storageService: storageService)
         return DicesViewController(delegate: delegate, viewModel: viewModel, viewFactory: DicesFactory())
     }
     

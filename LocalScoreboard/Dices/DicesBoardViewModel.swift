@@ -11,8 +11,8 @@ import RxSwift
 class DicesBoardViewModel: RxOutput<DicesBoardViewModelOutput>, DicesBoardViewModelInterface {
     var viewData: DicesBoardView.ViewData
     
-    init(players: [String]) {
-        viewData = .init(players: players.map { DicesPlayerViewModel(viewData: .init(name: $0)) })
+    init(players: [String], storageService: StorageServiceInterface) {
+        viewData = .init(players: players.map { DicesPlayerViewModel(viewData: .init(name: $0), storageService: storageService) })
         
         super.init()
         
@@ -32,7 +32,7 @@ class DicesBoardViewModel: RxOutput<DicesBoardViewModelOutput>, DicesBoardViewMo
                     .append(weak: self)
                     .filter { vm, data in
                         data.output >= 100 && vm.isOnePlayerSurpasingAnother(raisingPlayer: data.input, stillPlayer: data.output)
-                    }.map { _ in DicesPlayerViewModelInput.addScore(.init(score: -100)) }
+                    }.map { _ in DicesPlayerViewModelInput.playerSurpassed(.init()) }
                     .bind(to: stillPlayer.input)
                     .disposed(by: disposeBag)
             }

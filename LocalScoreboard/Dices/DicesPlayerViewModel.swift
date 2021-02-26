@@ -12,11 +12,16 @@ import RxCocoa
 class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayerViewModelOutput>, DicesPlayerViewModelInterface {
     var viewData: DicesPlayerView.ViewData
     
+    private let storageService: StorageServiceInterface
     private var gamePhase: GamePhase = .phaseOne
     private var score: BehaviorSubject<Int> = .init(value: 0)
     
-    init(viewData: DicesPlayerView.ViewData) {
+    private let phaseOneTax = 50
+    private let surpassingTax = 100
+    
+    init(viewData: DicesPlayerView.ViewData, storageService: StorageServiceInterface) {
         self.viewData = viewData
+        self.storageService = storageService
         
         super.init()
         
@@ -25,18 +30,27 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     
     private func setupBindings() {
         input.asObservable().filterByAssociatedType(Input.AddScoreTappedModel.self)
-            .withLatestFrom(score)
+            .withRequestResult(ofType: [Int].self, from: storageService, with: StorageServiceRequest.getTopScoresByOccurences(.init(scoresToReturn: Values.quickDrawsCount)))
+            .withLatestFrom(score) { (quickDraws: $0, currentScore: $1) }
             .append(weak: self)
-            .map { vm, currentScore in DicesInputPopoverViewModel(playerName: vm.viewData.name, gamePhase: vm.gamePhase, currentScore: currentScore) }
+            .map { vm, data in DicesInputPopoverViewModel(playerName: vm.viewData.name, gamePhase: vm.gamePhase, currentScore: data.currentScore, quickDraws: data.quickDraws) }
             .map { Output.showInputPopover(.init(inputPopoverViewModel: $0)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
         
-        let scoreUpdates = input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
+        let addScore = input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
+            .doResultlessRequest(from: storageService) { StorageServiceRequest.saveScoreOccurrence(.init(score: $0.score)) }
             .append(weak: self)
+            .map { vm, input in (vm, vm.gamePhase == .phaseTwo ? input.score : input.score - vm.phaseOneTax) }
+        
+        let playerSurpassed = input.asObservable().filterByAssociatedType(Input.PlayerSurpassedModel.self)
+            .append(weak: self)
+            .map { vm, _ in (vm, -vm.surpassingTax) }
+        
+        let scoreUpdates = Observable.merge(addScore, playerSurpassed)
             .withLatestFrom(score) { ($0.0, $0.1, $1) }
-            .map { vc, input, currentScore -> [Output.ScoreChangedModel] in
-                let newScore = currentScore + input.score
+            .map { vc, inputScore, currentScore -> [Output.ScoreChangedModel] in
+                let newScore = currentScore + inputScore
                 
                 return Array(min(currentScore, newScore)...max(currentScore, newScore))
                     .sorted { abs($0.distance(to: currentScore)) < abs($1.distance(to: currentScore)) }
@@ -81,6 +95,9 @@ extension DicesPlayerViewModel {
     enum GamePhase {
         case phaseOne
         case phaseTwo
+    }
+    private struct Values {
+        static let quickDrawsCount = 5
     }
 }
 

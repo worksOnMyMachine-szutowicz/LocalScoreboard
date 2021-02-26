@@ -14,9 +14,9 @@ class DicesViewModel: RxInputOutput<DicesViewModelInput, DicesViewModelOutput>, 
     
     private let players: [String]
     
-    init(players: [String]) {
+    init(players: [String], storageService: StorageServiceInterface) {
         self.players = players
-        viewData = .init(boardViewModel: DicesBoardViewModel(players: players))
+        viewData = .init(boardViewModel: DicesBoardViewModel(players: players, storageService: storageService))
         
         super.init()
         

@@ -20,13 +20,14 @@ class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, Inpu
     private let firstPassage = 301..<400
     private let secondPassage = 701..<800
     
-    private let quickDraws = [-10, 20, 100, 50, 40, 30]
+    private let quickDraws: [Int]
     
-    init(playerName: String, gamePhase: DicesPlayerViewModel.GamePhase, currentScore: Int) {
+    init(playerName: String, gamePhase: DicesPlayerViewModel.GamePhase, currentScore: Int, quickDraws: [Int]) {
         viewData = .init(playerName: playerName, scoresSource: [operations.map { $0.description }, data.map { String($0) }],
                          quickDrawsSource: quickDraws.map { String($0) })
         self.gamePhase = gamePhase
         self.currentScore = currentScore
+        self.quickDraws = quickDraws
         
         super.init()
         setupBindigs()
@@ -61,8 +62,6 @@ class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, Inpu
                 return .init(score: score, resultType: .warning, message: String(format: "1000dices.input.warning.passage".localized, arguments: [String(score), String((currentScore + score).distanceToNearestHundred)]))
         
             // .ok
-            case let scoreData where isPhaseOneCompleted(gamePhase: scoreData.gamePhase, score: scoreData.score):
-                return .init(score: score - phaseOneTax, resultType: .ok, message: "")
             default:
                 return .init(score: score, resultType: .ok, message: "")
         }
@@ -90,11 +89,6 @@ class DicesInputPopoverViewModel: RxInputOutput<InputPopoverViewModelInput, Inpu
         
         return firstPassage.firstHalf.contains(currentScore + score) ||
             secondPassage.firstHalf.contains(currentScore + score)
-    }
-    
-    // .ok
-    private func isPhaseOneCompleted(gamePhase: DicesPlayerViewModel.GamePhase, score: Int) -> Bool {
-        gamePhase == .phaseOne && score >= phaseOneTax
     }
 }
 

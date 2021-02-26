@@ -19,7 +19,7 @@ enum DicesViewModelInput: EnumWithAssociatedValue {
     case newGameDataRequest(NewGameDataRequest)
     
     struct NewGameDataRequest { }
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .newGameDataRequest(let associatedValue):
             return associatedValue
@@ -34,7 +34,7 @@ enum DicesViewModelOutput: EnumWithAssociatedValue {
     struct FinishGameModel { let winner: String }
     struct StartNewGameModel { let players: [String] }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .finishGame(let associatedValue):
             return associatedValue

@@ -16,7 +16,7 @@ class RxInputOutput<I, O> {
 
     let input = PublishRelay<I>()
     let outputRelay = PublishRelay<O>()
-    var output: Driver<Output>{
+    var output: Driver<Output> {
         outputRelay.asDriver(onErrorRecover: { _ in .empty() })
     }
 }
@@ -26,7 +26,14 @@ class RxOutput<O> {
     let disposeBag = DisposeBag()
 
     let outputRelay = PublishRelay<O>()
-    var output: Driver<Output>{
+    var output: Driver<Output> {
         outputRelay.asDriver(onErrorRecover: { _ in .empty() })
     }
+}
+
+class RxRequestable<R> {
+    typealias Request = R
+    let disposeBag = DisposeBag()
+    
+    let request = PublishSubject<ResultableRequest>()
 }

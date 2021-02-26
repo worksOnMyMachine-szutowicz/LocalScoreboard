@@ -15,7 +15,7 @@
 		1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB1272C0418F6892326E5D3 /* NewGameViewController.swift */; };
 		1BB124D83DC3089F4B834297 /* LocalScoreboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12915288E385531054EC3 /* LocalScoreboardTests.swift */; };
 		1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB125C14E734F96E8A46E39 /* DescribedTextFieldView.swift */; };
-		1BB125E6EB73980C64B63C60 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12BC7A88A36DF705771C6 /* ViewControllerFactory.swift */; };
+		1BB125E6EB73980C64B63C60 /* AppCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12BC7A88A36DF705771C6 /* AppCoordinatorFactory.swift */; };
 		1BB126C5E9F6356535FF425E /* UIView+Fill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12310E5C3581595166933 /* UIView+Fill.swift */; };
 		1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB12E8704FF864EB553BD36 /* ViewConstans.swift */; };
 		1BB127C99D765FE285D0489A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BB12475DA95427D0FD3F47A /* LaunchScreen.storyboard */; };
@@ -34,6 +34,9 @@
 		F21EFBA925E5BE3F00BEFF4F /* DicesViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21EFBA825E5BE3F00BEFF4F /* DicesViewModelInterface.swift */; };
 		F21EFBAE25E5BEE100BEFF4F /* DicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21EFBAD25E5BEE100BEFF4F /* DicesViewModel.swift */; };
 		F21EFBB325E5C65000BEFF4F /* BlurredBackgroundUIPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21EFBB225E5C65000BEFF4F /* BlurredBackgroundUIPresentationController.swift */; };
+		F22CE73025E7BCDF00EAA745 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CE72F25E7BCDF00EAA745 /* Storage.swift */; };
+		F22CE73625E7C4EE00EAA745 /* NSObject+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CE73525E7C4EE00EAA745 /* NSObject+ClassName.swift */; };
+		F22CE73E25E7C79F00EAA745 /* NSManagedObjectContext+CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CE73D25E7C79F00EAA745 /* NSManagedObjectContext+CRUD.swift */; };
 		F248282825C40B43002239E3 /* NewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248282725C40B43002239E3 /* NewPlayerView.swift */; };
 		F248282D25C417C8002239E3 /* NewPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */; };
 		F248283225C4181A002239E3 /* NewPlayerViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */; };
@@ -57,11 +60,15 @@
 		F27A764725DE9B5400A014E8 /* UIViewController+RxOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */; };
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
 		F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GameData.swift */; };
+		F29ED48325E9228200C1825F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29ED48225E9228200C1825F /* StorageService.swift */; };
+		F29ED48825E9229600C1825F /* StorageServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29ED48725E9229600C1825F /* StorageServiceInterface.swift */; };
 		F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0979125C7E93400C954A4 /* BackgroundView.swift */; };
 		F2C7791A25DD5DB200FD3947 /* DecisionAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C7791925DD5DB200FD3947 /* DecisionAlertPresentationController.swift */; };
 		F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */; };
 		F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */; };
+		F2D63EDF25E95996005865E5 /* Observable+ResultableRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D63EDE25E95996005865E5 /* Observable+ResultableRequest.swift */; };
 		F2E195E725C87EA80074AA9D /* TextField+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E195E625C87EA80074AA9D /* TextField+Padding.swift */; };
+		F2E57D5025E9A1D5004B6321 /* LocalScoreboard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2E57D4E25E9A1D5004B6321 /* LocalScoreboard.xcdatamodeld */; };
 		F2EDF60B25D461E900835288 /* DicesScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EDF60A25D461E900835288 /* DicesScoreView.swift */; };
 		F2F9B57025E421A900A761B9 /* DicesBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9B56F25E421A900A761B9 /* DicesBoardViewModel.swift */; };
 		F2F9B57825E4266B00A761B9 /* DicesBoardViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F9B57725E4266B00A761B9 /* DicesBoardViewModelInterface.swift */; };
@@ -88,7 +95,7 @@
 
 /* Begin PBXFileReference section */
 		17AC5EDEC769CBD52A014A7B /* Pods-LocalScoreboardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboardTests.release.xcconfig"; path = "Target Support Files/Pods-LocalScoreboardTests/Pods-LocalScoreboardTests.release.xcconfig"; sourceTree = "<group>"; };
-		1BB1218E66A0A4D93BBFDD92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		1BB1218E66A0A4D93BBFDD92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BB1223C25BE299382FDEFA2 /* GameHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHeaderView.swift; sourceTree = "<group>"; };
 		1BB12310E5C3581595166933 /* UIView+Fill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Fill.swift"; sourceTree = "<group>"; };
 		1BB12469EFB87711AE5E8AE8 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -103,7 +110,7 @@
 		1BB12AFA59C4A060148680B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BB12B61C930E09EE48BCB55 /* String+Localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		1BB12B8415829330650FA631 /* LocalScoreboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalScoreboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1BB12BC7A88A36DF705771C6 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		1BB12BC7A88A36DF705771C6 /* AppCoordinatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinatorFactory.swift; sourceTree = "<group>"; };
 		1BB12D2F9A24E58C1001DC58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		1BB12D3AC9374DBC54E0E572 /* LocalScoreboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalScoreboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BB12D5517AEE05B8531C394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +132,9 @@
 		F21EFBA825E5BE3F00BEFF4F /* DicesViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewModelInterface.swift; sourceTree = "<group>"; };
 		F21EFBAD25E5BEE100BEFF4F /* DicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesViewModel.swift; sourceTree = "<group>"; };
 		F21EFBB225E5C65000BEFF4F /* BlurredBackgroundUIPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredBackgroundUIPresentationController.swift; sourceTree = "<group>"; };
+		F22CE72F25E7BCDF00EAA745 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		F22CE73525E7C4EE00EAA745 /* NSObject+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+ClassName.swift"; sourceTree = "<group>"; };
+		F22CE73D25E7C79F00EAA745 /* NSManagedObjectContext+CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+CRUD.swift"; sourceTree = "<group>"; };
 		F248282725C40B43002239E3 /* NewPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerView.swift; sourceTree = "<group>"; };
 		F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerViewModel.swift; sourceTree = "<group>"; };
 		F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerViewModelInterface.swift; sourceTree = "<group>"; };
@@ -148,11 +158,15 @@
 		F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+RxOutput.swift"; sourceTree = "<group>"; };
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
 		F27D48D325C5B75800BF02D0 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		F29ED48225E9228200C1825F /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		F29ED48725E9229600C1825F /* StorageServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceInterface.swift; sourceTree = "<group>"; };
 		F2A0979125C7E93400C954A4 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		F2C7791925DD5DB200FD3947 /* DecisionAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionAlertPresentationController.swift; sourceTree = "<group>"; };
 		F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModelInterface.swift; sourceTree = "<group>"; };
+		F2D63EDE25E95996005865E5 /* Observable+ResultableRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+ResultableRequest.swift"; sourceTree = "<group>"; };
 		F2E195E625C87EA80074AA9D /* TextField+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Padding.swift"; sourceTree = "<group>"; };
+		F2E57D4F25E9A1D5004B6321 /* LocalScoreboard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalScoreboard.xcdatamodel; sourceTree = "<group>"; };
 		F2EDF60A25D461E900835288 /* DicesScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesScoreView.swift; sourceTree = "<group>"; };
 		F2F9B56F25E421A900A761B9 /* DicesBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardViewModel.swift; sourceTree = "<group>"; };
 		F2F9B57725E4266B00A761B9 /* DicesBoardViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesBoardViewModelInterface.swift; sourceTree = "<group>"; };
@@ -218,6 +232,7 @@
 		1BB120A698AE500863E45998 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F22CE73425E7C4DC00EAA745 /* Storage */,
 				F248284825C42176002239E3 /* Rx */,
 				1BB128225FAF746836DE6706 /* Array+Constraints.swift */,
 				1BB12B61C930E09EE48BCB55 /* String+Localized.swift */,
@@ -293,15 +308,16 @@
 		1BB12FB1BF8498D386C7ADDE /* LocalScoreboard */ = {
 			isa = PBXGroup;
 			children = (
-				1BB1218E66A0A4D93BBFDD92 /* Info.plist */,
-				1BB128DF5DC3AD07F5BFBB1F /* AppDelegate.swift */,
-				1BB12469EFB87711AE5E8AE8 /* AppCoordinator.swift */,
-				1BB12BC7A88A36DF705771C6 /* ViewControllerFactory.swift */,
-				F27D48D325C5B75800BF02D0 /* GameData.swift */,
+				F2A275F025E6DB1B00E1C55E /* Storage */,
 				1BB124931FA4576F1A2E7C93 /* Resources */,
 				1BB120A698AE500863E45998 /* Extensions */,
 				1BB124F0C31E2F455C3F42E4 /* Dices */,
 				1BB1205CAC59D159C678C3D1 /* Common */,
+				1BB12469EFB87711AE5E8AE8 /* AppCoordinator.swift */,
+				1BB128DF5DC3AD07F5BFBB1F /* AppDelegate.swift */,
+				1BB12BC7A88A36DF705771C6 /* AppCoordinatorFactory.swift */,
+				F27D48D325C5B75800BF02D0 /* GameData.swift */,
+				1BB1218E66A0A4D93BBFDD92 /* Info.plist */,
 			);
 			path = LocalScoreboard;
 			sourceTree = "<group>";
@@ -336,6 +352,15 @@
 			path = InputPopover;
 			sourceTree = "<group>";
 		};
+		F22CE73425E7C4DC00EAA745 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				F22CE73525E7C4EE00EAA745 /* NSObject+ClassName.swift */,
+				F22CE73D25E7C79F00EAA745 /* NSManagedObjectContext+CRUD.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		F248284825C42176002239E3 /* Rx */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +369,7 @@
 				F248283B25C41A75002239E3 /* RxInputOutput.swift */,
 				F211718125C425F400880DA4 /* Observable+Weak.swift */,
 				F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */,
+				F2D63EDE25E95996005865E5 /* Observable+ResultableRequest.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -395,6 +421,17 @@
 				F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */,
 			);
 			path = NewGame;
+			sourceTree = "<group>";
+		};
+		F2A275F025E6DB1B00E1C55E /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				F22CE72F25E7BCDF00EAA745 /* Storage.swift */,
+				F29ED48225E9228200C1825F /* StorageService.swift */,
+				F29ED48725E9229600C1825F /* StorageServiceInterface.swift */,
+				F2E57D4E25E9A1D5004B6321 /* LocalScoreboard.xcdatamodeld */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		F2C7791825DD5D8700FD3947 /* DecisionAlert */ = {
@@ -641,10 +678,14 @@
 				F21EFBB325E5C65000BEFF4F /* BlurredBackgroundUIPresentationController.swift in Sources */,
 				F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */,
 				F248282825C40B43002239E3 /* NewPlayerView.swift in Sources */,
-				1BB125E6EB73980C64B63C60 /* ViewControllerFactory.swift in Sources */,
+				F29ED48825E9229600C1825F /* StorageServiceInterface.swift in Sources */,
+				1BB125E6EB73980C64B63C60 /* AppCoordinatorFactory.swift in Sources */,
 				F2F9B57025E421A900A761B9 /* DicesBoardViewModel.swift in Sources */,
+				F22CE73625E7C4EE00EAA745 /* NSObject+ClassName.swift in Sources */,
 				F248595925D1012100F8EB1E /* DicesPlayerView.swift in Sources */,
+				F2E57D5025E9A1D5004B6321 /* LocalScoreboard.xcdatamodeld in Sources */,
 				1BB129B8A31B2F701AA58952 /* String+Localized.swift in Sources */,
+				F29ED48325E9228200C1825F /* StorageService.swift in Sources */,
 				F25C771225DD1AAF00455B2E /* DecisionAlertViewController.swift in Sources */,
 				F2E195E725C87EA80074AA9D /* TextField+Padding.swift in Sources */,
 				F248596825D105F200F8EB1E /* DicesFactory.swift in Sources */,
@@ -655,6 +696,7 @@
 				F248284125C42166002239E3 /* Observable+Filter.swift in Sources */,
 				F248283725C4193A002239E3 /* EnumWithAssociatedValue.swift in Sources */,
 				F2F9B57825E4266B00A761B9 /* DicesBoardViewModelInterface.swift in Sources */,
+				F22CE73E25E7C79F00EAA745 /* NSManagedObjectContext+CRUD.swift in Sources */,
 				F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */,
 				F21171A125C45FFC00880DA4 /* DescribedTextFieldViewModel.swift in Sources */,
 				1BB122BDFA2CDE9BF159CDF7 /* NewGameViewController.swift in Sources */,
@@ -663,6 +705,7 @@
 				1BB1254430D36E29E0C8B159 /* DescribedTextFieldView.swift in Sources */,
 				F252197025CB4AD1008701DD /* DicesBoardView.swift in Sources */,
 				F252196125CB4049008701DD /* DicesViewController.swift in Sources */,
+				F22CE73025E7BCDF00EAA745 /* Storage.swift in Sources */,
 				F27A764725DE9B5400A014E8 /* UIViewController+RxOutput.swift in Sources */,
 				F248596325D104C900F8EB1E /* DicesPlayerViewModelInterface.swift in Sources */,
 				F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */,
@@ -680,6 +723,7 @@
 				F248595E25D104B000F8EB1E /* DicesPlayerViewModel.swift in Sources */,
 				F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */,
 				F20E57ED25DAD80B006F0BD0 /* InputPopoverViewController.swift in Sources */,
+				F2D63EDF25E95996005865E5 /* Observable+ResultableRequest.swift in Sources */,
 				1BB1294457B0CEE9DF5F4B5B /* UIStackView+Init.swift in Sources */,
 				1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */,
 				F248283225C4181A002239E3 /* NewPlayerViewModelInterface.swift in Sources */,
@@ -968,6 +1012,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F2E57D4E25E9A1D5004B6321 /* LocalScoreboard.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F2E57D4F25E9A1D5004B6321 /* LocalScoreboard.xcdatamodel */,
+			);
+			currentVersion = F2E57D4F25E9A1D5004B6321 /* LocalScoreboard.xcdatamodel */;
+			path = LocalScoreboard.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1BB128E4F790DB425EF177BB /* Project object */;
 }

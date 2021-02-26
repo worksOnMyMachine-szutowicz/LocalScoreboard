@@ -11,21 +11,16 @@ protocol AppCoordinatorInterface {
 }
 
 class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, DicesViewControllerDelegate, DicesPlayerViewDelegate, InputPopoverViewControllerDelegate {
-    private let window: UIWindow
     private let navigationController: UINavigationController
-    private let viewControllerFactory: ViewControllerFactoryProtocol
+    private let viewControllerFactory: AppCoordinatorFactoryProtocol
 
-    init(window: UIWindow, navigationController: UINavigationController, viewControllerFactory: ViewControllerFactoryProtocol) {
-        self.window = window
+    init(navigationController: UINavigationController, viewControllerFactory: AppCoordinatorFactoryProtocol) {
         self.navigationController = navigationController
         self.viewControllerFactory = viewControllerFactory
     }
 
     func start() {
         navigationController.setViewControllers([viewControllerFactory.createNewGameViewController(delegate: self)], animated: true)
-
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
     }
     
     func pushRulesView(rulesViewData: RulesViewController.ViewData) {

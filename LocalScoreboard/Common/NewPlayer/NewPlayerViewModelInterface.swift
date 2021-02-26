@@ -27,7 +27,7 @@ enum NewPlayerViewModelInput: EnumWithAssociatedValue {
     struct DeleteTappedModel { }
     struct ValidateModel { }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .updateIndex(let associatedValue):
             return associatedValue
@@ -50,7 +50,7 @@ enum NewPlayerViewModelOutput: EnumWithAssociatedValue {
         let userInput: String
     }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .delete(let associatedValue):
             return associatedValue

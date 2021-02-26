@@ -22,7 +22,7 @@ enum NewGameViewModelInput: EnumWithAssociatedValue {
     struct PlayButtonTappedModel { }
     struct RulesButtonTappedModel { }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .playButtonTapped(let associatedValue):
             return associatedValue
@@ -42,7 +42,7 @@ enum NewGameViewModelOutput: EnumWithAssociatedValue {
         let players: [String]
     }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .showRulesView(let associatedValue):
             return associatedValue

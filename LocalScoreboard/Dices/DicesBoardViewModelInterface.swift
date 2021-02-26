@@ -19,7 +19,7 @@ enum DicesBoardViewModelOutput: EnumWithAssociatedValue {
     
     struct FinishGameModel { let winner: String }
     
-    func associatedValue() -> Any {
+    var associatedValue: Any {
         switch self {
         case .finishGame(let associatedValue):
             return associatedValue
