@@ -11,8 +11,9 @@ import UIKit
 class InputPopoverPresentationController: BlurredBackgroundUIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         let bounds = presentingViewController.view.bounds
-        let size = CGSize(width: bounds.width, height: bounds.height * Values.heightMultiplier)
-        let origin = CGPoint(x: 0, y: bounds.maxY - size.height)
+        let width = min(bounds.width, bounds.height)
+        let size = CGSize(width: width, height: bounds.height * Values.heightMultiplier)
+        let origin = CGPoint(x: 1/2 * bounds.width - 1/2 * width, y: bounds.maxY - size.height)
         
         return CGRect(origin: origin, size: size)
     }
