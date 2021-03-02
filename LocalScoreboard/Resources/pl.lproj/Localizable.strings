@@ -1,1 +1,72 @@
-"newGame.title" = "Nowa gra";
+"global.back" = "< Wstecz";
+"global.quit" = "Wyjdź";
+"global.ok" = "Ok";
+"global.cancel" = "Anuluj";
+"global.save" = "Zapisz";
+"global.fullRules" = "Pełne zasady";
+"global.+" = "+";
+"global.-" = "-";
+"global.warning" = "Uwaga";
+
+"newGame.addPlayer.title" = "Gracze";
+"newGame.addPlayer.button" = "+";
+"newGame.addPlayer.player" = "Gracz %@";
+"newGame.addPlayer.delete" = "-";
+"newGame.play" = "Zagrajmy!";
+
+"inputPopover.title" = "Dodaj wynik dla: %@";
+"inputPopover.quickDraws" = "Szybki wybór";
+"inputPopover.selection" = "Wybór";
+
+"quitGame.title" = "Wyjście z gry";
+"quitGame.message" = "Na pewno chcesz wyjść? Dane obecnej gry zostaną otracone";
+
+//Games data
+
+//1000 Dices
+"1000dices.title" = "1000 Kości";
+"1000dices.description" = "Rzucaj kośćmi, twórz układy i bądź pierwszym graczem, który osiągnie 1000 punktów!";
+"1000dices.rules.requirements.title" = "Wymagania";
+"1000dices.rules.requirements.content" = "Potrzebujesz 5 kości, to wszystko! Jakiś znajomek albo kilku do wspólnej gierki też nie zaszkodzi.";
+"1000dices.rules.objective.title" = "Cel";
+"1000dices.rules.objective.content" = "Być pierwszym, który osiągnie 1000 punktów.";
+"1000dices.rules.generalRules.title" = "Zasady ogólne";
+"1000dices.rules.generalRules.content" = "Tura gracza polega na rzucaniu kośćmi i zbieraniu tych, które punktują. Kiedy wyrzucisz jedną lub więcej punktującą kość MOŻESZ spróbować szczęścia i rzucić kośćmi jeszcze raz zostawiając przynajmniej jedną na stole. W przypadku, gdy uda Ci się wyrzucić wszystkie pięć punktujących kości MUSISZ rzucić jeszcze raz wszystkimi, zatrzymując dotychczasowy wynik w pamięci. Tura kończy się gdy gracz nie wyrzuci w ostatnim rzucie żadnej punktującej kości, co skutkuje wynikiem równym 0 oraz specyficzną dla fazy karą dla niego, lub gdy poprosi o zapisanie jego aktualnego wyniku rezygnując z prawa do dalszego rzucania kośćmi. Aktualny wynik jest sumą specyficznych dla fazy wartości już wyrzuconych, punktujących kości.
+Gra jest podzielna na dwie fazy opisane szczegółowo poniżej.
+Terminologia:
+Wyrzucona kość z jedną kropką na górze -> 1.
+Wyrzucona kość z dwoma kropkami na górze -> 2.
+Wyrzucona kość z trzema kropkami na górze -> 3.
+...
+Wyrzucona kość z sześcioma kropkami na górze -> 6.";
+"1000dices.rules.phaseOneRules.title" = "Zasady Fazy Pierwszej";
+"1000dices.rules.phaseOneRules.content" = "Żeby wygrać grę trzeba najpierw do niej wejść. W Fazie Pierwszej potrzebujesz uzyskać przynajmniej 50 punktów w turze, aby ją ukończyć i rozpoocząć Fazę Drugą z wynikiem 0 punktów. Jakakolwiek nadwyżka ponad minimalne 50 punktów będzie dopisana do wyniku w Fazie Drugiej. Cały myk polega na tym, że punktują tylko następujące kości: 1. (10 punktów) i 5. (5 punktów). W zamian za to nie ma żadnej kary za niewyrzucenie żadnej punktującej kości w ostatnim rzucie, poza, rzecz jasna, stratą kolejki. Tak więc zarządzaj swoimi rzutami mądrze i w końcu wyjdziesz, prędzej czy później się uda!";
+"1000dices.rules.phaseTwoRules.title" = "Zasady Fazy Drugiej";
+"1000dices.rules.phaseTwoRules.content" = "W Fazie Drugiej sprawy stają się nieco bardziej skomplikowane. Trwa ona już do końca gry, co oznacza wiele punktów czekających na zdobycie. Na szczęście, poza zasadami punktowania z fazy pierwszej, faza druga wjeżdża, niczym husaria pod Wiedniem, z tak zwanymi układami. Układy to najprościej rzecz ujmując trzy, cztery lub pięć tych samych kości, które zostały wyrzucone w POJEDYNCZYM RZUCIE. Raz wyrzucony układ nie może być rozdzielany. Ich wynik ustalany jest z wykorzystaniem następującego wzoru:
+Rn * 10 * 2^Ssd
+gdzie Rn oznacza \"Wyrzucony numer\", a Ssd \"Nadwyżke kości tworzących układ\"
+Kilka przykładów:
+3. 3. 3. 6. 2. -> 30
+4. 4. 4. 4. 4. -> 160
+1. 1. 1. 1. 3. -> 200
+I jeszcze kilka uwzględniając zasady punktowania z fazy pierwszej:
+2. 2. 2. 5. 3. -> 25
+3. 3. 3. 5. 5. -> 40
+6. 6. 6. 6. 1. -> 130
+
+Dobre wieści dotyczące fazy drugiej zostały wyjaśnione, lecz czym byłaby beczka miodu bez łyżki dziegciu? Oto lista:
+1. Kara za niewyrzucenie żadnej punktującej kości w PIERWSZYM rzucie kolejki to -10 punktów.
+2. Po przekroczeniu 100 punktów uważaj na pozostałych graczy! Kiedy którykolwiek z nich WYPRZEDZI Cię na liście wyników zostaniesz obciążony -100 punktami. Jednakże, jeśli ten ktoś zrówna się idealnie z Twoim wynikiem to nikt nie zostanie poszkodowany.
+3. Na drodzę do 1000 punktów znajdują się dwa przejścia: z 300 na 400 punktów oraz z 700 na 800 punktów, wyłączając wartości graniczne. Przejście oznacza, że nie możesz zapisać wyniku w danym przedziale więcej niż raz. Oznacza to, że jesteś zmuszony do wyrzucenia dużej liczby punktów zamiast trzymać się taktyki małych kroków przez całą grę.
+4. Musisz uzbierać dokładnie 1000 punktów. Nie będziesz w stanie zapisać choćby punktu ponad to.
+
+Powodzenia!";
+"1000dices.input.error.phaseOne" = "Musisz uzyskać przynajmniej %@ punktów aby wejść do gry!
+Sprawdź Zasady -> Zasady Fazy Pierwszej po więcej informacji";
+"1000dices.input.error.passage" = "Jesteś na przejściu!
+Sprawdź Zasady -> Zasady Fazy Drugiej -> Punkt 3. po więcej informacji";
+"1000dices.input.error.surplus" = "Nie możesz przekroczyć 1000 punktów!
+Sprawdź Zasady -> Zasady Fazy Drugiej -> Punkt 4. po więcej informacji";
+"1000dices.input.warning.passage" = "Próbujesz dodać %@ punktów co umiejscowi Cię w dolnej połowie przejścia. Oznacza to, że będziesz potrzebować przynajmniej %@ punktów w następnej kolejce. Dodajemy?";
+"1000dices.finishGame.title" = "Gracz %@ zwyciężył!";
+"1000dices.finishGame.message" = "Jeszcze jedna rundka z tymi samymi graczami?";

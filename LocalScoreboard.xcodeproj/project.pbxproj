@@ -122,6 +122,7 @@
 		A3C995F0EBEDD478F2BB2B66 /* Pods-LocalScoreboardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboardTests.debug.xcconfig"; path = "Target Support Files/Pods-LocalScoreboardTests/Pods-LocalScoreboardTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AFC5FE019A2E8032E5A1B81B /* Pods-LocalScoreboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboard.debug.xcconfig"; path = "Target Support Files/Pods-LocalScoreboard/Pods-LocalScoreboard.debug.xcconfig"; sourceTree = "<group>"; };
 		BF8D5336A17A12548104D269 /* Pods-LocalScoreboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboard.release.xcconfig"; path = "Target Support Files/Pods-LocalScoreboard/Pods-LocalScoreboard.release.xcconfig"; sourceTree = "<group>"; };
+		F20204D625EE9A6C0063356D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F20E57EC25DAD80B006F0BD0 /* InputPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverViewController.swift; sourceTree = "<group>"; };
 		F211718125C425F400880DA4 /* Observable+Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Weak.swift"; sourceTree = "<group>"; };
 		F211718625C4279A00880DA4 /* NewGameViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewFactory.swift; sourceTree = "<group>"; };
@@ -758,6 +759,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F25A91B825C157B6002B9C51 /* en */,
+				F20204D625EE9A6C0063356D /* pl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

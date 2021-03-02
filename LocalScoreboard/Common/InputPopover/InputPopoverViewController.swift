@@ -52,9 +52,9 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         titleLabel.attributedText = .init(string: String(format: "inputPopover.title".localized, viewModel.viewData.playerName), attributes: ViewConstants.highlightedLabelAttributes)
         titleLabel.textAlignment = .center
-        quickDrawsLabel.attributedText = .init(string: "Quick draws", attributes: ViewConstants.labelAttributes)
+        quickDrawsLabel.attributedText = .init(string: "inputPopover.quickDraws".localized, attributes: ViewConstants.labelAttributes)
         quickDrawsLabel.textAlignment = .center
-        selectionLabel.attributedText = .init(string: "Selection", attributes: ViewConstants.labelAttributes)
+        selectionLabel.attributedText = .init(string: "inputPopover.selection".localized, attributes: ViewConstants.labelAttributes)
         selectionLabel.textAlignment = .center
         pickerView.delegate = self
         pickerView.dataSource = self
