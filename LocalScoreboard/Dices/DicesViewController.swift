@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 
 protocol DicesViewControllerDelegate: DicesPlayerViewDelegate {
+    func quitGameConfirmation() -> Observable<DecisionAlertViewController.Decision>
     func quitGame()
     func finishGame(winner: String) -> Observable<DecisionAlertViewController.Decision>
     func startNewGame(players: [String])
@@ -67,6 +68,12 @@ class DicesViewController: BackgroundedUIViewController {
     private func setupBindings() {
         quitButton.rx.tap
             .append(weak: self)
+            .flatMap { vc, _ -> Observable<DecisionAlertViewController.Decision> in
+                guard let delegate = vc.delegate else { return .empty() }
+                
+                return delegate.quitGameConfirmation()
+            }.filter { $0 == .quit }
+            .append(weak: self)
             .subscribe(onNext: { vc, _ in
                 vc.delegate?.quitGame()
             }).disposed(by: disposeBag)
@@ -79,7 +86,7 @@ class DicesViewController: BackgroundedUIViewController {
         
         let finishGameRequest =  viewModel.output.asObservable().filterByAssociatedType(VMOutput.FinishGameModel.self)
             .append(weak: self)
-            .flatMapFirst { vc, output -> Observable<DecisionAlertViewController.Decision>in
+            .flatMapFirst { vc, output -> Observable<DecisionAlertViewController.Decision> in
                 guard let delegate = vc.delegate else { return .empty() }
                 
                 return delegate.finishGame(winner: output.winner)

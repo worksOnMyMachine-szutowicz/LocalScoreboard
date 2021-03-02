@@ -34,6 +34,13 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, Di
         }
     }
     
+    func quitGameConfirmation() -> Observable<DecisionAlertViewController.Decision> {
+        let decisionAlertController = viewControllerFactory.createDecisionAlertViewController(viewData: .init(title: "quitGame.title".localized, message: "quitGame.message".localized, firstButton: .quit, secondButton: .cancel))
+        navigationController.present(decisionAlertController, animated: true, completion: nil)
+        
+        return decisionAlertController.rx.output
+    }
+    
     func quitGame() {
         navigationController.setViewControllers([viewControllerFactory.createNewGameViewController(delegate: self)], animated: true)
     }

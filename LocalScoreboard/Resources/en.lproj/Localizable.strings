@@ -16,6 +16,9 @@
 
 "inputPopover.title" = "Add score for: %@";
 
+"quitGame.title" = "Quit game";
+"quitGame.message" = "Do You really want to quit game? Current game date will be lost";
+
 //Games data
 
 //1000 Dices
