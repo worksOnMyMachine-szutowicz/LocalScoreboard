@@ -42,8 +42,6 @@ class DicesViewController: BackgroundedUIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         layout()
     }
     
@@ -51,17 +49,17 @@ class DicesViewController: BackgroundedUIViewController {
         view.addSubviews([quitButton, boardView, rulesButton])
         [quitButton, boardView, rulesButton].disableAutoresizingMask()
         
-        [quitButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         quitButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
+        [quitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         quitButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.defaultSheetMargin),
          quitButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Values.navigationButtonTopPadding)].activate()
         
-        [boardView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         boardView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-         boardView.topAnchor.constraint(equalTo: quitButton.bottomAnchor),
+        [boardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         boardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+         boardView.topAnchor.constraint(equalTo: quitButton.bottomAnchor, constant: ViewConstants.gridPadding),
          boardView.bottomAnchor.constraint(equalTo: rulesButton.topAnchor, constant: -ViewConstants.gridPadding)].activate()
         
-        [rulesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
+        [rulesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.defaultSheetMargin),
          rulesButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
     }
     

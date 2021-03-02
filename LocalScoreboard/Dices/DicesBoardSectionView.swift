@@ -36,7 +36,7 @@ class DicesBoardSectionView: UIView {
         [title, content, contentSeparator, bottomSeparator].disableAutoresizingMask()
         
         [title.leadingAnchor.constraint(equalTo: leadingAnchor),
-         title.widthAnchor.constraint(equalToConstant: ViewConstants.sheetMargin),
+         title.widthAnchor.constraint(equalToConstant: ViewConstants.defaultSheetMargin),
          title.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
         
         [contentSeparator.leadingAnchor.constraint(equalTo: title.trailingAnchor),
@@ -44,7 +44,7 @@ class DicesBoardSectionView: UIView {
          contentSeparator.topAnchor.constraint(equalTo: topAnchor),
          contentSeparator.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
         
-        [content.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMargin),
+        [content.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.defaultSheetMargin),
          content.trailingAnchor.constraint(equalTo: trailingAnchor),
          content.topAnchor.constraint(equalTo: topAnchor),
          content.bottomAnchor.constraint(equalTo: bottomSeparator.topAnchor)].activate()

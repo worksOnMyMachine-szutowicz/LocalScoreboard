@@ -12,19 +12,22 @@ class BackgroundView: UIView {
     private let verticalStackView = UIStackView(type: .verticalBackground)
     private let horizontalStackView = UIStackView(type: .horizontalBackground)
     
-    init(for view: UIView) {
+    init(for view: UIView, withMargin margin: CGFloat) {
         super.init(frame: .zero)
         
         backgroundColor = Colors.background
+        clipsToBounds = true
         
-        layout(bounds: view.bounds)
+        layout(bounds: view.bounds, margin: margin)
     }
     
     required init?(coder: NSCoder) {
         nil
     }
     
-    private func layout(bounds: CGRect) {
+    private func layout(bounds: CGRect, margin: CGFloat) {
+        let highlightedLineIndex = Int(margin / ViewConstants.backgroundGridSize)
+        
         let bottomUncoveredSpace = CGFloat(Int(bounds.height) % Int(ViewConstants.backgroundGridSize)) - ViewConstants.backgroundLineSize
         let rightUncoveredSpace = CGFloat(Int(bounds.width) % Int(ViewConstants.backgroundGridSize)) - ViewConstants.backgroundLineSize
         
@@ -38,7 +41,7 @@ class BackgroundView: UIView {
             verticalStackView.addArrangedSubview(createLineView(orientation: .row))
         }
         for index in 0...numberOfVerticalLines {
-            horizontalStackView.addArrangedSubview(createLineView(orientation: .column, highlighted: index == Values.highlightedLineIndex))
+            horizontalStackView.addArrangedSubview(createLineView(orientation: .column, highlighted: index == highlightedLineIndex))
         }
     }
     
@@ -56,10 +59,6 @@ class BackgroundView: UIView {
 }
 
 extension BackgroundView {
-    private struct Values {
-        static let highlightedLineIndex: Int = Int(ViewConstants.sheetMargin / ViewConstants.backgroundGridSize)
-    }
-    
     private enum Orientation {
         case row
         case column

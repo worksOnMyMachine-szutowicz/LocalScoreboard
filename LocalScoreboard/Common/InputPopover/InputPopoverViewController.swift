@@ -13,7 +13,7 @@ protocol InputPopoverViewControllerDelegate: class {
     func showInputWarning(with viewData: DecisionAlertViewController.ViewData, on vc: UIViewController) -> Observable<DecisionAlertViewController.Decision>
 }
 
-class InputPopoverViewController: UIViewController, OutputableViewController, UIViewControllerTransitioningDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class InputPopoverViewController: BackgroundedUIViewController, OutputableViewController, UIViewControllerTransitioningDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     typealias Output = Int?
     typealias VMInput = InputPopoverViewModelInput
     typealias VMOutput = InputPopoverViewModelOutput
@@ -23,6 +23,7 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
     private let titleLabel = UILabel()
     private let quickDrawsLabel = UILabel()
     private let quickDraws: [UIButton]
+    private let selectionContainer = UIView()
     private let selectionLabel = UILabel()
     private let pickerView = UIPickerView()
     private let errorLabel = UILabel()
@@ -36,7 +37,11 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
         return selections
     }
     
-    var outputSubject: PublishSubject<Output> = . init()
+    override var backgroundOptions: BackgroundedUIViewController.BackgroundOptions {
+        .init(margin: Values.quickDrawsWidth, cornerRounding: Values.cornerRounding)
+    }
+    
+    var outputSubject: PublishSubject<Output> = .init()
 
     init(viewModel: InputPopoverViewModelInterface, delegate: InputPopoverViewControllerDelegate) {
         self.viewModel = viewModel
@@ -48,8 +53,8 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
         modalPresentationStyle = .custom
         transitioningDelegate = self
         view.backgroundColor = Colors.background
-        view.layer.cornerRadius = Values.cornerRadius
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.layer.cornerRadius = Values.cornerRounding.value
+        view.layer.maskedCorners = Values.cornerRounding.corners
         titleLabel.attributedText = .init(string: String(format: "inputPopover.title".localized, viewModel.viewData.playerName), attributes: ViewConstants.highlightedLabelAttributes)
         titleLabel.textAlignment = .center
         quickDrawsLabel.attributedText = .init(string: "inputPopover.quickDraws".localized, attributes: ViewConstants.labelAttributes)
@@ -61,6 +66,9 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
         errorLabel.textAlignment = .center
         errorLabel.isHidden = true
         errorLabel.numberOfLines = 0
+        errorLabel.backgroundColor = Colors.backgroundHighlight
+        errorLabel.layer.masksToBounds = true
+        errorLabel.layer.cornerRadius = Values.cornerRounding.value
         
         setupBindings()
     }
@@ -103,36 +111,43 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
     }
     
     private func layout() {
-        view.addSubviews([titleLabel, selectionLabel, pickerView, errorLabel, cancelButton, saveButton])
-        [titleLabel, selectionLabel, pickerView, errorLabel, cancelButton, saveButton].disableAutoresizingMask()
+        view.addSubviews([titleLabel, selectionContainer, errorLabel, cancelButton, saveButton])
+        [titleLabel, selectionContainer, selectionLabel, pickerView, errorLabel, cancelButton, saveButton].disableAutoresizingMask()
+        
+        selectionContainer.addSubviews([selectionLabel, pickerView])
     
-        [titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.borderPadding),
-         titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.borderPadding),
-         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Values.borderPadding),
+        [titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ViewConstants.gridPadding),
          titleLabel.heightAnchor.constraint(equalToConstant: Values.labelHeight)].activate()
+        
+        [selectionContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+         selectionContainer.bottomAnchor.constraint(equalTo: errorLabel.topAnchor)].activate()
 
-        [selectionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+        [selectionLabel.centerXAnchor.constraint(equalTo: selectionContainer.centerXAnchor),
+         selectionLabel.topAnchor.constraint(equalTo: selectionContainer.topAnchor),
          selectionLabel.heightAnchor.constraint(equalToConstant: Values.labelHeight)].activate()
         
-        [pickerView.topAnchor.constraint(equalTo: selectionLabel.bottomAnchor),
-         pickerView.bottomAnchor.constraint(equalTo: errorLabel.topAnchor)].activate()
+        [pickerView.centerXAnchor.constraint(equalTo: selectionContainer.centerXAnchor),
+         pickerView.topAnchor.constraint(equalTo: selectionLabel.bottomAnchor),
+         pickerView.bottomAnchor.constraint(equalTo: selectionContainer.bottomAnchor)].activate()
         
         viewModel.viewData.quickDrawsSource.isEmpty ? layoutWithoutQuickDraws() : layoutWithQuickDraws()
 
-        [errorLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.borderPadding),
-         errorLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.borderPadding),
-         errorLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -Values.borderPadding),
+        [errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         errorLabel.widthAnchor.constraint(greaterThanOrEqualTo: view.widthAnchor, multiplier: Values.errorLabelWidthMultiplier),
+         errorLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -ViewConstants.gridPadding),
          errorLabel.heightAnchor.constraint(equalToConstant: Values.errorLabelHeight)].activate()
         
-        [cancelButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+        [cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
          cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
         
-        [saveButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        [saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
          saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
     }
     
     private func layoutWithQuickDraws() {
         let quickDrawsStackView = UIStackView(type: .verticalWithoutSpacing)
+        quickDrawsStackView.spacing = Values.quickDrawsSpacing
         view.addSubviews([quickDrawsLabel, quickDrawsStackView])
         [quickDrawsLabel, quickDrawsStackView].disableAutoresizingMask()
         
@@ -140,26 +155,23 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
             quickDrawsStackView.addArrangedSubview($0)
         }
         
-        [quickDrawsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.borderPadding),
-         quickDrawsLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Values.quickDrawsWidthMulitplier),
+        [quickDrawsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         quickDrawsLabel.widthAnchor.constraint(equalToConstant: Values.quickDrawsWidth),
          quickDrawsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
          quickDrawsLabel.heightAnchor.constraint(equalToConstant: Values.labelHeight)].activate()
         
-        [selectionLabel.leadingAnchor.constraint(equalTo: quickDrawsLabel.trailingAnchor),
-         selectionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.borderPadding)].activate()
-        
-        [quickDrawsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Values.borderPadding),
-         quickDrawsStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Values.quickDrawsWidthMulitplier),
+        [quickDrawsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         quickDrawsStackView.widthAnchor.constraint(equalToConstant: Values.quickDrawsWidth),
          quickDrawsStackView.topAnchor.constraint(equalTo: selectionLabel.bottomAnchor),
          quickDrawsStackView.bottomAnchor.constraint(equalTo: errorLabel.topAnchor, constant: -Values.quickDrawsBottomPadding)].activate()
         
-        [pickerView.leadingAnchor.constraint(equalTo: quickDrawsStackView.trailingAnchor),
-         pickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Values.borderPadding)].activate()
+        [selectionContainer.leadingAnchor.constraint(equalTo: quickDrawsStackView.trailingAnchor),
+         selectionContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -ViewConstants.gridPadding)].activate()
     }
     
     private func layoutWithoutQuickDraws() {
-        selectionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        [selectionContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         selectionContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -ViewConstants.gridPadding)].activate()
     }
     
     private func setupBindings() {
@@ -196,7 +208,7 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
             .append(weak: self)
             .subscribe(onNext: { vc, output in
                 vc.errorLabel.isHidden = false
-                vc.errorLabel.attributedText = .init(string: output.message, attributes: ViewConstants.errorLabelAttributes)
+                vc.errorLabel.attributedText = .init(string: output.message, attributes: ViewConstants.labelAttributes)
             }).disposed(by: disposeBag)
         
         for (index, quickDraw) in quickDraws.enumerated() {
@@ -218,12 +230,13 @@ class InputPopoverViewController: UIViewController, OutputableViewController, UI
 
 extension InputPopoverViewController {
     private struct Values {
-        static let cornerRadius: CGFloat = 20
-        static let borderPadding: CGFloat = 20
-        static let quickDrawsWidthMulitplier: CGFloat = 0.25
+        static let cornerRounding: (value: CGFloat, corners: CACornerMask) = (20, [.layerMinXMinYCorner, .layerMaxXMinYCorner])
+        static let quickDrawsWidth: CGFloat = 160
         static let quickDrawsBottomPadding: CGFloat = 10
+        static let quickDrawsSpacing: CGFloat = 5
         static let labelHeight: CGFloat = 40
         static let errorLabelHeight: CGFloat = 60
+        static let errorLabelWidthMultiplier: CGFloat = 0.75
         static let pickerItemPadding: CGFloat = 20
     }
     struct ViewData {
@@ -237,9 +250,9 @@ private extension UIButton {
     static func quickDraw(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.setAttributedTitle(.init(string: title, attributes: ViewConstants.labelAttributes), for: .normal)
-        button.layer.borderColor = Colors.backgroundLine.cgColor
-        button.layer.borderWidth = 1
+        button.backgroundColor = Colors.backgroundHighlight
         button.layer.cornerRadius = 10
+        button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         return button
     }
 }

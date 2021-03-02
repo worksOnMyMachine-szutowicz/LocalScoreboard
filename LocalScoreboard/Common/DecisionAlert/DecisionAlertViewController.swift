@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class DecisionAlertViewController: UIViewController, OutputableViewController, UIViewControllerTransitioningDelegate {
+class DecisionAlertViewController: BackgroundedUIViewController, OutputableViewController, UIViewControllerTransitioningDelegate {
     typealias Output = Decision
     private let viewData: ViewData
     private let disposeBag = DisposeBag()
@@ -22,6 +22,10 @@ class DecisionAlertViewController: UIViewController, OutputableViewController, U
     
     var outputSubject: PublishSubject<Output> = .init()
     
+    override var backgroundOptions: BackgroundedUIViewController.BackgroundOptions {
+        .init(margin: 0, cornerRounding: Values.cornerRounding)
+    }
+    
     init(viewData: ViewData) {
         self.viewData = viewData
         firstButton = UIButton.stickerButton(title: viewData.firstButton.localized)
@@ -32,16 +36,16 @@ class DecisionAlertViewController: UIViewController, OutputableViewController, U
         modalPresentationStyle = .custom
         transitioningDelegate = self
         view.backgroundColor = Colors.background
-        view.layer.cornerRadius = Values.cornerRadius
+        view.layer.cornerRadius = Values.cornerRounding.value
         titleLabel.attributedText = .init(string: viewData.title, attributes: ViewConstants.highlightedLabelAttributes)
         titleLabel.textAlignment = .center
         messageLabel.attributedText = .init(string: viewData.message, attributes: ViewConstants.labelAttributes)
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         
-        firstButton.layer.cornerRadius = Values.cornerRadius
+        firstButton.layer.cornerRadius = Values.cornerRounding.value
         firstButton.layer.maskedCorners = .layerMinXMaxYCorner
-        secondButton.layer.cornerRadius = Values.cornerRadius
+        secondButton.layer.cornerRadius = Values.cornerRounding.value
         secondButton.layer.maskedCorners = .layerMaxXMaxYCorner
         verticalButtonsSeparator.backgroundColor = Colors.backgroundLine
         horizontalButtonsSeparator.backgroundColor = Colors.backgroundLine
@@ -113,7 +117,7 @@ class DecisionAlertViewController: UIViewController, OutputableViewController, U
 
 extension DecisionAlertViewController {
     private struct Values {
-        static let cornerRadius: CGFloat = 20
+        static let cornerRounding: (value: CGFloat, corners: CACornerMask) = (20, [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         static let labelPadding: CGFloat = 20
         static let titleLabelHeight: CGFloat = 40
         static let buttonBordersSize: CGFloat = 2

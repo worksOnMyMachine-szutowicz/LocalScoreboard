@@ -42,7 +42,7 @@ class DescribedTextFieldView: UIView {
         heightAnchor.constraint(equalToConstant: Values.textFieldHeight).isActive = true
 
         [label.leadingAnchor.constraint(equalTo: leadingAnchor),
-         label.widthAnchor.constraint(equalToConstant: ViewConstants.sheetMargin),
+         label.widthAnchor.constraint(equalToConstant: ViewConstants.defaultSheetMargin),
          label.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
 
         [textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 2 * ViewConstants.padding),

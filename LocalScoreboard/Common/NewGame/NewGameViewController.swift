@@ -38,8 +38,6 @@ class NewGameViewController: BackgroundedUIViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-
         layout()
     }
 
@@ -47,19 +45,19 @@ class NewGameViewController: BackgroundedUIViewController {
         view.addSubviews([gameHeaderView, addPlayersView, rulesButton, playButton])
         [gameHeaderView, addPlayersView, rulesButton, playButton].disableAutoresizingMask()
         
-        [gameHeaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         gameHeaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        [gameHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         gameHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
          gameHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Values.topMargin)].activate()
         
-        [addPlayersView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         addPlayersView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        [addPlayersView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         addPlayersView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
          addPlayersView.topAnchor.constraint(equalTo: gameHeaderView.bottomAnchor, constant: ViewConstants.gridPadding)].activate()
         
-        [rulesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.sheetMargin),
+        [rulesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+         rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.defaultSheetMargin),
          rulesButton.topAnchor.constraint(equalTo: addPlayersView.bottomAnchor, constant: ViewConstants.gridPadding)].activate()
         
-        [playButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+        [playButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
          playButton.topAnchor.constraint(equalTo: rulesButton.bottomAnchor, constant: ViewConstants.gridPadding),
          playButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)].activate()
     }

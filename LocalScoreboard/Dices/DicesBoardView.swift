@@ -15,6 +15,8 @@ class DicesBoardView: UIView {
     private let playersScrollView = UIScrollView()
     private let scrollViewClipper = UIView()
     
+    private var boardHeightConstraint: NSLayoutConstraint?
+    
     init(viewModel: DicesBoardViewModelInterface, viewFactory: DicesFactoryInterface, delegate: DicesPlayerViewDelegate) {
         players = viewModel.viewData.players.map {
             viewFactory.createPlayerView(viewModel: $0, delegate: delegate)
@@ -33,9 +35,13 @@ class DicesBoardView: UIView {
     }
     
     override func layoutSubviews() {
+        boardHeightConstraint?.isActive = false
+        
         let minimumBoardSize = CGFloat(Values.numberOfSections) * ViewConstants.backgroundGridSize
         let boardSize = CGFloat(Int(bounds.height/minimumBoardSize)) * minimumBoardSize
-        boardStackView.heightAnchor.constraint(equalToConstant: boardSize).isActive = true
+        boardHeightConstraint = boardStackView.heightAnchor.constraint(equalToConstant: boardSize)
+        
+        boardHeightConstraint?.isActive = true
     }
     
     private func layout() {
@@ -53,7 +59,7 @@ class DicesBoardView: UIView {
             playersStackView.addArrangedSubview($0)
         }
         
-        [scrollViewClipper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.sheetMargin),
+        [scrollViewClipper.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewConstants.defaultSheetMargin),
          scrollViewClipper.trailingAnchor.constraint(equalTo: trailingAnchor),
          scrollViewClipper.topAnchor.constraint(equalTo: topAnchor),
          scrollViewClipper.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()

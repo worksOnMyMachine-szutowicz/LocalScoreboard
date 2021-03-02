@@ -8,9 +8,9 @@ import UIKit
 struct ViewConstants {
     static let backgroundLineSize: CGFloat = 1
     static let backgroundGridSize: CGFloat = 20
-    static let sheetMargin: CGFloat = 80
-    static let sheetMarginPadding: CGFloat = sheetMargin + padding
-    static let sheetMarginDoublePadding: CGFloat = sheetMargin + 2 * padding
+    static let defaultSheetMargin: CGFloat = 80
+    static let sheetMarginPadding: CGFloat = defaultSheetMargin + padding
+    static let sheetMarginDoublePadding: CGFloat = defaultSheetMargin + 2 * padding
     
     static let gridPadding: CGFloat = backgroundGridSize
     static let padding: CGFloat = 10
@@ -23,10 +23,6 @@ struct ViewConstants {
     static let highlightedLabelAttributes : [NSAttributedString.Key : Any] =
         [.font: UIFont(name: "MarkerFelt-Wide", size: 25) as Any,
          .foregroundColor: Colors.labelText]
-    
-    static let errorLabelAttributes : [NSAttributedString.Key : Any] =
-        [.font: UIFont(name: "MarkerFelt-Thin", size: 18.416) as Any,
-         .foregroundColor: Colors.errorLabelText]
 }
 
 struct Colors {

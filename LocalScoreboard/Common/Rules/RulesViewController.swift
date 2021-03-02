@@ -24,8 +24,6 @@ class RulesViewController: BackgroundedUIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
         layout()
         setupBackButton()
     }
