@@ -33,7 +33,7 @@ class RulesViewController: BackgroundedUIViewController {
         let scrollView = UIScrollView(frame: .zero)
         
         scrollView.addSubviewAndFill(stackView, insets: .init(top: Values.topMargin, left: 0, bottom: 0, right: 0))
-        view.addSubviewAndFillToSafeArea(scrollView)
+        view.addSubviewAndFill(scrollView)
         stackView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
 
         stackView.addArrangedSubview(header)

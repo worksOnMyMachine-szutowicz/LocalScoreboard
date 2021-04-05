@@ -64,7 +64,7 @@ class DicesBoardView: UIView {
          scrollViewClipper.topAnchor.constraint(equalTo: topAnchor),
          scrollViewClipper.bottomAnchor.constraint(equalTo: bottomAnchor)].activate()
         
-        [playersScrollView.leadingAnchor.constraint(equalTo: scrollViewClipper.leadingAnchor),
+        [playersScrollView.leadingAnchor.constraint(equalTo: scrollViewClipper.leadingAnchor, constant: ViewConstants.gridPadding),
          playersScrollView.trailingAnchor.constraint(equalTo: scrollViewClipper.trailingAnchor),
          playersScrollView.topAnchor.constraint(equalTo: scrollViewClipper.topAnchor),
          playersScrollView.heightAnchor.constraint(equalTo: playersStackView.heightAnchor),

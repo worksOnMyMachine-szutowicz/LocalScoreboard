@@ -32,4 +32,7 @@ struct Colors {
     
     static let labelText = UIColor(red: 0.114, green: 0.172, blue: 0.549, alpha: 1.0)
     static let errorLabelText = UIColor(red: 0.961, green: 0.768, blue: 0.839, alpha: 1.0)
+    
+    static let navigationButtonBackground = UIColor(red: 1.0, green: 0.902, blue: 0.459, alpha: 1.0)
+    static let pointOfInterestBackground = UIColor(red: 0.918, green: 0.882, blue: 0.96, alpha: 1.0)
 }

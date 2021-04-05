@@ -12,7 +12,9 @@ extension UIButton {
     static func stickerButton(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.setAttributedTitle(.init(string: title, attributes: ViewConstants.highlightedLabelAttributes), for: .normal)
-        button.backgroundColor = .yellow
+        button.backgroundColor = Colors.navigationButtonBackground
+        button.layer.borderWidth = 1
+        button.layer.borderColor = Colors.backgroundLine.cgColor
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: ViewConstants.padding, bottom: 0, right: ViewConstants.padding)
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         

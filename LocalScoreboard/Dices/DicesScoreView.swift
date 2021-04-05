@@ -18,10 +18,11 @@ class DicesScoreView: UIView {
     init() {
         super.init(frame: .zero)
         
-        scoreView.backgroundColor = .green
+        scoreView.backgroundColor = Values.scoreColor
         scoreView.layer.cornerRadius = Values.scoreCornerRadius
         scoreView.layer.maskedCorners = []
         scoreLabel.isHidden = true
+        scoreLabel.backgroundColor = Colors.background
         
         layout()
     }
@@ -79,7 +80,7 @@ class DicesScoreView: UIView {
     }
     
     private func setupScoreLabel(for score: Int) {
-        scoreLabel.attributedText = .init(string: String(score), attributes: ViewConstants.labelAttributes)
+        scoreLabel.attributedText = .init(string: String(score), attributes: ViewConstants.highlightedLabelAttributes)
         scoreLabel.isHidden = false
     }
 }
@@ -92,6 +93,7 @@ extension DicesScoreView {
         private static let animationDuration: Double = 0.03
         fileprivate static let scoreWidth: CGFloat = 40
         fileprivate static let scoreCornerRadius: CGFloat = 10
+        fileprivate static let scoreColor: UIColor = UIColor(red: 0.6, green: 0.894, blue: 0.941, alpha: 1.0)
         fileprivate static let sectionHeight: CGFloat = 1 / CGFloat(DicesBoardView.Values.numberOfSections)
         fileprivate static let halfOfSectionHeight: CGFloat = 1 / 2 / CGFloat(DicesBoardView.Values.numberOfSections)
         fileprivate static let scoreHeightMultiplier: CGFloat = 1 / 100 / CGFloat(DicesBoardView.Values.numberOfSections)

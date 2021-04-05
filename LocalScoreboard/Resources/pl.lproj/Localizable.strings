@@ -1,5 +1,5 @@
 "global.back" = "< Wstecz";
-"global.quit" = "Wyjdź";
+"global.quit" = "Wyjście";
 "global.ok" = "Ok";
 "global.cancel" = "Anuluj";
 "global.save" = "Zapisz";
@@ -29,7 +29,7 @@
 "1000dices.rules.requirements.title" = "Wymagania";
 "1000dices.rules.requirements.content" = "Potrzebujesz 5 kości, to wszystko! Jakiś znajomek albo kilku do wspólnej gierki też nie zaszkodzi.";
 "1000dices.rules.objective.title" = "Cel";
-"1000dices.rules.objective.content" = "Być pierwszym, który osiągnie 1000 punktów.";
+"1000dices.rules.objective.content" = "Zdobycie 1000 punktów zanim zrobi to ktokolwiek inny.";
 "1000dices.rules.generalRules.title" = "Zasady ogólne";
 "1000dices.rules.generalRules.content" = "Tura gracza polega na rzucaniu kośćmi i zbieraniu tych, które punktują. Kiedy wyrzucisz jedną lub więcej punktującą kość MOŻESZ spróbować szczęścia i rzucić kośćmi jeszcze raz zostawiając przynajmniej jedną na stole. W przypadku, gdy uda Ci się wyrzucić wszystkie pięć punktujących kości MUSISZ rzucić jeszcze raz wszystkimi, zatrzymując dotychczasowy wynik w pamięci. Tura kończy się gdy gracz nie wyrzuci w ostatnim rzucie żadnej punktującej kości, co skutkuje wynikiem równym 0 oraz specyficzną dla fazy karą dla niego, lub gdy poprosi o zapisanie jego aktualnego wyniku rezygnując z prawa do dalszego rzucania kośćmi. Aktualny wynik jest sumą specyficznych dla fazy wartości już wyrzuconych, punktujących kości.
 Gra jest podzielna na dwie fazy opisane szczegółowo poniżej.

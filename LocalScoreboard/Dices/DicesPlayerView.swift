@@ -23,11 +23,17 @@ class DicesPlayerView: UIView {
     private weak var delegate: DicesPlayerViewDelegate?
     private let button: UIButton
     private let scoreView = DicesScoreView()
+    private var viewWidth: CGFloat {
+        let buttonWidth = Int(button.titleLabel?.textWidth ?? 0) + Int(ViewConstants.backgroundGridSize)
+        return CGFloat(buttonWidth + (Int(ViewConstants.backgroundGridSize) - (Int(buttonWidth) % Int(ViewConstants.backgroundGridSize))))
+    }
 
     init(viewModel: DicesPlayerViewModelInterface, delegate: DicesPlayerViewDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
         button =  UIButton.stickerButton(title: viewModel.viewData.name)
+        button.layer.borderWidth = 0
+        button.backgroundColor = Colors.pointOfInterestBackground
         headerBottomAnchor = button.bottomAnchor
         
         super.init(frame: .zero)
@@ -45,7 +51,7 @@ class DicesPlayerView: UIView {
         [button, scoreView].disableAutoresizingMask()
         
         [button.leadingAnchor.constraint(equalTo: leadingAnchor),
-         button.widthAnchor.constraint(greaterThanOrEqualToConstant: Values.minimumWidth),
+         button.widthAnchor.constraint(equalToConstant: viewWidth),
          button.trailingAnchor.constraint(equalTo: trailingAnchor),
          button.topAnchor.constraint(equalTo: topAnchor)].activate()
         
@@ -80,10 +86,6 @@ class DicesPlayerView: UIView {
 }
 
 extension DicesPlayerView {
-    private struct Values {
-        static let minimumWidth: CGFloat = 40
-    }
-    
     struct ViewData {
         let name: String
     }

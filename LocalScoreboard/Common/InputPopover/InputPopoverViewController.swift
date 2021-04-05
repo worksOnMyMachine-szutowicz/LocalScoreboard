@@ -27,6 +27,7 @@ class InputPopoverViewController: BackgroundedUIViewController, OutputableViewCo
     private let selectionLabel = UILabel()
     private let pickerView = UIPickerView()
     private let errorLabel = UILabel()
+    private let quickDrawsStackView = UIStackView(type: .verticalWithoutSpacing)
     private let cancelButton = UIButton.stickerButton(title: "global.cancel".localized)
     private let saveButton = UIButton.stickerButton(title: "global.save".localized)
     private var pickerSelections: [Int] {
@@ -59,6 +60,8 @@ class InputPopoverViewController: BackgroundedUIViewController, OutputableViewCo
         titleLabel.textAlignment = .center
         quickDrawsLabel.attributedText = .init(string: "inputPopover.quickDraws".localized, attributes: ViewConstants.labelAttributes)
         quickDrawsLabel.textAlignment = .center
+        quickDrawsStackView.spacing = Values.quickDrawsSpacing
+        quickDrawsStackView.backgroundColor = Colors.background
         selectionLabel.attributedText = .init(string: "inputPopover.selection".localized, attributes: ViewConstants.labelAttributes)
         selectionLabel.textAlignment = .center
         pickerView.delegate = self
@@ -67,6 +70,7 @@ class InputPopoverViewController: BackgroundedUIViewController, OutputableViewCo
         errorLabel.isHidden = true
         errorLabel.numberOfLines = 0
         errorLabel.backgroundColor = Colors.backgroundHighlight
+        errorLabel.alpha = Values.errorLabelBackgroundAlpha
         errorLabel.layer.masksToBounds = true
         errorLabel.layer.cornerRadius = Values.cornerRounding.value
         
@@ -146,8 +150,6 @@ class InputPopoverViewController: BackgroundedUIViewController, OutputableViewCo
     }
     
     private func layoutWithQuickDraws() {
-        let quickDrawsStackView = UIStackView(type: .verticalWithoutSpacing)
-        quickDrawsStackView.spacing = Values.quickDrawsSpacing
         view.addSubviews([quickDrawsLabel, quickDrawsStackView])
         [quickDrawsLabel, quickDrawsStackView].disableAutoresizingMask()
         
@@ -237,6 +239,7 @@ extension InputPopoverViewController {
         static let labelHeight: CGFloat = 40
         static let errorLabelHeight: CGFloat = 60
         static let errorLabelWidthMultiplier: CGFloat = 0.75
+        static let errorLabelBackgroundAlpha: CGFloat = 0.8
         static let pickerItemPadding: CGFloat = 20
     }
     struct ViewData {
@@ -250,7 +253,9 @@ private extension UIButton {
     static func quickDraw(title: String) -> UIButton {
         let button = UIButton(type: .system)
         button.setAttributedTitle(.init(string: title, attributes: ViewConstants.labelAttributes), for: .normal)
-        button.backgroundColor = Colors.backgroundHighlight
+        button.backgroundColor = Colors.pointOfInterestBackground
+        button.layer.borderColor = Colors.backgroundLine.cgColor
+        button.layer.borderWidth = 1
         button.layer.cornerRadius = 10
         button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         return button

@@ -19,7 +19,7 @@ class AddPlayersView: UIView {
     init(viewModel: AddPlayersViewModelInterface, viewFactory: NewGameViewFactoryInterface) {
         self.viewModel = viewModel
         self.viewFactory = viewFactory
-        headerContainer.backgroundColor = Colors.backgroundHighlight
+        headerContainer.backgroundColor = Colors.pointOfInterestBackground
         headerTitle.attributedText = .init(string: "newGame.addPlayer.title".localized, attributes: ViewConstants.highlightedLabelAttributes)
         addButton.setAttributedTitle(.init(string: "newGame.addPlayer.button".localized, attributes: ViewConstants.highlightedLabelAttributes), for: .normal)
         
