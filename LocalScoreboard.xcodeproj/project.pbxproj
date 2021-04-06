@@ -223,20 +223,9 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F20E19CB261CB1BE00437EAE /* AnimatedButton */,
-				F2C7791825DD5D8700FD3947 /* DecisionAlert */,
-				F20E57EB25DAD0DB006F0BD0 /* InputPopover */,
-				F277525E25C596D80099E995 /* AddPlayers */,
-				F277525D25C596C20099E995 /* NewPlayer */,
-				F27D48D825C5BA0300BF02D0 /* NewGame */,
-				F277527425C598D40099E995 /* Rules */,
-				F277525F25C596F10099E995 /* DescribedTextField */,
-				F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */,
-				F21EFBB225E5C65000BEFF4F /* BlurredBackgroundUIPresentationController.swift */,
-				1BB1223C25BE299382FDEFA2 /* GameHeaderView.swift */,
-				F2A0979125C7E93400C954A4 /* BackgroundView.swift */,
+				F2C37660261CBDF800B5633A /* ViewControllers */,
+				F2C3765F261CBDAC00B5633A /* Components */,
 				1BB12E8704FF864EB553BD36 /* ViewConstans.swift */,
-				F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -283,18 +272,10 @@
 		1BB124F0C31E2F455C3F42E4 /* Dices */ = {
 			isa = PBXGroup;
 			children = (
-				F252196025CB4049008701DD /* DicesViewController.swift */,
-				F21EFBAD25E5BEE100BEFF4F /* DicesViewModel.swift */,
-				F21EFBA825E5BE3F00BEFF4F /* DicesViewModelInterface.swift */,
-				F252196F25CB4AD1008701DD /* DicesBoardView.swift */,
-				F2F9B56F25E421A900A761B9 /* DicesBoardViewModel.swift */,
-				F2F9B57725E4266B00A761B9 /* DicesBoardViewModelInterface.swift */,
-				F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */,
-				F248595825D1012100F8EB1E /* DicesPlayerView.swift */,
-				F248595D25D104B000F8EB1E /* DicesPlayerViewModel.swift */,
-				F248596225D104C900F8EB1E /* DicesPlayerViewModelInterface.swift */,
+				F2C3765C261CBD5800B5633A /* ViewController */,
+				F2C3765D261CBD7100B5633A /* Board */,
+				F2C3765E261CBD8C00B5633A /* Player */,
 				F248596725D105F200F8EB1E /* DicesFactory.swift */,
-				F2EDF60A25D461E900835288 /* DicesScoreView.swift */,
 				F25C770425DD071300455B2E /* DicesInputPopoverViewModel.swift */,
 			);
 			path = Dices;
@@ -464,6 +445,65 @@
 				F2E57D4E25E9A1D5004B6321 /* LocalScoreboard.xcdatamodeld */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		F2C3765C261CBD5800B5633A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F252196025CB4049008701DD /* DicesViewController.swift */,
+				F21EFBAD25E5BEE100BEFF4F /* DicesViewModel.swift */,
+				F21EFBA825E5BE3F00BEFF4F /* DicesViewModelInterface.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F2C3765D261CBD7100B5633A /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				F252196F25CB4AD1008701DD /* DicesBoardView.swift */,
+				F2F9B56F25E421A900A761B9 /* DicesBoardViewModel.swift */,
+				F2F9B57725E4266B00A761B9 /* DicesBoardViewModelInterface.swift */,
+				F252197425CB4B2E008701DD /* DicesBoardSectionView.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		F2C3765E261CBD8C00B5633A /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				F248595825D1012100F8EB1E /* DicesPlayerView.swift */,
+				F248595D25D104B000F8EB1E /* DicesPlayerViewModel.swift */,
+				F248596225D104C900F8EB1E /* DicesPlayerViewModelInterface.swift */,
+				F2EDF60A25D461E900835288 /* DicesScoreView.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		F2C3765F261CBDAC00B5633A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F20E19CB261CB1BE00437EAE /* AnimatedButton */,
+				F277525E25C596D80099E995 /* AddPlayers */,
+				F277525D25C596C20099E995 /* NewPlayer */,
+				F277525F25C596F10099E995 /* DescribedTextField */,
+				F2FBCB9125C7FEF400533EA0 /* BackgroundedUIViewController.swift */,
+				F21EFBB225E5C65000BEFF4F /* BlurredBackgroundUIPresentationController.swift */,
+				1BB1223C25BE299382FDEFA2 /* GameHeaderView.swift */,
+				F2A0979125C7E93400C954A4 /* BackgroundView.swift */,
+				F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F2C37660261CBDF800B5633A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F277527425C598D40099E995 /* Rules */,
+				F27D48D825C5BA0300BF02D0 /* NewGame */,
+				F20E57EB25DAD0DB006F0BD0 /* InputPopover */,
+				F2C7791825DD5D8700FD3947 /* DecisionAlert */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		F2C7791825DD5D8700FD3947 /* DecisionAlert */ = {
