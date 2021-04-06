@@ -21,19 +21,14 @@ class DicesPlayerView: UIView {
     private let disposeBag = DisposeBag()
     private let viewModel: DicesPlayerViewModelInterface
     private weak var delegate: DicesPlayerViewDelegate?
-    private let button: UIButton
+    private let button: AnimatedButtonView
     private let scoreView = DicesScoreView()
-    private var viewWidth: CGFloat {
-        let buttonWidth = Int(button.titleLabel?.textWidth ?? 0) + Int(ViewConstants.backgroundGridSize)
-        return CGFloat(buttonWidth + (Int(ViewConstants.backgroundGridSize) - (Int(buttonWidth) % Int(ViewConstants.backgroundGridSize))))
-    }
 
     init(viewModel: DicesPlayerViewModelInterface, delegate: DicesPlayerViewDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
-        button =  UIButton.stickerButton(title: viewModel.viewData.name)
-        button.layer.borderWidth = 0
-        button.backgroundColor = Colors.pointOfInterestBackground
+        self.button = AnimatedButtonView(text: .init(string: viewModel.viewData.name, attributes: ViewConstants.highlightedLabelAttributes), animation: .outlinedButton, backgroundColor: Colors.background)
+        
         headerBottomAnchor = button.bottomAnchor
         
         super.init(frame: .zero)
@@ -51,7 +46,6 @@ class DicesPlayerView: UIView {
         [button, scoreView].disableAutoresizingMask()
         
         [button.leadingAnchor.constraint(equalTo: leadingAnchor),
-         button.widthAnchor.constraint(equalToConstant: viewWidth),
          button.trailingAnchor.constraint(equalTo: trailingAnchor),
          button.topAnchor.constraint(equalTo: topAnchor)].activate()
         
@@ -62,7 +56,7 @@ class DicesPlayerView: UIView {
     }
     
     private func setupBindings() {
-        button.rx.tap
+        button.output.asObservable().filterByAssociatedType(AnimatedButtonOutput.TappedModel.self)
             .map { _ in VMInput.addScoreTapped(.init()) }
             .bind(to: viewModel.input)
             .disposed(by: disposeBag)
@@ -71,6 +65,7 @@ class DicesPlayerView: UIView {
             .append(weak: self)
             .flatMapFirst { view, output -> Observable<Int?> in
                 guard let delegate = view.delegate else { return .empty() }
+                view.button.input.accept(.animate(.init()))
                 return delegate.showAddScoreView(for: output.inputPopoverViewModel)
             }.compactMap { $0 }
             .map { VMInput.addScore(.init(score: $0)) }

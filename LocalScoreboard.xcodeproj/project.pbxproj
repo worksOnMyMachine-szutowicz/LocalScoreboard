@@ -25,6 +25,9 @@
 		1BB12DD331F76DBF39B58330 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB12AFA59C4A060148680B1 /* Assets.xcassets */; };
 		2B904EDD945640CD943D601C /* Pods_LocalScoreboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F24665F181AB7B147F8352 /* Pods_LocalScoreboard.framework */; };
 		F20283A6261B897B00001EDF /* UILabel+TextWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20283A5261B897B00001EDF /* UILabel+TextWidth.swift */; };
+		F20283BE261B987800001EDF /* outlinedButton.json in Resources */ = {isa = PBXBuildFile; fileRef = F20283BD261B987800001EDF /* outlinedButton.json */; };
+		F20E19CD261CB1DE00437EAE /* AnimatedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E19CC261CB1DE00437EAE /* AnimatedButtonView.swift */; };
+		F20E19D5261CB3FE00437EAE /* AnimatedButtonInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E19D4261CB3FE00437EAE /* AnimatedButtonInterface.swift */; };
 		F20E57ED25DAD80B006F0BD0 /* InputPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20E57EC25DAD80B006F0BD0 /* InputPopoverViewController.swift */; };
 		F211718225C425F400880DA4 /* Observable+Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211718125C425F400880DA4 /* Observable+Weak.swift */; };
 		F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F211718625C4279A00880DA4 /* NewGameViewFactory.swift */; };
@@ -64,6 +67,7 @@
 		F29ED48325E9228200C1825F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29ED48225E9228200C1825F /* StorageService.swift */; };
 		F29ED48825E9229600C1825F /* StorageServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29ED48725E9229600C1825F /* StorageServiceInterface.swift */; };
 		F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0979125C7E93400C954A4 /* BackgroundView.swift */; };
+		F2C37655261CB9F200B5633A /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C37654261CB9F200B5633A /* Animations.swift */; };
 		F2C7791A25DD5DB200FD3947 /* DecisionAlertPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C7791925DD5DB200FD3947 /* DecisionAlertPresentationController.swift */; };
 		F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */; };
 		F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */; };
@@ -125,6 +129,9 @@
 		BF8D5336A17A12548104D269 /* Pods-LocalScoreboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LocalScoreboard.release.xcconfig"; path = "Target Support Files/Pods-LocalScoreboard/Pods-LocalScoreboard.release.xcconfig"; sourceTree = "<group>"; };
 		F20204D625EE9A6C0063356D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F20283A5261B897B00001EDF /* UILabel+TextWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+TextWidth.swift"; sourceTree = "<group>"; };
+		F20283BD261B987800001EDF /* outlinedButton.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outlinedButton.json; sourceTree = "<group>"; };
+		F20E19CC261CB1DE00437EAE /* AnimatedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButtonView.swift; sourceTree = "<group>"; };
+		F20E19D4261CB3FE00437EAE /* AnimatedButtonInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButtonInterface.swift; sourceTree = "<group>"; };
 		F20E57EC25DAD80B006F0BD0 /* InputPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverViewController.swift; sourceTree = "<group>"; };
 		F211718125C425F400880DA4 /* Observable+Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Weak.swift"; sourceTree = "<group>"; };
 		F211718625C4279A00880DA4 /* NewGameViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewFactory.swift; sourceTree = "<group>"; };
@@ -164,6 +171,7 @@
 		F29ED48225E9228200C1825F /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		F29ED48725E9229600C1825F /* StorageServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceInterface.swift; sourceTree = "<group>"; };
 		F2A0979125C7E93400C954A4 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		F2C37654261CB9F200B5633A /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		F2C7791925DD5DB200FD3947 /* DecisionAlertPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionAlertPresentationController.swift; sourceTree = "<group>"; };
 		F2D15ECD25C6FAFE002EDD34 /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		F2D15ED225C6FB10002EDD34 /* NewGameViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModelInterface.swift; sourceTree = "<group>"; };
@@ -215,6 +223,7 @@
 		1BB1205CAC59D159C678C3D1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F20E19CB261CB1BE00437EAE /* AnimatedButton */,
 				F2C7791825DD5D8700FD3947 /* DecisionAlert */,
 				F20E57EB25DAD0DB006F0BD0 /* InputPopover */,
 				F277525E25C596D80099E995 /* AddPlayers */,
@@ -263,6 +272,7 @@
 		1BB124931FA4576F1A2E7C93 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F20283B4261B93C100001EDF /* Animations */,
 				1BB12475DA95427D0FD3F47A /* LaunchScreen.storyboard */,
 				1BB12AFA59C4A060148680B1 /* Assets.xcassets */,
 				F25A91B925C157B6002B9C51 /* Localizable.strings */,
@@ -344,6 +354,24 @@
 				17AC5EDEC769CBD52A014A7B /* Pods-LocalScoreboardTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F20283B4261B93C100001EDF /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				F20283BD261B987800001EDF /* outlinedButton.json */,
+				F2C37654261CB9F200B5633A /* Animations.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		F20E19CB261CB1BE00437EAE /* AnimatedButton */ = {
+			isa = PBXGroup;
+			children = (
+				F20E19CC261CB1DE00437EAE /* AnimatedButtonView.swift */,
+				F20E19D4261CB3FE00437EAE /* AnimatedButtonInterface.swift */,
+			);
+			path = AnimatedButton;
 			sourceTree = "<group>";
 		};
 		F20E57EB25DAD0DB006F0BD0 /* InputPopover */ = {
@@ -554,6 +582,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F20283BE261B987800001EDF /* outlinedButton.json in Resources */,
 				1BB127C99D765FE285D0489A /* LaunchScreen.storyboard in Resources */,
 				1BB12DD331F76DBF39B58330 /* Assets.xcassets in Resources */,
 				F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */,
@@ -644,12 +673,14 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -718,6 +749,7 @@
 				F20283A6261B897B00001EDF /* UILabel+TextWidth.swift in Sources */,
 				F2D15ECE25C6FAFE002EDD34 /* NewGameViewModel.swift in Sources */,
 				F2FBCB9225C7FEF400533EA0 /* BackgroundedUIViewController.swift in Sources */,
+				F20E19CD261CB1DE00437EAE /* AnimatedButtonView.swift in Sources */,
 				1BB120D51F2B33F4BFB83D34 /* GameHeaderView.swift in Sources */,
 				1BB12108DA0B7B9EC4A94EFD /* AddPlayersView.swift in Sources */,
 				F21EFBA925E5BE3F00BEFF4F /* DicesViewModelInterface.swift in Sources */,
@@ -729,8 +761,10 @@
 				F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */,
 				F20E57ED25DAD80B006F0BD0 /* InputPopoverViewController.swift in Sources */,
 				F2D63EDF25E95996005865E5 /* Observable+ResultableRequest.swift in Sources */,
+				F20E19D5261CB3FE00437EAE /* AnimatedButtonInterface.swift in Sources */,
 				1BB1294457B0CEE9DF5F4B5B /* UIStackView+Init.swift in Sources */,
 				1BB127BFBEF3B50A70F2EFA2 /* ViewConstans.swift in Sources */,
+				F2C37655261CB9F200B5633A /* Animations.swift in Sources */,
 				F248283225C4181A002239E3 /* NewPlayerViewModelInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

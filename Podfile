@@ -7,6 +7,7 @@ target 'LocalScoreboard' do
   # Pods for LocalScoreboard
   pod 'RxSwift', '6.0.0'
   pod 'RxCocoa', '6.0.0'
+  pod 'lottie-ios'
 
   target 'LocalScoreboardTests' do
     inherit! :search_paths
