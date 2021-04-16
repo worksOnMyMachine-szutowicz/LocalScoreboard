@@ -14,7 +14,9 @@ class BlurredBackgroundUIPresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
         
-        setupBlurView()
+        if let superview = presentingViewController.view {
+            superview.addSubviewAndFill(blurView)
+        }
 
         blurView.alpha = 0
         presentingViewController.transitionCoordinator?.animate(alongsideTransition: { [weak self] _ in
@@ -30,17 +32,5 @@ class BlurredBackgroundUIPresentationController: UIPresentationController {
         }, completion: { [weak self] _ in
             self?.blurView.removeFromSuperview()
         })
-    }
-    
-    private func setupBlurView() {
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        
-        if let superview = presentingViewController.view {
-            superview.addSubview(blurView)
-            [blurView.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-             blurView.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
-             blurView.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
-             blurView.topAnchor.constraint(equalTo: superview.topAnchor)].activate()
-        }
     }
 }

@@ -87,6 +87,7 @@ class BackgroundedUIViewController: UIViewController {
 extension BackgroundedUIViewController {
     struct Values {
         static let navigationButtonTopPadding: CGFloat = 60
+        static let centerAlignmentConst: CGFloat = 0.5 * ViewConstants.backgroundGridSize
     }
     
     struct BackgroundOptions {

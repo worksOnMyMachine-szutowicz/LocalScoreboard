@@ -23,6 +23,8 @@ class DicesScoreView: UIView {
         scoreView.layer.maskedCorners = []
         scoreLabel.isHidden = true
         scoreLabel.backgroundColor = Colors.background
+        scoreLabel.layer.cornerRadius = Values.scoreCornerRadius
+        scoreLabel.layer.masksToBounds = true
         
         layout()
     }
