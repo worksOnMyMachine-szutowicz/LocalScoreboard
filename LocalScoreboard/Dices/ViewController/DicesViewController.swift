@@ -61,7 +61,7 @@ class DicesViewController: BackgroundedUIViewController {
          boardView.bottomAnchor.constraint(equalTo: toolbarView.topAnchor, constant: -ViewConstants.gridPadding)].activate()
         
         [toolbarView.leadingAnchor.constraint(equalTo: view.centerXAnchor),
-         toolbarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ViewConstants.gridPadding),
+         toolbarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
          toolbarView.bottomAnchor.constraint(equalTo: rulesButton.topAnchor)].activate()
         
         [rulesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),

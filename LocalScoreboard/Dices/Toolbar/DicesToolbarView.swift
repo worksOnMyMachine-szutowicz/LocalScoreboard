@@ -15,9 +15,9 @@ class DicesToolbarView: UIView {
     private let disposeBag = DisposeBag()
     private let viewModel: DicesToolbarViewModelInterface
     
-    private let stackView = UIStackView(type: .horizontalBackground)
+    private let stackView = UIStackView(type: .horizontalWithEqualSpacing)
     
-    private lazy var stackViewHiddenConstraints = [stackView.leadingAnchor.constraint(equalTo: trailingAnchor)]
+    private lazy var stackViewHiddenConstraints = [stackView.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewConstants.gridPadding)]
     private lazy var stackViewVisibleContraints = [stackView.leadingAnchor.constraint(equalTo: leadingAnchor)]
     
     init(viewModel: DicesToolbarViewModelInterface) {
@@ -53,13 +53,17 @@ class DicesToolbarView: UIView {
     private func refresh(with buttons: [DicesToolbarViewModel.ButtonViewData]) {
         stackViewVisibleContraints.deactivate()
         stackViewHiddenConstraints.activate()
+        UIView.animate(withDuration: ViewConstants.animationTime, animations: { [weak self] () -> Void in
+            self?.layoutIfNeeded()
+        }, completion: { [weak self] _ in
+            self?.layoutButtons(buttons: buttons)
+        })
+    }
+    
+    private func layoutButtons(buttons: [DicesToolbarViewModel.ButtonViewData]) {
         stackView.subviews.forEach {
             $0.removeFromSuperview()
         }
-        UIView.animate(withDuration: ViewConstants.animationTime, animations: { [weak self] () -> Void in
-            self?.layoutIfNeeded()
-        })
-                
         buttons.forEach { buttonModel in
             let button = UIButton.stickerButton(title: buttonModel.title)
             button.rx.tap
@@ -77,6 +81,7 @@ class DicesToolbarView: UIView {
             
             stackView.addArrangedSubview(button)
         }
+        layoutIfNeeded()
         
         stackViewHiddenConstraints.deactivate()
         stackViewVisibleContraints.activate()

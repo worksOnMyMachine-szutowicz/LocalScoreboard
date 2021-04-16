@@ -25,11 +25,6 @@ class AnimatedButtonView: UIView, AnimatedButtonInterface {
     private let animation: AnimationView
     private let background = UIView()
     
-    private var viewWidth: CGFloat {
-        let buttonWidth = Int(button.titleLabel?.textWidth ?? 0) + Int(ViewConstants.backgroundGridSize)
-        return CGFloat(buttonWidth + (Int(ViewConstants.backgroundGridSize) - (Int(buttonWidth) % Int(ViewConstants.backgroundGridSize))))
-    }
-    
     init(text: NSAttributedString, animation: Animations, backgroundColor: UIColor) {
         self.animation = AnimationView(name: animation.rawValue)
         
@@ -55,8 +50,8 @@ class AnimatedButtonView: UIView, AnimatedButtonInterface {
         addSubviewAndFill(animation)
         addSubviewAndFill(button)
         
-        [heightAnchor.constraint(equalToConstant: Values.height),
-         widthAnchor.constraint(equalToConstant: viewWidth)].activate()
+        heightAnchor.constraint(equalToConstant: Values.height).isActive = true
+        button.roundWidth(to: ViewConstants.backgroundGridSize)
     }
     
     private func setupBindings() {

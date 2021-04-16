@@ -17,6 +17,7 @@ extension UIButton {
         button.layer.borderColor = Colors.backgroundLine.cgColor
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: ViewConstants.padding, bottom: 0, right: ViewConstants.padding)
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.roundWidth(to: ViewConstants.backgroundGridSize)
         
         return button
     }
@@ -29,6 +30,7 @@ extension UIButton {
         button.layer.borderColor = Colors.backgroundLine.cgColor
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: ViewConstants.padding, bottom: 0, right: ViewConstants.padding)
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.roundWidth(to: ViewConstants.backgroundGridSize)
         
         return button
     }

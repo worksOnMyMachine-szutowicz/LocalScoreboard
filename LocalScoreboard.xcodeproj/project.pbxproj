@@ -65,6 +65,7 @@
 		F27D48CF25C5A84300BF02D0 /* TitledSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */; };
 		F27D48D425C5B75800BF02D0 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27D48D325C5B75800BF02D0 /* GameData.swift */; };
 		F284EC05262A06780044CD1A /* Observable+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = F284EC04262A06780044CD1A /* Observable+Map.swift */; };
+		F284EC11262A12BF0044CD1A /* UIButton+RoundedWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F284EC10262A12BF0044CD1A /* UIButton+RoundedWidth.swift */; };
 		F29ED48325E9228200C1825F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29ED48225E9228200C1825F /* StorageService.swift */; };
 		F29ED48825E9229600C1825F /* StorageServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29ED48725E9229600C1825F /* StorageServiceInterface.swift */; };
 		F2A0979225C7E93400C954A4 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A0979125C7E93400C954A4 /* BackgroundView.swift */; };
@@ -173,6 +174,7 @@
 		F27D48CE25C5A84300BF02D0 /* TitledSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledSectionView.swift; sourceTree = "<group>"; };
 		F27D48D325C5B75800BF02D0 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		F284EC04262A06780044CD1A /* Observable+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Map.swift"; sourceTree = "<group>"; };
+		F284EC10262A12BF0044CD1A /* UIButton+RoundedWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+RoundedWidth.swift"; sourceTree = "<group>"; };
 		F29ED48225E9228200C1825F /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		F29ED48725E9229600C1825F /* StorageServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceInterface.swift; sourceTree = "<group>"; };
 		F2A0979125C7E93400C954A4 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				F2E195E625C87EA80074AA9D /* TextField+Padding.swift */,
 				F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */,
 				F20283A5261B897B00001EDF /* UILabel+TextWidth.swift */,
+				F284EC10262A12BF0044CD1A /* UIButton+RoundedWidth.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				F21171A625C4618200880DA4 /* DescribedTextFileViewModelInterface.swift in Sources */,
 				F25C770525DD071400455B2E /* DicesInputPopoverViewModel.swift in Sources */,
 				F2D15ED325C6FB10002EDD34 /* NewGameViewModelInterface.swift in Sources */,
+				F284EC11262A12BF0044CD1A /* UIButton+RoundedWidth.swift in Sources */,
 				F248595E25D104B000F8EB1E /* DicesPlayerViewModel.swift in Sources */,
 				F2C37670261CC21800B5633A /* DicesToolbarViewModelInterface.swift in Sources */,
 				F211718C25C429B000880DA4 /* AddPlayersViewModel.swift in Sources */,
