@@ -16,7 +16,7 @@ class AnimatedButtonView: UIView, AnimatedButtonInterface {
     typealias Output = AnimatedButtonOutput
     private let disposeBag = DisposeBag()
     private let outputRelay = PublishRelay<Output>()
-    let input = PublishRelay<AnimatedButtonInput>()
+    let input = PublishRelay<Input>()
     var output: Driver<Output> {
         outputRelay.asDriver(onErrorRecover: { _ in .empty() })
     }

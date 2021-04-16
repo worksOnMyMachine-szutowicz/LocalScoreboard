@@ -70,3 +70,6 @@ See Rules -> Phase Two rules -> Point 4. for more info";
 "1000dices.input.warning.passage" = "You are about to submit %@ points which will place You in the lower half of the passage. It means that You'll need to score at least %@ points in next turn. Are You sure?";
 "1000dices.finishGame.title" = "%@ has won!";
 "1000dices.finishGame.message" = "How about another round with the same players?";
+"1000dices.toolbar.addScore" = "Add Score";
+"1000dices.toolbar.punishment" = "Punishment";
+"1000dices.toolbar.nextPlayer" = "Next player";

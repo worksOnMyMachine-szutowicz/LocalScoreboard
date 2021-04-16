@@ -14,14 +14,19 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     
     private let storageService: StorageServiceInterface
     private var gamePhase: GamePhase = .phaseOne
-    private var score: BehaviorSubject<Int> = .init(value: 0)
+    private let score: BehaviorSubject<Int> = .init(value: 0)
+    private let isCurrent: BehaviorSubject<Bool>
+    private let playerIndex: Int
     
     private let phaseOneTax = 50
     private let surpassingTax = 100
+    private let phaseTwoPunishment = -10
     
-    init(viewData: DicesPlayerView.ViewData, storageService: StorageServiceInterface) {
+    init(viewData: DicesPlayerView.ViewData, playerIndex: Int, storageService: StorageServiceInterface) {
         self.viewData = viewData
         self.storageService = storageService
+        self.isCurrent = .init(value: playerIndex == 0)
+        self.playerIndex = playerIndex
         
         super.init()
         
@@ -29,6 +34,18 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     }
     
     private func setupBindings() {
+        Observable.merge(input.asObservable().filterByAssociatedType(Input.ViewDidLoadModel.self).mapToVoid(), isCurrent.mapToVoid())
+            .withLatestFrom(isCurrent)
+            .append(weak: self)
+            .map { vm, isCurrent in isCurrent ? Output.becomedCurrentPlayer(.init(playerIndex: vm.playerIndex, gamePhase: vm.gamePhase)) : Output.resignedCurrentPlayer(.init()) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        input.asObservable().filterByAssociatedType(Input.CurrentPlayerModel.self)
+            .map { $0.value }
+            .bind(to: isCurrent)
+            .disposed(by: disposeBag)
+        
         input.asObservable().filterByAssociatedType(Input.AddScoreTappedModel.self)
             .withRequestResult(ofType: [Int].self, from: storageService, with: StorageServiceRequest.getTopScoresByOccurences(.init(scoresToReturn: Values.quickDrawsCount)))
             .withLatestFrom(score) { (quickDraws: $0, currentScore: $1) }
@@ -37,6 +54,11 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .map { Output.showInputPopover(.init(inputPopoverViewModel: $0)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
+        
+        let punishment = input.asObservable().filterByAssociatedType(Input.PunishmentTappedModel.self)
+            .append(weak: self)
+            .map { vm, _ in (vm, vm.phaseTwoPunishment) }
+            .doResultlessRequest(from: storageService) { StorageServiceRequest.saveScoreOccurrence(.init(score: $0.1)) }
         
         let addScore = input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
             .doResultlessRequest(from: storageService) { StorageServiceRequest.saveScoreOccurrence(.init(score: $0.score)) }
@@ -47,7 +69,7 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .append(weak: self)
             .map { vm, _ in (vm, -vm.surpassingTax) }
         
-        let scoreUpdates = Observable.merge(addScore, playerSurpassed)
+        let scoreUpdates = Observable.merge(addScore, punishment, playerSurpassed)
             .withLatestFrom(score) { ($0.0, $0.1, $1) }
             .map { vc, inputScore, currentScore -> [Output.ScoreChangedModel] in
                 let newScore = currentScore + inputScore

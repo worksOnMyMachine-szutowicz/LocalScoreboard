@@ -16,7 +16,7 @@ class DicesViewModel: RxInputOutput<DicesViewModelInput, DicesViewModelOutput>, 
     
     init(players: [String], storageService: StorageServiceInterface) {
         self.players = players
-        viewData = .init(boardViewModel: DicesBoardViewModel(players: players, storageService: storageService))
+        viewData = .init(boardViewModel: DicesBoardViewModel(players: players, storageService: storageService), toolbarViewModel: DicesToolbarViewModel())
         
         super.init()
         
@@ -24,9 +24,20 @@ class DicesViewModel: RxInputOutput<DicesViewModelInput, DicesViewModelOutput>, 
     }
     
     private func setupBindigs() {
+        viewData.boardViewModel.output.asObservable().filterByAssociatedType(DicesBoardViewModelOutput.CurrentPlayerChangedModel.self)
+            .map { DicesToolbarViewModelInput.refresh(.init(gamePhase: $0.gamePhase)) }
+            .bind(to: viewData.toolbarViewModel.input)
+            .disposed(by: disposeBag)
+        
         viewData.boardViewModel.output.asObservable().filterByAssociatedType(DicesBoardViewModelOutput.FinishGameModel.self)
             .map { Output.finishGame(.init(winner: $0.winner)) }
             .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        viewData.toolbarViewModel.output.asObservable()
+            .observe(on: MainScheduler.asyncInstance)
+            .map { DicesBoardViewModelInput.toolbarButtonTapped(.init(type: $0)) }
+            .bind(to: viewData.boardViewModel.input)
             .disposed(by: disposeBag)
         
         input.asObservable().filterByAssociatedType(Input.NewGameDataRequest.self)

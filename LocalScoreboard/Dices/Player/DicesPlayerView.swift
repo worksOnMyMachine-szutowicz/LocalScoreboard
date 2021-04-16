@@ -35,6 +35,7 @@ class DicesPlayerView: UIView {
         
         layout()
         setupBindings()
+        viewModel.input.accept(.viewDidLoad(.init()))
     }
         
     required init?(coder: NSCoder) {
@@ -65,7 +66,6 @@ class DicesPlayerView: UIView {
             .append(weak: self)
             .flatMapFirst { view, output -> Observable<Int?> in
                 guard let delegate = view.delegate else { return .empty() }
-                view.button.input.accept(.animate(.init()))
                 return delegate.showAddScoreView(for: output.inputPopoverViewModel)
             }.compactMap { $0 }
             .map { VMInput.addScore(.init(score: $0)) }
@@ -77,6 +77,16 @@ class DicesPlayerView: UIView {
             .subscribe(onNext: { view, output in
                 view.scoreView.changeScore(to: output.stepScore)
             }).disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.BecomedCurrentPlayerModel.self)
+            .map { _ in AnimatedButtonInput.animate(.init()) }
+            .bind(to: button.input)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.ResignedCurrentPlayerModel.self)
+            .map { _ in AnimatedButtonInput.stopAnimating(.init()) }
+            .bind(to: button.input)
+            .disposed(by: disposeBag)
     }
 }
 

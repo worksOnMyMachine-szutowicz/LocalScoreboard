@@ -28,8 +28,8 @@ class InputPopoverViewController: BackgroundedUIViewController, OutputableViewCo
     private let pickerView = UIPickerView()
     private let errorLabel = UILabel()
     private let quickDrawsStackView = UIStackView(type: .verticalWithoutSpacing)
-    private let cancelButton = UIButton.stickerButton(title: "global.cancel".localized)
-    private let saveButton = UIButton.stickerButton(title: "global.save".localized)
+    private let cancelButton = UIButton.navigationButton(title: "global.cancel".localized)
+    private let saveButton = UIButton.navigationButton(title: "global.save".localized)
     private var pickerSelections: [Int] {
         var selections: [Int] = []
         for i in 0..<viewModel.viewData.scoresSource.count {

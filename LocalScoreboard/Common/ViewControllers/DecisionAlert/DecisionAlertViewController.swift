@@ -28,8 +28,8 @@ class DecisionAlertViewController: BackgroundedUIViewController, OutputableViewC
     
     init(viewData: ViewData) {
         self.viewData = viewData
-        firstButton = UIButton.stickerButton(title: viewData.firstButton.localized)
-        secondButton = UIButton.stickerButton(title: viewData.secondButton.localized)
+        firstButton = UIButton.navigationButton(title: viewData.firstButton.localized)
+        secondButton = UIButton.navigationButton(title: viewData.secondButton.localized)
         
         super.init(nibName: nil, bundle: nil)
         

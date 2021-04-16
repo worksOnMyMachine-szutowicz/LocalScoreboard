@@ -8,11 +8,13 @@
 
 import RxSwift
 
-class DicesBoardViewModel: RxOutput<DicesBoardViewModelOutput>, DicesBoardViewModelInterface {
+class DicesBoardViewModel: RxInputOutput<DicesBoardViewModelInput, DicesBoardViewModelOutput>, DicesBoardViewModelInterface {
+    private var currentPlayer: (index: Int, interface: DicesPlayerViewModelInterface)?
+    
     var viewData: DicesBoardView.ViewData
     
     init(players: [String], storageService: StorageServiceInterface) {
-        viewData = .init(players: players.map { DicesPlayerViewModel(viewData: .init(name: $0), storageService: storageService) })
+        viewData = .init(players: players.enumerated().map { DicesPlayerViewModel(viewData: .init(name: $0.element), playerIndex: $0.offset, storageService: storageService) })
         
         super.init()
         
@@ -20,6 +22,32 @@ class DicesBoardViewModel: RxOutput<DicesBoardViewModelOutput>, DicesBoardViewMo
     }
     
     private func setupBindings() {
+        input.asObservable().filterByAssociatedType(Input.ToolbarButtonTappedModel.self)
+            .append(weak: self)
+            .subscribe(onNext: { vm, input in
+                switch input.type {
+                case .next:
+                    vm.designateNextPlayer()
+                case .add:
+                    vm.currentPlayer?.interface.input.accept(.addScoreTapped(.init()))
+                    vm.designateNextPlayer()
+                case .punishment:
+                    vm.currentPlayer?.interface.input.accept(.punishmentTapped(.init()))
+                    vm.designateNextPlayer()
+                default:
+                    return
+                }
+            }).disposed(by: disposeBag)
+        
+        Observable.merge(viewData.players.map { $0.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.BecomedCurrentPlayerModel.self) })
+            .append(weak: self)
+            .do { vm, currentPlayer in
+                vm.currentPlayer?.interface.input.accept(.currentPlayer(.init(value: false)))
+                vm.currentPlayer = (index: currentPlayer.playerIndex, interface: vm.viewData.players[currentPlayer.playerIndex])
+            }.map { vm, currenPlayer in Output.currentPlayerChanged(.init(gamePhase: currenPlayer.gamePhase)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
         Observable.merge(viewData.players.map { $0.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.PlayerWon.self) })
             .map { Output.finishGame(.init(winner: $0.playerName)) }
             .bind(to: outputRelay)
@@ -41,5 +69,11 @@ class DicesBoardViewModel: RxOutput<DicesBoardViewModelOutput>, DicesBoardViewMo
     
     private func isOnePlayerSurpasingAnother(raisingPlayer: DicesPlayerViewModelOutput.ScoreChangedModel, stillPlayer: Int) -> Bool {
         raisingPlayer.startedFrom < stillPlayer && stillPlayer.distance(to: raisingPlayer.stepScore) == 1
+    }
+    
+    private func designateNextPlayer() {
+        guard let currentPlayerIndex = currentPlayer?.index else { return }
+        let nextPlayer = viewData.players.indices.contains(currentPlayerIndex + 1) ? currentPlayerIndex + 1 : 0
+        viewData.players[nextPlayer].input.accept(.currentPlayer(.init(value: true)))
     }
 }

@@ -33,7 +33,7 @@ class BackgroundedUIViewController: UIViewController {
     }
     
     func setupBackButton() {
-        let backButton = UIButton.stickerButton(title: "global.back".localized)
+        let backButton = UIButton.navigationButton(title: "global.back".localized)
         backButton.rx.tap
             .append(weak: self)
             .subscribe(onNext: { vc, _ in

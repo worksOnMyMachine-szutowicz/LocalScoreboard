@@ -23,13 +23,15 @@ class DicesViewController: BackgroundedUIViewController {
     private let viewModel: DicesViewModelInterface
     private let disposeBag = DisposeBag()
     private weak var delegate: DicesViewControllerDelegate?
+    private let toolbarView: DicesToolbarView
     private let boardView: DicesBoardView
-    private let quitButton = UIButton.stickerButton(title: "global.quit".localized)
-    private let rulesButton = UIButton.stickerButton(title: "global.fullRules".localized)
+    private let quitButton = UIButton.navigationButton(title: "global.quit".localized)
+    private let rulesButton = UIButton.navigationButton(title: "global.fullRules".localized)
     
     init(delegate: DicesViewControllerDelegate, viewModel: DicesViewModelInterface, viewFactory: DicesFactoryInterface) {
         self.viewModel = viewModel
         self.delegate = delegate
+        self.toolbarView = viewFactory.createToolbarView(viewModel: viewModel.viewData.toolbarViewModel)
         self.boardView = viewFactory.createBoardView(viewModel: viewModel.viewData.boardViewModel, delegate: delegate)
         
         super.init(nibName: nil, bundle: nil)
@@ -46,8 +48,8 @@ class DicesViewController: BackgroundedUIViewController {
     }
     
     private func layout() {
-        view.addSubviews([quitButton, boardView, rulesButton])
-        [quitButton, boardView, rulesButton].disableAutoresizingMask()
+        view.addSubviews([quitButton, boardView, toolbarView, rulesButton])
+        [quitButton, boardView, toolbarView, rulesButton].disableAutoresizingMask()
         
         [quitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
          quitButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.defaultSheetMargin),
@@ -56,7 +58,11 @@ class DicesViewController: BackgroundedUIViewController {
         [boardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
          boardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
          boardView.topAnchor.constraint(equalTo: quitButton.bottomAnchor, constant: ViewConstants.gridPadding),
-         boardView.bottomAnchor.constraint(equalTo: rulesButton.topAnchor, constant: -ViewConstants.gridPadding)].activate()
+         boardView.bottomAnchor.constraint(equalTo: toolbarView.topAnchor, constant: -ViewConstants.gridPadding)].activate()
+        
+        [toolbarView.leadingAnchor.constraint(equalTo: view.centerXAnchor),
+         toolbarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -ViewConstants.gridPadding),
+         toolbarView.bottomAnchor.constraint(equalTo: rulesButton.topAnchor)].activate()
         
         [rulesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
          rulesButton.widthAnchor.constraint(greaterThanOrEqualToConstant: ViewConstants.defaultSheetMargin),
@@ -114,5 +120,6 @@ class DicesViewController: BackgroundedUIViewController {
 extension DicesViewController {
     struct ViewData {
         let boardViewModel: DicesBoardViewModelInterface
+        let toolbarViewModel: DicesToolbarViewModelInterface
     }
 }

@@ -19,8 +19,8 @@ class NewGameViewController: BackgroundedUIViewController {
     private let viewModel: NewGameViewModelInterface
     private let gameHeaderView: GameHeaderView
     private let addPlayersView: AddPlayersView
-    private let rulesButton = UIButton.stickerButton(title: "global.fullRules".localized)
-    private let playButton = UIButton.stickerButton(title: "newGame.play".localized)
+    private let rulesButton = UIButton.navigationButton(title: "global.fullRules".localized)
+    private let playButton = UIButton.navigationButton(title: "newGame.play".localized)
 
     init(delegate: NewGameViewControllerDelegate, viewModel: NewGameViewModelInterface) {
         self.delegate = delegate

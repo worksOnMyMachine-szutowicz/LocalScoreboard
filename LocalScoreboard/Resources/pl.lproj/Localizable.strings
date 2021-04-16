@@ -70,3 +70,6 @@ Sprawdź Zasady -> Zasady Fazy Drugiej -> Punkt 4. po więcej informacji";
 "1000dices.input.warning.passage" = "Próbujesz dodać %@ punktów co umiejscowi Cię w dolnej połowie przejścia. Oznacza to, że będziesz potrzebować przynajmniej %@ punktów w następnej kolejce. Dodajemy?";
 "1000dices.finishGame.title" = "Gracz %@ zwyciężył!";
 "1000dices.finishGame.message" = "Jeszcze jedna rundka z tymi samymi graczami?";
+"1000dices.toolbar.addScore" = "Dodaj wynik";
+"1000dices.toolbar.punishment" = "Kara";
+"1000dices.toolbar.nextPlayer" = "Następny gracz";

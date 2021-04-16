@@ -16,21 +16,33 @@ protocol DicesPlayerViewModelInterface {
 }
 
 enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
+    case viewDidLoad(ViewDidLoadModel)
     case addScoreTapped(AddScoreTappedModel)
+    case punishmentTapped(PunishmentTappedModel)
     case addScore(AddScoreModel)
     case playerSurpassed(PlayerSurpassedModel)
+    case currentPlayer(CurrentPlayerModel)
     
+    struct ViewDidLoadModel { }
     struct AddScoreTappedModel { }
     struct AddScoreModel { let score: Int }
+    struct PunishmentTappedModel { }
     struct PlayerSurpassedModel { }
+    struct CurrentPlayerModel { let value: Bool }
     
     var associatedValue: Any {
         switch self {
+        case .viewDidLoad(let associatedValue):
+            return associatedValue
         case .addScoreTapped(let associatedValue):
+            return associatedValue
+        case .punishmentTapped(let associatedValue):
             return associatedValue
         case .addScore(let associatedValue):
             return associatedValue
         case .playerSurpassed(let associatedValue):
+            return associatedValue
+        case .currentPlayer(let associatedValue):
             return associatedValue
         }
     }
@@ -40,6 +52,8 @@ enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
     case showInputPopover(ShowInputPopoverModel)
     case scoreChanged(ScoreChangedModel)
     case playerWon(PlayerWon)
+    case becomedCurrentPlayer(BecomedCurrentPlayerModel)
+    case resignedCurrentPlayer(ResignedCurrentPlayerModel)
     
     struct ShowInputPopoverModel { let inputPopoverViewModel: InputPopoverViewModelInterface}
     struct ScoreChangedModel {
@@ -47,6 +61,11 @@ enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
         let stepScore: Int
     }
     struct PlayerWon { let playerName: String }
+    struct BecomedCurrentPlayerModel {
+        let playerIndex: Int
+        let gamePhase: DicesPlayerViewModel.GamePhase
+    }
+    struct ResignedCurrentPlayerModel { }
     
     var associatedValue: Any {
         switch self {
@@ -55,6 +74,10 @@ enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
         case .scoreChanged(let associatedValue):
             return associatedValue
         case .playerWon(let associatedValue):
+            return associatedValue
+        case .becomedCurrentPlayer(let associatedValue):
+            return associatedValue
+        case .resignedCurrentPlayer(let associatedValue):
             return associatedValue
         }
     }

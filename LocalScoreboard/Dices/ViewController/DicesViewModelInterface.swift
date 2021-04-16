@@ -19,6 +19,7 @@ enum DicesViewModelInput: EnumWithAssociatedValue {
     case newGameDataRequest(NewGameDataRequest)
     
     struct NewGameDataRequest { }
+    
     var associatedValue: Any {
         switch self {
         case .newGameDataRequest(let associatedValue):

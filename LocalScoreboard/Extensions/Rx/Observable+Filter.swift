@@ -8,7 +8,6 @@
 
 import RxSwift
 
-
 public extension Observable {
     func filterByCast<T>(_: T.Type) -> Observable<T> {
         filter { $0 is T }.map { $0 as! T }
