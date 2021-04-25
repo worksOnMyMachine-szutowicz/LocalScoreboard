@@ -32,6 +32,7 @@ class AnimatedButtonView: UIView, AnimatedButtonInterface {
         
         button.setAttributedTitle(text, for: .normal)
         button.backgroundColor = .clear
+        button.isEnabled = false
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: ViewConstants.padding, bottom: 0, right: ViewConstants.padding)
         self.animation.loopMode = .loop
         background.backgroundColor = backgroundColor
@@ -47,11 +48,17 @@ class AnimatedButtonView: UIView, AnimatedButtonInterface {
     
     private func layout() {
         addSubviewAndFill(background)
-        addSubviewAndFill(animation)
+        addSubview(animation)
         addSubviewAndFill(button)
+        
+        animation.translatesAutoresizingMaskIntoConstraints = false
         
         heightAnchor.constraint(equalToConstant: Values.height).isActive = true
         button.roundWidth(to: ViewConstants.backgroundGridSize)
+        
+        [animation.leadingAnchor.constraint(equalTo: leadingAnchor),
+         animation.trailingAnchor.constraint(equalTo: trailingAnchor),
+         animation.centerYAnchor.constraint(equalTo: centerYAnchor)].activate()
     }
     
     private func setupBindings() {
@@ -61,8 +68,10 @@ class AnimatedButtonView: UIView, AnimatedButtonInterface {
                 switch input {
                 case .animate:
                     view.animation.play()
+                    view.button.isEnabled = true
                 case .stopAnimating:
                     view.animation.stop()
+                    view.button.isEnabled = false
                 }
             }).disposed(by: disposeBag)
         
