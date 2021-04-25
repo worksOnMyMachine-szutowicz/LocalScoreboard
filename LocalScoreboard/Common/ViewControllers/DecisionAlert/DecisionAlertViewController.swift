@@ -64,7 +64,7 @@ class DecisionAlertViewController: BackgroundedUIViewController, OutputableViewC
     // MARK: UIViewControllerTransitioningDelegate
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        DecisionAlertPresentationController(presentedViewController: presented, presenting: presenting)
+        DecisionAlertPresentationController(presentedViewController: presented, presenting: presenting, animation: viewData.backgroundAnimation)
     }
     
     private func layout() {
@@ -136,5 +136,6 @@ extension DecisionAlertViewController {
         let message: String
         let firstButton: Decision
         let secondButton: Decision
+        let backgroundAnimation: Animations?
     }
 }

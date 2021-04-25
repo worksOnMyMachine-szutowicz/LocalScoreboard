@@ -199,7 +199,7 @@ class InputPopoverViewController: BackgroundedUIViewController, OutputableViewCo
                 vc.errorLabel.isHidden = true
                 guard let delegate = vc.delegate else { return .empty() }
                 
-                let decision = delegate.showInputWarning(with: .init(title: "global.warning".localized, message: output.message, firstButton: .cancel, secondButton: .ok), on: vc)
+                let decision = delegate.showInputWarning(with: .init(title: "global.warning".localized, message: output.message, firstButton: .cancel, secondButton: .ok, backgroundAnimation: nil), on: vc)
                 return Observable.zip(decision, Observable.just(output.score))
             }.filter { $0.0 == .ok }
             .map { $0.1 }

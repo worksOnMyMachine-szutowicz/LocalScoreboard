@@ -35,7 +35,7 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, Di
     }
     
     func quitGameConfirmation() -> Observable<DecisionAlertViewController.Decision> {
-        let decisionAlertController = viewControllerFactory.createDecisionAlertViewController(viewData: .init(title: "quitGame.title".localized, message: "quitGame.message".localized, firstButton: .quit, secondButton: .cancel))
+        let decisionAlertController = viewControllerFactory.createDecisionAlertViewController(viewData: .init(title: "quitGame.title".localized, message: "quitGame.message".localized, firstButton: .quit, secondButton: .cancel, backgroundAnimation: nil))
         navigationController.present(decisionAlertController, animated: true, completion: nil)
         
         return decisionAlertController.rx.output
@@ -46,7 +46,7 @@ class AppCoordinator: AppCoordinatorInterface, NewGameViewControllerDelegate, Di
     }
     
     func finishGame(winner: String) -> Observable<DecisionAlertViewController.Decision> {
-        let decisionAlertController = viewControllerFactory.createDecisionAlertViewController(viewData: .init(title: String(format: "1000dices.finishGame.title".localized, arguments: [winner]), message: "1000dices.finishGame.message".localized, firstButton: .quit, secondButton: .ok))
+        let decisionAlertController = viewControllerFactory.createDecisionAlertViewController(viewData: .init(title: String(format: "1000dices.finishGame.title".localized, arguments: [winner]), message: "1000dices.finishGame.message".localized, firstButton: .quit, secondButton: .ok, backgroundAnimation: .confetti))
         navigationController.present(decisionAlertController, animated: true, completion: nil)
         
         return decisionAlertController.rx.output

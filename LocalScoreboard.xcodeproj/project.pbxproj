@@ -59,6 +59,7 @@
 		F25C76F225DC6CF700455B2E /* InputPopoverViewModelBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C76F125DC6CF700455B2E /* InputPopoverViewModelBinder.swift */; };
 		F25C770525DD071400455B2E /* DicesInputPopoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C770425DD071300455B2E /* DicesInputPopoverViewModel.swift */; };
 		F25C771225DD1AAF00455B2E /* DecisionAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C771125DD1AAF00455B2E /* DecisionAlertViewController.swift */; };
+		F260D5332635A63000C8BFF4 /* confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = F260D5322635A63000C8BFF4 /* confetti.json */; };
 		F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
 		F27A764725DE9B5400A014E8 /* UIViewController+RxOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */; };
@@ -168,6 +169,7 @@
 		F25C76F125DC6CF700455B2E /* InputPopoverViewModelBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPopoverViewModelBinder.swift; sourceTree = "<group>"; };
 		F25C770425DD071300455B2E /* DicesInputPopoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesInputPopoverViewModel.swift; sourceTree = "<group>"; };
 		F25C771125DD1AAF00455B2E /* DecisionAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionAlertViewController.swift; sourceTree = "<group>"; };
+		F260D5322635A63000C8BFF4 /* confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = confetti.json; sourceTree = "<group>"; };
 		F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+StickerButton.swift"; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+RxOutput.swift"; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				F20283BD261B987800001EDF /* outlinedButton.json */,
+				F260D5322635A63000C8BFF4 /* confetti.json */,
 				F2C37654261CB9F200B5633A /* Animations.swift */,
 			);
 			path = Animations;
@@ -645,6 +648,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F260D5332635A63000C8BFF4 /* confetti.json in Resources */,
 				F20283BE261B987800001EDF /* outlinedButton.json in Resources */,
 				1BB127C99D765FE285D0489A /* LaunchScreen.storyboard in Resources */,
 				1BB12DD331F76DBF39B58330 /* Assets.xcassets in Resources */,
