@@ -21,6 +21,7 @@ class DicesPlayerView: UIView {
     private let disposeBag = DisposeBag()
     private let viewModel: DicesPlayerViewModelInterface
     private weak var delegate: DicesPlayerViewDelegate?
+    private let statusView = DicesPlayerStatusView()
     private let button: AnimatedButtonView
     private let scoreView = DicesScoreView()
 
@@ -43,12 +44,16 @@ class DicesPlayerView: UIView {
     }
     
     private func layout() {
-        addSubviews([button, scoreView])
-        [button, scoreView].disableAutoresizingMask()
+        addSubviews([statusView, button, scoreView])
+        [statusView, button, scoreView].disableAutoresizingMask()
+        
+        [statusView.leadingAnchor.constraint(equalTo: leadingAnchor),
+         statusView.trailingAnchor.constraint(equalTo: trailingAnchor),
+         statusView.topAnchor.constraint(equalTo: topAnchor)].activate()
         
         [button.leadingAnchor.constraint(equalTo: leadingAnchor),
          button.trailingAnchor.constraint(equalTo: trailingAnchor),
-         button.topAnchor.constraint(equalTo: topAnchor)].activate()
+         button.topAnchor.constraint(equalTo: statusView.bottomAnchor)].activate()
         
         [scoreView.leadingAnchor.constraint(equalTo: leadingAnchor),
          scoreView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -86,6 +91,11 @@ class DicesPlayerView: UIView {
         viewModel.output.asObservable().filterByAssociatedType(VMOutput.ResignedCurrentPlayerModel.self)
             .map { _ in AnimatedButtonInput.stopAnimating(.init()) }
             .bind(to: button.input)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.NewStatusModel.self)
+            .map { DicesPlayerStatusViewInput.addStatus(.init(status: $0.status, duration: $0.duration)) }
+            .bind(to: statusView.input)
             .disposed(by: disposeBag)
     }
 }

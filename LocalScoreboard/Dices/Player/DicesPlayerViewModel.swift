@@ -68,6 +68,13 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
         let playerSurpassed = input.asObservable().filterByAssociatedType(Input.PlayerSurpassedModel.self)
             .append(weak: self)
             .map { vm, _ in (vm, -vm.surpassingTax) }
+            .share()
+        
+        playerSurpassed
+            .append(weak: self)
+            .map { vm, _ in Output.newStatus(.init(status: .surpassed, duration: Double(vm.surpassingTax) * DicesScoreView.Values.animationTime.secondsValue)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
         
         let scoreUpdates = Observable.merge(addScore, punishment, playerSurpassed)
             .withLatestFrom(score) { ($0.0, $0.1, $1) }

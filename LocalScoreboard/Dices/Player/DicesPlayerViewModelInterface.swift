@@ -54,6 +54,7 @@ enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
     case playerWon(PlayerWon)
     case becomedCurrentPlayer(BecomedCurrentPlayerModel)
     case resignedCurrentPlayer(ResignedCurrentPlayerModel)
+    case newStatus(NewStatusModel)
     
     struct ShowInputPopoverModel { let inputPopoverViewModel: InputPopoverViewModelInterface}
     struct ScoreChangedModel {
@@ -66,6 +67,10 @@ enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
         let gamePhase: DicesPlayerViewModel.GamePhase
     }
     struct ResignedCurrentPlayerModel { }
+    struct NewStatusModel {
+        let status: DicesPlayerStatusView.Statuses
+        let duration: Double?
+    }
     
     var associatedValue: Any {
         switch self {
@@ -78,6 +83,8 @@ enum DicesPlayerViewModelOutput: EnumWithAssociatedValue {
         case .becomedCurrentPlayer(let associatedValue):
             return associatedValue
         case .resignedCurrentPlayer(let associatedValue):
+            return associatedValue
+        case .newStatus(let associatedValue):
             return associatedValue
         }
     }

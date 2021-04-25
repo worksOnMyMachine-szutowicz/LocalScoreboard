@@ -60,6 +60,9 @@
 		F25C770525DD071400455B2E /* DicesInputPopoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C770425DD071300455B2E /* DicesInputPopoverViewModel.swift */; };
 		F25C771225DD1AAF00455B2E /* DecisionAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25C771125DD1AAF00455B2E /* DecisionAlertViewController.swift */; };
 		F260D5332635A63000C8BFF4 /* confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = F260D5322635A63000C8BFF4 /* confetti.json */; };
+		F260D5382635B06A00C8BFF4 /* DicesPlayerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260D5372635B06A00C8BFF4 /* DicesPlayerStatusView.swift */; };
+		F260D53E2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260D53D2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift */; };
+		F260D54B2635B6E900C8BFF4 /* hit.json in Resources */ = {isa = PBXBuildFile; fileRef = F260D54A2635B6E900C8BFF4 /* hit.json */; };
 		F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
 		F27A764725DE9B5400A014E8 /* UIViewController+RxOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */; };
@@ -170,6 +173,9 @@
 		F25C770425DD071300455B2E /* DicesInputPopoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesInputPopoverViewModel.swift; sourceTree = "<group>"; };
 		F25C771125DD1AAF00455B2E /* DecisionAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionAlertViewController.swift; sourceTree = "<group>"; };
 		F260D5322635A63000C8BFF4 /* confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = confetti.json; sourceTree = "<group>"; };
+		F260D5372635B06A00C8BFF4 /* DicesPlayerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesPlayerStatusView.swift; sourceTree = "<group>"; };
+		F260D53D2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesPlayerStatusViewInterface.swift; sourceTree = "<group>"; };
+		F260D54A2635B6E900C8BFF4 /* hit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hit.json; sourceTree = "<group>"; };
 		F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+StickerButton.swift"; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+RxOutput.swift"; sourceTree = "<group>"; };
@@ -356,6 +362,7 @@
 			children = (
 				F20283BD261B987800001EDF /* outlinedButton.json */,
 				F260D5322635A63000C8BFF4 /* confetti.json */,
+				F260D54A2635B6E900C8BFF4 /* hit.json */,
 				F2C37654261CB9F200B5633A /* Animations.swift */,
 			);
 			path = Animations;
@@ -491,6 +498,8 @@
 				F248595D25D104B000F8EB1E /* DicesPlayerViewModel.swift */,
 				F248596225D104C900F8EB1E /* DicesPlayerViewModelInterface.swift */,
 				F2EDF60A25D461E900835288 /* DicesScoreView.swift */,
+				F260D5372635B06A00C8BFF4 /* DicesPlayerStatusView.swift */,
+				F260D53D2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -653,6 +662,7 @@
 				1BB127C99D765FE285D0489A /* LaunchScreen.storyboard in Resources */,
 				1BB12DD331F76DBF39B58330 /* Assets.xcassets in Resources */,
 				F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */,
+				F260D54B2635B6E900C8BFF4 /* hit.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,6 +781,7 @@
 			files = (
 				1BB12C16C2BB1B6A11C81E2A /* AppDelegate.swift in Sources */,
 				F25C76F225DC6CF700455B2E /* InputPopoverViewModelBinder.swift in Sources */,
+				F260D5382635B06A00C8BFF4 /* DicesPlayerStatusView.swift in Sources */,
 				1BB121563F5CC2668B9CAE62 /* AppCoordinator.swift in Sources */,
 				F2EDF60B25D461E900835288 /* DicesScoreView.swift in Sources */,
 				F248283C25C41A75002239E3 /* RxInputOutput.swift in Sources */,
@@ -793,6 +804,7 @@
 				F248596825D105F200F8EB1E /* DicesFactory.swift in Sources */,
 				F211719125C429E000880DA4 /* AddPlayersViewModelInterface.swift in Sources */,
 				F25C76DE25DC53CC00455B2E /* InputPopoverPresentationController.swift in Sources */,
+				F260D53E2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift in Sources */,
 				F21EFBAE25E5BEE100BEFF4F /* DicesViewModel.swift in Sources */,
 				F284EC05262A06780044CD1A /* Observable+Map.swift in Sources */,
 				F211718725C4279A00880DA4 /* NewGameViewFactory.swift in Sources */,
