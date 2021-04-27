@@ -63,6 +63,7 @@
 		F260D5382635B06A00C8BFF4 /* DicesPlayerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260D5372635B06A00C8BFF4 /* DicesPlayerStatusView.swift */; };
 		F260D53E2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F260D53D2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift */; };
 		F260D54B2635B6E900C8BFF4 /* hit.json in Resources */ = {isa = PBXBuildFile; fileRef = F260D54A2635B6E900C8BFF4 /* hit.json */; };
+		F260D5642636B2D400C8BFF4 /* shield.json in Resources */ = {isa = PBXBuildFile; fileRef = F260D5632636B2D400C8BFF4 /* shield.json */; };
 		F269FAC125C8A8FE00758B8A /* UIButton+StickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */; };
 		F277527E25C5A16A0099E995 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F277527D25C5A16A0099E995 /* RulesViewController.swift */; };
 		F27A764725DE9B5400A014E8 /* UIViewController+RxOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */; };
@@ -176,6 +177,7 @@
 		F260D5372635B06A00C8BFF4 /* DicesPlayerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesPlayerStatusView.swift; sourceTree = "<group>"; };
 		F260D53D2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DicesPlayerStatusViewInterface.swift; sourceTree = "<group>"; };
 		F260D54A2635B6E900C8BFF4 /* hit.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hit.json; sourceTree = "<group>"; };
+		F260D5632636B2D400C8BFF4 /* shield.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shield.json; sourceTree = "<group>"; };
 		F269FAC025C8A8FE00758B8A /* UIButton+StickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+StickerButton.swift"; sourceTree = "<group>"; };
 		F277527D25C5A16A0099E995 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		F27A764625DE9B5400A014E8 /* UIViewController+RxOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+RxOutput.swift"; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				F20283BD261B987800001EDF /* outlinedButton.json */,
 				F260D5322635A63000C8BFF4 /* confetti.json */,
 				F260D54A2635B6E900C8BFF4 /* hit.json */,
+				F260D5632636B2D400C8BFF4 /* shield.json */,
 				F2C37654261CB9F200B5633A /* Animations.swift */,
 			);
 			path = Animations;
@@ -408,6 +411,15 @@
 				F2D63EDE25E95996005865E5 /* Observable+ResultableRequest.swift */,
 			);
 			path = Rx;
+			sourceTree = "<group>";
+		};
+		F24CDE03263862DA00D4DC76 /* DicesPlayerStatus */ = {
+			isa = PBXGroup;
+			children = (
+				F260D5372635B06A00C8BFF4 /* DicesPlayerStatusView.swift */,
+				F260D53D2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift */,
+			);
+			path = DicesPlayerStatus;
 			sourceTree = "<group>";
 		};
 		F277525D25C596C20099E995 /* NewPlayer */ = {
@@ -494,12 +506,11 @@
 		F2C3765E261CBD8C00B5633A /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				F24CDE03263862DA00D4DC76 /* DicesPlayerStatus */,
 				F248595825D1012100F8EB1E /* DicesPlayerView.swift */,
 				F248595D25D104B000F8EB1E /* DicesPlayerViewModel.swift */,
 				F248596225D104C900F8EB1E /* DicesPlayerViewModelInterface.swift */,
 				F2EDF60A25D461E900835288 /* DicesScoreView.swift */,
-				F260D5372635B06A00C8BFF4 /* DicesPlayerStatusView.swift */,
-				F260D53D2635B1B900C8BFF4 /* DicesPlayerStatusViewInterface.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -663,6 +674,7 @@
 				1BB12DD331F76DBF39B58330 /* Assets.xcassets in Resources */,
 				F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */,
 				F260D54B2635B6E900C8BFF4 /* hit.json in Resources */,
+				F260D5642636B2D400C8BFF4 /* shield.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

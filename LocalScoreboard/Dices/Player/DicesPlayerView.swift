@@ -47,9 +47,10 @@ class DicesPlayerView: UIView {
         addSubviews([statusView, button, scoreView])
         [statusView, button, scoreView].disableAutoresizingMask()
         
-        [statusView.leadingAnchor.constraint(equalTo: leadingAnchor),
-         statusView.trailingAnchor.constraint(equalTo: trailingAnchor),
-         statusView.topAnchor.constraint(equalTo: topAnchor)].activate()
+        [statusView.centerXAnchor.constraint(equalTo: centerXAnchor),
+         statusView.widthAnchor.constraint(equalToConstant: Values.statusBarWidth),
+         statusView.topAnchor.constraint(equalTo: topAnchor),
+         statusView.heightAnchor.constraint(equalToConstant: Values.statusBarHeight)].activate()
         
         [button.leadingAnchor.constraint(equalTo: leadingAnchor),
          button.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -97,10 +98,19 @@ class DicesPlayerView: UIView {
             .map { DicesPlayerStatusViewInput.addStatus(.init(status: $0.status, duration: $0.duration)) }
             .bind(to: statusView.input)
             .disposed(by: disposeBag)
+        
+        viewModel.output.asObservable().filterByAssociatedType(VMOutput.RemoveStatusModel.self)
+            .map { DicesPlayerStatusViewInput.removeStatus(.init(status: $0.status)) }
+            .bind(to: statusView.input)
+            .disposed(by: disposeBag)
     }
 }
 
 extension DicesPlayerView {
+    private struct Values {
+        static let statusBarWidth: CGFloat = 140
+        static let statusBarHeight: CGFloat = 40
+    }
     struct ViewData {
         let name: String
     }

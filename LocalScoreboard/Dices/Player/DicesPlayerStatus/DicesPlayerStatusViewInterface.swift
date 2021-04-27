@@ -14,15 +14,19 @@ protocol DicesPlayerStatusViewInterface {
 
 enum DicesPlayerStatusViewInput: EnumWithAssociatedValue {
     case addStatus(AddStatusModel)
+    case removeStatus(RemoveStatusModel)
     
     struct AddStatusModel {
         let status: DicesPlayerStatusView.Statuses
         let duration: Double?
     }
+    struct RemoveStatusModel { let status: DicesPlayerStatusView.Statuses }
     
     var associatedValue: Any {
         switch self {
         case .addStatus(let associatedValue):
+            return associatedValue
+        case .removeStatus(let associatedValue):
             return associatedValue
         }
     }

@@ -14,6 +14,7 @@ class DicesBoardView: UIView {
     private let playersStackView = UIStackView(type: .horizontalWithEqualSpacing)
     private let playersScrollView = UIScrollView()
     private let scrollViewClipper = UIView()
+    private let statusBar = UIView()
     
     private var boardHeightConstraint: NSLayoutConstraint?
     
@@ -26,6 +27,7 @@ class DicesBoardView: UIView {
         
         playersScrollView.clipsToBounds = false
         scrollViewClipper.clipsToBounds = true
+        statusBar.backgroundColor = Colors.pointOfInterestBackground
         
         layout()
     }
@@ -45,8 +47,8 @@ class DicesBoardView: UIView {
     }
     
     private func layout() {
-        addSubviews([boardStackView, scrollViewClipper])
-        [boardStackView, scrollViewClipper, playersScrollView].disableAutoresizingMask()
+        addSubviews([statusBar, boardStackView, scrollViewClipper])
+        [statusBar, boardStackView, scrollViewClipper, playersScrollView].disableAutoresizingMask()
         
         scrollViewClipper.addSubview(playersScrollView)
         playersScrollView.addSubviewAndFill(playersStackView)
@@ -73,6 +75,11 @@ class DicesBoardView: UIView {
         [boardStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
          boardStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
          boardStackView.topAnchor.constraint(equalTo: players[0].headerBottomAnchor)].activate()
+        
+        [statusBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+         statusBar.trailingAnchor.constraint(equalTo: trailingAnchor),
+         statusBar.topAnchor.constraint(equalTo: topAnchor),
+         statusBar.heightAnchor.constraint(equalToConstant: Values.statusBarHeight)].activate()
     }
 }
 
@@ -81,6 +88,7 @@ extension DicesBoardView {
         static let numberOfSections: Int = 11
         static let highlightedSections: [Int] = [4, 8]
         fileprivate static let enlargedTitleSection: Int = 10
+        fileprivate static let statusBarHeight: CGFloat = 40
     }
     struct ViewData {
         let players: [DicesPlayerViewModelInterface]

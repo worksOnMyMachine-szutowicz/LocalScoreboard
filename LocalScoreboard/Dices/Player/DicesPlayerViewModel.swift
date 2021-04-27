@@ -99,8 +99,11 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .bind(to: score)
             .disposed(by: disposeBag)
         
-        scoreUpdates
+        let firstScore = scoreUpdates
             .take(1)
+            .share()
+            
+        firstScore
             .append(weak: self)
             .subscribe(onNext: { vm, _ in
                 vm.gamePhase = .phaseTwo
@@ -117,6 +120,17 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .map { vm, _ in Output.playerWon(.init(playerName: vm.viewData.name)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
+        
+        Observable.merge(firstScore, scoreUpdates.filter { $0.protectionBegins() })
+            .map { _ in Output.newStatus(.init(status: .protected, duration: nil)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        scoreUpdates
+            .filter { $0.protectionEnds() }
+            .map { _ in Output.removeStatus(.init(status: .protected)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -130,3 +144,14 @@ extension DicesPlayerViewModel {
     }
 }
 
+private extension DicesPlayerViewModelOutput.ScoreChangedModel {
+    static let protectionBorder = 100
+    
+    func protectionBegins() -> Bool {
+        startedFrom >= DicesPlayerViewModelOutput.ScoreChangedModel.protectionBorder && stepScore == DicesPlayerViewModelOutput.ScoreChangedModel.protectionBorder - 1
+    }
+    
+    func protectionEnds() -> Bool {
+        startedFrom < DicesPlayerViewModelOutput.ScoreChangedModel.protectionBorder && stepScore == DicesPlayerViewModelOutput.ScoreChangedModel.protectionBorder
+    }
+}

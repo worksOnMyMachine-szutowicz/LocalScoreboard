@@ -16,12 +16,16 @@ class DicesPlayerStatusView: UIView, DicesPlayerStatusViewInterface {
     private let disposeBag = DisposeBag()
     let input = PublishRelay<Input>()
     
-    private let stackView = UIStackView(type: .horizontalWithEqualSpacing)
+    private let stackView = UIStackView()
+    private var statuses: [(status: Statuses, view: UIView)] = []
     
     init() {
         super.init(frame: .zero)
         
+        backgroundColor = Colors.background
+        layer.cornerRadius = Values.cornerRadius
         stackView.spacing = ViewConstants.padding
+        stackView.distribution = .fillEqually
         
         layout()
         setupBindings()
@@ -33,8 +37,6 @@ class DicesPlayerStatusView: UIView, DicesPlayerStatusViewInterface {
     
     private func layout() {
         addSubviewAndFill(stackView, insets: .init(top: 0, left: ViewConstants.padding, bottom: 0, right: ViewConstants.padding))
-        
-        heightAnchor.constraint(equalToConstant: Values.height).isActive = true
     }
     
     private func setupBindings() {
@@ -43,6 +45,12 @@ class DicesPlayerStatusView: UIView, DicesPlayerStatusViewInterface {
             .subscribe(onNext: { view, input in
                 view.addStatus(model: input)
             }).disposed(by: disposeBag)
+        
+        input.asObservable().filterByAssociatedType(Input.RemoveStatusModel.self)
+            .append(weak: self)
+            .subscribe(onNext: { view, input in
+                view.removeStatus(model: input)
+            }).disposed(by: disposeBag)
     }
     
     private func addStatus(model: Input.AddStatusModel) {
@@ -50,38 +58,45 @@ class DicesPlayerStatusView: UIView, DicesPlayerStatusViewInterface {
         animationView.loopMode = .loop
         animationView.isHidden = true
         
+        statuses.append((status: model.status, view: animationView))
         stackView.addArrangedSubview(animationView)
-        UIView.animate(withDuration: ViewConstants.animationTime) { [weak self] () -> Void in
-            self?.layoutIfNeeded()
+        UIView.animate(withDuration: ViewConstants.animationTime) { () -> Void in
             animationView.isHidden = false
         }
         animationView.play()
         
         if let duration = model.duration {
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
-                self?.removeStatus(view: animationView)
+                self?.removeStatus(model: .init(status: model.status))
             }
         }
     }
     
-    private func removeStatus(view: AnimationView) {
+    private func removeStatus(model: Input.RemoveStatusModel) {
+        guard let activeStatusIndex = statuses.firstIndex(where: { $0.status == model.status }) else { return }
+        let activeStatus = statuses[activeStatusIndex]
+        statuses.remove(at: activeStatusIndex)
+        
         UIView.animate(withDuration: ViewConstants.animationTime, animations: { () -> Void in
-            view.isHidden = true
+            activeStatus.view.isHidden = true
         }, completion: { _ in
-            view.removeFromSuperview()
+            activeStatus.view.removeFromSuperview()
         })
     }
 }
 
 extension DicesPlayerStatusView {
     private struct Values {
-        static let height: CGFloat = 40
+        static let cornerRadius: CGFloat = 20
     }
     enum Statuses {
+        case protected
         case surpassed
         
-        var animation: Animations {
+        fileprivate var animation: Animations {
             switch self {
+            case .protected:
+                return .shield
             case .surpassed:
                 return .hit
             }

@@ -9,5 +9,6 @@
 enum Animations: String {
     case outlinedButton
     case confetti
+    case shield
     case hit
 }
