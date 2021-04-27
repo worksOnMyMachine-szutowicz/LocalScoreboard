@@ -131,6 +131,18 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .map { _ in Output.removeStatus(.init(status: .protected)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
+        
+        scoreUpdates
+            .filter { $0.entersPassage() }
+            .map { _ in Output.newStatus(.init(status: .onPassage, duration: nil)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        scoreUpdates
+            .filter { $0.leavesPassage() }
+            .map { _ in Output.removeStatus(.init(status: .onPassage)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -146,6 +158,8 @@ extension DicesPlayerViewModel {
 
 private extension DicesPlayerViewModelOutput.ScoreChangedModel {
     static let protectionBorder = 100
+    static let firstPassageBorders = (in: 301, out: 400)
+    static let secondPassageTreshold = (in: 701, out: 800)
     
     func protectionBegins() -> Bool {
         startedFrom >= DicesPlayerViewModelOutput.ScoreChangedModel.protectionBorder && stepScore == DicesPlayerViewModelOutput.ScoreChangedModel.protectionBorder - 1
@@ -153,5 +167,25 @@ private extension DicesPlayerViewModelOutput.ScoreChangedModel {
     
     func protectionEnds() -> Bool {
         startedFrom < DicesPlayerViewModelOutput.ScoreChangedModel.protectionBorder && stepScore == DicesPlayerViewModelOutput.ScoreChangedModel.protectionBorder
+    }
+    
+    func entersPassage() -> Bool {
+        entersBorders(DicesPlayerViewModelOutput.ScoreChangedModel.firstPassageBorders) ||
+            entersBorders(DicesPlayerViewModelOutput.ScoreChangedModel.secondPassageTreshold)
+    }
+    
+    func leavesPassage() -> Bool {
+        leavesBorders(DicesPlayerViewModelOutput.ScoreChangedModel.firstPassageBorders) ||
+            leavesBorders(DicesPlayerViewModelOutput.ScoreChangedModel.secondPassageTreshold)
+    }
+    
+    private func entersBorders(_ borders: (in: Int, out: Int)) -> Bool {
+        startedFrom < borders.in && stepScore == borders.in ||
+            startedFrom > borders.out && stepScore == borders.out
+    }
+    
+    private func leavesBorders(_ borders: (in: Int, out: Int)) -> Bool {
+        startedFrom < borders.out && stepScore == borders.out ||
+            startedFrom > borders.in && stepScore == borders.in
     }
 }

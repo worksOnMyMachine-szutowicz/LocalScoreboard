@@ -92,6 +92,7 @@ extension DicesPlayerStatusView {
     enum Statuses {
         case protected
         case surpassed
+        case onPassage
         
         fileprivate var animation: Animations {
             switch self {
@@ -99,6 +100,8 @@ extension DicesPlayerStatusView {
                 return .shield
             case .surpassed:
                 return .hit
+            case .onPassage:
+                return .errorCone
             }
         }
     }

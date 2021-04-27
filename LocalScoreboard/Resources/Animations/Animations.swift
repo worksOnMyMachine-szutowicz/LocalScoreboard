@@ -11,4 +11,5 @@ enum Animations: String {
     case confetti
     case shield
     case hit
+    case errorCone
 }
