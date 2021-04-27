@@ -23,6 +23,7 @@ class DicesBoardViewModel: RxInputOutput<DicesBoardViewModelInput, DicesBoardVie
     
     private func setupBindings() {
         input.asObservable().filterByAssociatedType(Input.ToolbarButtonTappedModel.self)
+            .observe(on: MainScheduler.asyncInstance)
             .append(weak: self)
             .subscribe(onNext: { vm, input in
                 switch input.type {
@@ -30,13 +31,19 @@ class DicesBoardViewModel: RxInputOutput<DicesBoardViewModelInput, DicesBoardVie
                     vm.designateNextPlayer()
                 case .add:
                     vm.currentPlayer?.interface.input.accept(.addScoreTapped(.init()))
-                    vm.designateNextPlayer()
                 case .punishment:
                     vm.currentPlayer?.interface.input.accept(.punishmentTapped(.init()))
                     vm.designateNextPlayer()
                 default:
                     return
                 }
+            }).disposed(by: disposeBag)
+        
+        Observable.merge(viewData.players.map { $0.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.ScoreAddedModel.self) })
+            .observe(on: MainScheduler.asyncInstance)
+            .append(weak: self)
+            .subscribe(onNext: { vm, _ in
+                vm.designateNextPlayer()
             }).disposed(by: disposeBag)
         
         Observable.merge(viewData.players.map { $0.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.BecomedCurrentPlayerModel.self) })

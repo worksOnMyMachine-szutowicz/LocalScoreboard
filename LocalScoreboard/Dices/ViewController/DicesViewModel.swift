@@ -35,7 +35,6 @@ class DicesViewModel: RxInputOutput<DicesViewModelInput, DicesViewModelOutput>, 
             .disposed(by: disposeBag)
         
         viewData.toolbarViewModel.output.asObservable()
-            .observe(on: MainScheduler.asyncInstance)
             .map { DicesBoardViewModelInput.toolbarButtonTapped(.init(type: $0)) }
             .bind(to: viewData.boardViewModel.input)
             .disposed(by: disposeBag)

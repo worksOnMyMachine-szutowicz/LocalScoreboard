@@ -70,9 +70,8 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .map { vm, _ in (vm, -vm.surpassingTax) }
             .share()
         
-        playerSurpassed
-            .append(weak: self)
-            .map { vm, _ in Output.newStatus(.init(status: .surpassed, duration: Double(vm.surpassingTax) * DicesScoreView.Values.animationTime.secondsValue)) }
+        input.asObservable().filterByAssociatedType(Input.AddScoreModel.self)
+            .map { _ in Output.scoreAdded(.init()) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
         
@@ -118,6 +117,12 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
             .filter { $0.stepScore == 1000 }
             .append(weak: self)
             .map { vm, _ in Output.playerWon(.init(playerName: vm.viewData.name)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        playerSurpassed
+            .append(weak: self)
+            .map { vm, _ in Output.newStatus(.init(status: .surpassed, duration: Double(vm.surpassingTax) * DicesScoreView.Values.animationTime.secondsValue)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
         
