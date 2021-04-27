@@ -24,6 +24,7 @@ class DicesPlayerStatusView: UIView, DicesPlayerStatusViewInterface {
         
         backgroundColor = Colors.background
         layer.cornerRadius = Values.cornerRadius
+        clipsToBounds = true
         stackView.spacing = ViewConstants.padding
         stackView.distribution = .fillEqually
         

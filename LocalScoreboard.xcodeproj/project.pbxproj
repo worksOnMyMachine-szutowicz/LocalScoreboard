@@ -41,7 +41,7 @@
 		F22CE73025E7BCDF00EAA745 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CE72F25E7BCDF00EAA745 /* Storage.swift */; };
 		F22CE73625E7C4EE00EAA745 /* NSObject+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CE73525E7C4EE00EAA745 /* NSObject+ClassName.swift */; };
 		F22CE73E25E7C79F00EAA745 /* NSManagedObjectContext+CRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22CE73D25E7C79F00EAA745 /* NSManagedObjectContext+CRUD.swift */; };
-		F23BF887263865EF00BE29E0 /* errorCone.json in Resources */ = {isa = PBXBuildFile; fileRef = F23BF886263865EF00BE29E0 /* errorCone.json */; };
+		F23BF88F2638A38D00BE29E0 /* errorCone.json in Resources */ = {isa = PBXBuildFile; fileRef = F23BF88E2638A38C00BE29E0 /* errorCone.json */; };
 		F248282825C40B43002239E3 /* NewPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248282725C40B43002239E3 /* NewPlayerView.swift */; };
 		F248282D25C417C8002239E3 /* NewPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */; };
 		F248283225C4181A002239E3 /* NewPlayerViewModelInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */; };
@@ -156,7 +156,7 @@
 		F22CE72F25E7BCDF00EAA745 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		F22CE73525E7C4EE00EAA745 /* NSObject+ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+ClassName.swift"; sourceTree = "<group>"; };
 		F22CE73D25E7C79F00EAA745 /* NSManagedObjectContext+CRUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+CRUD.swift"; sourceTree = "<group>"; };
-		F23BF886263865EF00BE29E0 /* errorCone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = errorCone.json; sourceTree = "<group>"; };
+		F23BF88E2638A38C00BE29E0 /* errorCone.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = errorCone.json; sourceTree = "<group>"; };
 		F248282725C40B43002239E3 /* NewPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerView.swift; sourceTree = "<group>"; };
 		F248282C25C417C8002239E3 /* NewPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerViewModel.swift; sourceTree = "<group>"; };
 		F248283125C4181A002239E3 /* NewPlayerViewModelInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerViewModelInterface.swift; sourceTree = "<group>"; };
@@ -368,7 +368,7 @@
 				F260D5322635A63000C8BFF4 /* confetti.json */,
 				F260D54A2635B6E900C8BFF4 /* hit.json */,
 				F260D5632636B2D400C8BFF4 /* shield.json */,
-				F23BF886263865EF00BE29E0 /* errorCone.json */,
+				F23BF88E2638A38C00BE29E0 /* errorCone.json */,
 				F2C37654261CB9F200B5633A /* Animations.swift */,
 			);
 			path = Animations;
@@ -676,7 +676,7 @@
 				1BB127C99D765FE285D0489A /* LaunchScreen.storyboard in Resources */,
 				1BB12DD331F76DBF39B58330 /* Assets.xcassets in Resources */,
 				F25A91B725C157B6002B9C51 /* Localizable.strings in Resources */,
-				F23BF887263865EF00BE29E0 /* errorCone.json in Resources */,
+				F23BF88F2638A38D00BE29E0 /* errorCone.json in Resources */,
 				F260D54B2635B6E900C8BFF4 /* hit.json in Resources */,
 				F260D5642636B2D400C8BFF4 /* shield.json in Resources */,
 			);
