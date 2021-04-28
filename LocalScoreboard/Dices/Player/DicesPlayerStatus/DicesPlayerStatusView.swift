@@ -57,6 +57,7 @@ class DicesPlayerStatusView: UIView, DicesPlayerStatusViewInterface {
     private func addStatus(model: Input.AddStatusModel) {
         let animationView = AnimationView(name: model.status.animation.rawValue)
         animationView.loopMode = .loop
+        animationView.backgroundBehavior = .pauseAndRestore
         animationView.isHidden = true
         
         statuses.append((status: model.status, view: animationView))

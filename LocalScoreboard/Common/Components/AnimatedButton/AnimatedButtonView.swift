@@ -36,6 +36,7 @@ class AnimatedButtonView: UIView, AnimatedButtonInterface {
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: ViewConstants.padding, bottom: 0, right: ViewConstants.padding)
         self.animation.loopMode = .loop
         self.animation.contentMode = .scaleToFill
+        self.animation.backgroundBehavior = .pauseAndRestore
         background.backgroundColor = backgroundColor
         background.layer.cornerRadius = Values.cornerRadius
         
