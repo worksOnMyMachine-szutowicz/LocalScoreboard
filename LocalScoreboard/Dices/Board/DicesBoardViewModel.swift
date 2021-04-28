@@ -62,16 +62,40 @@ class DicesBoardViewModel: RxInputOutput<DicesBoardViewModelInput, DicesBoardVie
         
         for (raisingPlayerIndex, raisingPlayer) in viewData.players.enumerated() {
             for (stillPlayerIndex, stillPlayer) in viewData.players.enumerated() where stillPlayerIndex != raisingPlayerIndex {
-                raisingPlayer.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.ScoreChangedModel.self)
-                    .withLatestFrom(stillPlayer.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.ScoreChangedModel.self)) { (input: $0, output: $1.stepScore) }
+                let scoreChanges = raisingPlayer.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.ScoreChangedModel.self)
+                    .withLatestFrom(stillPlayer.output.asObservable().filterByAssociatedType(DicesPlayerViewModelOutput.ScoreChangedModel.self)) { (raisingPlayer: $0, stillPlayer: $1.stepScore) }
                     .append(weak: self)
+                    .share()
+                
+                scoreChanges
+                    .observe(on: MainScheduler.asyncInstance)
+                    .map { vm, data in vm.isOnePlayerThreateningAnother(threatened: data.raisingPlayer.stepScore, threatening: data.stillPlayer) }
+                    .distinctUntilChanged()
+                    .map { DicesPlayerViewModelInput.playerThreatened(.init(threatened: $0, by: stillPlayer.viewData.name)) }
+                    .bind(to: raisingPlayer.input)
+                    .disposed(by: disposeBag)
+                    
+                scoreChanges
+                    .map { vm, data in vm.isOnePlayerThreateningAnother(threatened: data.stillPlayer, threatening: data.raisingPlayer.stepScore) }
+                    .distinctUntilChanged()
+                    .map { DicesPlayerViewModelInput.playerThreatened(.init(threatened: $0, by: raisingPlayer.viewData.name)) }
+                    .bind(to: stillPlayer.input)
+                    .disposed(by: disposeBag)
+                    
+                scoreChanges
                     .filter { vm, data in
-                        data.output >= 100 && vm.isOnePlayerSurpasingAnother(raisingPlayer: data.input, stillPlayer: data.output)
+                        data.stillPlayer >= 100 && vm.isOnePlayerSurpasingAnother(raisingPlayer: data.raisingPlayer, stillPlayer: data.stillPlayer)
                     }.map { _ in DicesPlayerViewModelInput.playerSurpassed(.init()) }
                     .bind(to: stillPlayer.input)
                     .disposed(by: disposeBag)
             }
         }
+    }
+    
+    private func isOnePlayerThreateningAnother(threatened: Int, threatening: Int) -> Bool {
+        let dangerZone = 1...50
+        
+        return threatened >= 100 && dangerZone.contains(threatened - threatening)
     }
     
     private func isOnePlayerSurpasingAnother(raisingPlayer: DicesPlayerViewModelOutput.ScoreChangedModel, stillPlayer: Int) -> Bool {

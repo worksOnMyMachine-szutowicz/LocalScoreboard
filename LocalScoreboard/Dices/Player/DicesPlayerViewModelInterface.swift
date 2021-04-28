@@ -20,6 +20,7 @@ enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
     case addScoreTapped(AddScoreTappedModel)
     case punishmentTapped(PunishmentTappedModel)
     case addScore(AddScoreModel)
+    case playerThreatened(PlayerThreatenedModel)
     case playerSurpassed(PlayerSurpassedModel)
     case currentPlayer(CurrentPlayerModel)
     
@@ -27,6 +28,10 @@ enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
     struct AddScoreTappedModel { }
     struct AddScoreModel { let score: Int }
     struct PunishmentTappedModel { }
+    struct PlayerThreatenedModel {
+        let threatened: Bool
+        let by: String
+    }
     struct PlayerSurpassedModel { }
     struct CurrentPlayerModel { let value: Bool }
     
@@ -39,6 +44,8 @@ enum DicesPlayerViewModelInput: EnumWithAssociatedValue {
         case .punishmentTapped(let associatedValue):
             return associatedValue
         case .addScore(let associatedValue):
+            return associatedValue
+        case .playerThreatened(let associatedValue):
             return associatedValue
         case .playerSurpassed(let associatedValue):
             return associatedValue

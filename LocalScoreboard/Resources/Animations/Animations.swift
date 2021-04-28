@@ -12,4 +12,5 @@ enum Animations: String {
     case shield
     case hit
     case errorCone
+    case warning
 }

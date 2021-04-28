@@ -94,6 +94,7 @@ extension DicesPlayerStatusView {
         case protected
         case surpassed
         case onPassage
+        case threatened
         
         fileprivate var animation: Animations {
             switch self {
@@ -103,6 +104,8 @@ extension DicesPlayerStatusView {
                 return .hit
             case .onPassage:
                 return .errorCone
+            case .threatened:
+                return .warning
             }
         }
     }

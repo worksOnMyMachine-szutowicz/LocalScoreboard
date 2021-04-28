@@ -15,6 +15,7 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
     private let storageService: StorageServiceInterface
     private var gamePhase: GamePhase = .phaseOne
     private let score: BehaviorSubject<Int> = .init(value: 0)
+    private let isThreatened: BehaviorSubject<[String]> = .init(value: [])
     private let isCurrent: BehaviorSubject<Bool>
     private let playerIndex: Int
     
@@ -146,6 +147,27 @@ class DicesPlayerViewModel: RxInputOutput<DicesPlayerViewModelInput, DicesPlayer
         scoreUpdates
             .filter { $0.leavesPassage() }
             .map { _ in Output.removeStatus(.init(status: .onPassage)) }
+            .bind(to: outputRelay)
+            .disposed(by: disposeBag)
+        
+        input.asObservable().filterByAssociatedType(Input.PlayerThreatenedModel.self)
+            .withLatestFrom(isThreatened) { (new: $0, currently: $1) }
+            .map { new, currently in
+                var updated = currently
+                if new.threatened && !currently.contains(new.by) {
+                    updated.append(new.by)
+                }
+                if !new.threatened, let index = currently.firstIndex(where: { $0 == new.by }) {
+                    updated.remove(at: index)
+                }
+                return updated
+            }.bind(to: isThreatened)
+            .disposed(by: disposeBag)
+        
+        isThreatened
+            .map { $0.isEmpty }
+            .distinctUntilChanged()
+            .map { $0 ? Output.removeStatus(.init(status: .threatened)) : Output.newStatus(.init(status: .threatened, duration: nil)) }
             .bind(to: outputRelay)
             .disposed(by: disposeBag)
     }
