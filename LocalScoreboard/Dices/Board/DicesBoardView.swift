@@ -15,6 +15,7 @@ class DicesBoardView: UIView {
     private let playersScrollView = UIScrollView()
     private let scrollViewClipper = UIView()
     private let statusBar = UIView()
+    private let statusButton = UIButton.stickerButton(title: "1000dices.statusBar.status".localized)
     
     private var boardHeightConstraint: NSLayoutConstraint?
     
@@ -47,8 +48,8 @@ class DicesBoardView: UIView {
     }
     
     private func layout() {
-        addSubviews([statusBar, boardStackView, scrollViewClipper])
-        [statusBar, boardStackView, scrollViewClipper, playersScrollView].disableAutoresizingMask()
+        addSubviews([statusBar, statusButton, boardStackView, scrollViewClipper])
+        [statusBar, statusButton, boardStackView, scrollViewClipper, playersScrollView].disableAutoresizingMask()
         
         scrollViewClipper.addSubview(playersScrollView)
         playersScrollView.addSubviewAndFill(playersStackView)
@@ -80,6 +81,9 @@ class DicesBoardView: UIView {
          statusBar.trailingAnchor.constraint(equalTo: trailingAnchor),
          statusBar.topAnchor.constraint(equalTo: topAnchor),
          statusBar.heightAnchor.constraint(equalToConstant: Values.statusBarHeight)].activate()
+        
+        [statusButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+         statusButton.centerYAnchor.constraint(equalTo: statusBar.centerYAnchor)].activate()
     }
 }
 

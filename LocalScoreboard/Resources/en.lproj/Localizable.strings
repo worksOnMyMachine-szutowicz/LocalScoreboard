@@ -73,3 +73,4 @@ See Rules -> Phase Two rules -> Point 4. for more info";
 "1000dices.toolbar.addScore" = "Add Score";
 "1000dices.toolbar.punishment" = "Punishment";
 "1000dices.toolbar.nextPlayer" = "Next player";
+"1000dices.statusBar.status" = "Status";

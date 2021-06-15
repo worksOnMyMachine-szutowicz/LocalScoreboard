@@ -93,7 +93,7 @@ class DicesBoardViewModel: RxInputOutput<DicesBoardViewModelInput, DicesBoardVie
     }
     
     private func isOnePlayerThreateningAnother(threatened: Int, threatening: Int) -> Bool {
-        let dangerZone = 1...50
+        let dangerZone = 1...30
         
         return threatened >= 100 && dangerZone.contains(threatened - threatening)
     }
